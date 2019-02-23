@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value="/articles")
 public class ArticleController {
@@ -14,8 +16,7 @@ public class ArticleController {
     ArticleRepository articleRepository;
 
     @GetMapping("")
-    public ResponseEntity<String> getSomeResponse() {
-        articleRepository.findAll();
-        return ResponseEntity.ok("ok");
+    public ResponseEntity<List<Article>> getSomeResponse() {
+        return ResponseEntity.ok(articleRepository.findAll());
     }
 }
