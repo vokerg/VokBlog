@@ -1,0 +1,11 @@
+<div>
+  <div *ngIf="!isEdit">
+    <button (click)="showEditForm()">Add comment</button>
+  </div>
+  <div *ngIf="isEdit">
+    <form (ngSubmit)="onSubmit()">
+      <input [(ngModel)]="comment.comment" name="comment">
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+{
+  "articles" : [
+    {
+      "id": "1",
+      "title": "article1",
+      "subject": "subject1",
+      "content": "articlet article article",
+      "liked": false
+    },
+    {
+      "id": "2",
+      "title": "article2",
+      "subject": "subject2",
+      "content": "articlet article article",
+      "liked": false
+    }
+  ]
+}

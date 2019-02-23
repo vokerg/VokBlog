@@ -1,0 +1,8 @@
+<p>
+  Title: <a [routerLink]="['/articles', article.id]">
+     {{article.title}}
+  </a>
+  Subject: {{article.subject}}
+  <br>
+  <button (click)="setLike()">{{article.liked ? "Unlike" : "Like"}}</button>
+</p>
