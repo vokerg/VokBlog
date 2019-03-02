@@ -4,7 +4,7 @@
   </div>
   <div *ngIf="isEdit">
     <form (ngSubmit)="onSubmit()">
-      <input [(ngModel)]="comment.comment" name="comment">
+      <input [(ngModel)]="comment.text" name="text">
       <button type="submit">Submit</button>
     </form>
   </div>

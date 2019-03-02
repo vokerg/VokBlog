@@ -8,11 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigInteger;
 import java.util.List;
 
 @RestController
-@RequestMapping(value="/api/articles")
+@RequestMapping(value = "/api/articles")
 public class ArticleController {
 
     @Autowired
@@ -34,5 +33,12 @@ public class ArticleController {
     @GetMapping("/{id}/comments")
     public ResponseEntity<List<Comment>> getCommentsForArticle(@PathVariable(required = true) String id) {
         return ResponseEntity.ok(commentRepository.findByIdArticle(id));
+    }
+
+    @PutMapping("/{id}/comments")
+    public ResponseEntity<Comment> createCommentForArticle(@PathVariable(required = true) String id,
+                                                           @RequestBody Comment comment) {
+        commentRepository.save(comment);
+        return ResponseEntity.ok(comment);
     }
 }
