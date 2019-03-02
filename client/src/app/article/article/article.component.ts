@@ -29,8 +29,12 @@ export class ArticleComponent implements OnInit {
       this.id = params["id"];
       this.articlesService.getArticle(this.id).forEach(article => {
         this.article = article;
-        this.tags = article.tags.split(",").map(str => str.trim());
-        this.articlesService.getComments(this.id).forEach(response => this.comments = response);
+        if (article.tags) {
+          this.tags = article.tags.split(",").map(str => str.trim());
+        }
+        this.articlesService.getComments(this.id).forEach(response => {
+          this.comments = response;
+        });
       });
     });
   }

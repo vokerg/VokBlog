@@ -1,14 +1,16 @@
 export class Comment {
   id: string;
-  idAuthor: number;
+  idAuthor: string;
+  idArticle: string;
   author: string;
-  //date: Date;
+  title: string;
   text: string;
   constructor() {
-    this.id="0";
-    this.idAuthor=0;
+    this.id=null;
+    this.idAuthor="";
+    this.idArticle="";
     this.author="";
-    //this.date=new Date();
+    this.title="";
     this.text="";
   }
 }

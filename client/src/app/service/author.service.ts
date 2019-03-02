@@ -17,11 +17,11 @@ export class AuthorService {
   getAuthorComments(authorId: number):Comment[] {
     let comment: Comment = new Comment();
     comment.author = "aaass";
-    comment.comment="blablabla";
+    comment.text="blablabla";
 
     let comment1 = <Comment>({
       author:"aaadfsdfsdf",
-      comment:"aaaaa"
+      text:"aaaaa"
     });
 
     return [comment, comment1];

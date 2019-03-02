@@ -1,4 +1,5 @@
 <p>
-  <a [routerLink]="['/authors', comment.id]">{{comment.author}}</a>:
-  {{comment.comment}}
+  Author: <a [routerLink]="['/authors', comment.id]">{{comment.author}}</a>:
+  Title: {{comment.title}}
+  Text: {{comment.text}}
 </p>

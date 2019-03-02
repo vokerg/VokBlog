@@ -21,28 +21,30 @@ export class ArticlesService {
   }
 
   getComments(articleId: number):Observable<Comment[]> {
-    return this.http.get<any>(`api/articles/${articleId}/comments` ).pipe(map(response => <Comment[]>response.comments));
+    return this.http.get<any>(`api/articles/${articleId}/comments`)
+      .pipe(map(response => <Comment[]>response));
   }
 
   updateArticle(article: Article): Observable<number> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const options = { headers: headers };
-    return this.http.post<any>(`api/articles/${article.id}`, article, options).pipe(map((res, err) => err));
+    return this.http.post<any>(`api/articles/${article.id}`, article, options)
+      .pipe(map((res, err) => err));
   }
 
   createArticle(article: Article) : Observable<number> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const options = { headers: headers };
     const {id, ...processedArticle} = article;
-    return this.http.put<any>('api/articles/', processedArticle, options).pipe(map((res, err) => err));
+    return this.http.put<any>('api/articles/', processedArticle, options)
+      .pipe(map((res, err) => err));
   }
 
   addComment(articleId: String, comment: Comment):Observable<number> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const options = { headers: headers };
-    console.log(comment);
-    //return this.http.put<Comment>(`api/articles/${articleId}/comments`, comment, options).pipe(map((res, err) => err));
-    return this.http.put<any>(`api/articles/${articleId}/comments`, {idAuthor: "", author: "", text: ""}, options).pipe(map((res, err) => err));
+    return this.http.put<any>(`api/articles/${articleId}/comments`, {...comment}, options)
+      .pipe(map((res, err) => err));
   }
 
 }

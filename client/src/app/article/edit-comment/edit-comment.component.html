@@ -4,6 +4,11 @@
   </div>
   <div *ngIf="isEdit">
     <form (ngSubmit)="onSubmit()">
+      author:
+      <input [(ngModel)]="comment.author" name="text">
+      title:
+      <input [(ngModel)]="comment.title" name="text">
+      text:
       <input [(ngModel)]="comment.text" name="text">
       <button type="submit">Submit</button>
     </form>

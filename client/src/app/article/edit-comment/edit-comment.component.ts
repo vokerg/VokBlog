@@ -16,15 +16,15 @@ export class EditCommentComponent implements OnInit {
   cmnt: String;
 
   onSubmit() {
-    console.log("submit fired", this.articleId);
-    this.articlesService.addComment("1", this.comment).forEach(errorCode => console.log(errorCode));
+    this.articlesService.addComment(this.articleId, this.comment)
+      .forEach(errorCode => console.log(errorCode));
     this.showEditForm()
   }
 
   showEditForm() {
-    console.log("clicked");
     this.isEdit = !this.isEdit;
     this.comment = new Comment();
+    this.comment.idArticle = this.articleId;
   }
 
   constructor(private articlesService: ArticlesService) {
