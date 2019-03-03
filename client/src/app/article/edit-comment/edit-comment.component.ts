@@ -9,11 +9,10 @@ import { ArticlesService } from '../../service/articles.service';
 })
 export class EditCommentComponent implements OnInit {
 
-  @Input() articleId: String;
+  @Input() articleId: string;
 
   isEdit: boolean;
   comment: Comment;
-  cmnt: String;
 
   onSubmit() {
     this.articlesService.addComment(this.articleId, this.comment)
