@@ -1,13 +1,17 @@
 package com.vokerg.blog.VokergBlog.controller;
 
+import com.vokerg.blog.VokergBlog.JwtUserService;
 import com.vokerg.blog.VokergBlog.model.Comment;
 import com.vokerg.blog.VokergBlog.repository.ArticleRepository;
 import com.vokerg.blog.VokergBlog.model.Article;
 import com.vokerg.blog.VokergBlog.repository.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.ws.Response;
 import java.util.List;
 
 @RestController
@@ -19,6 +23,12 @@ public class ArticleController {
 
     @Autowired
     CommentRepository commentRepository;
+
+    @Autowired
+    JwtUserService jwtUserService;
+
+    @Autowired
+    AuthenticationManager authenticationManager;
 
     @GetMapping("")
     public ResponseEntity<List<Article>> getSomeResponse() {
@@ -40,5 +50,12 @@ public class ArticleController {
                                                            @RequestBody Comment comment) {
         commentRepository.save(comment);
         return ResponseEntity.ok(comment);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestParam String username, @RequestParam String password) {
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+        return ResponseEntity.ok(jwtUserService.login(username, "12345"));
+
     }
 }
