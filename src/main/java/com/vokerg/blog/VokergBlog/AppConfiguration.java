@@ -55,7 +55,10 @@ AuthenticationManager authenticationManager;
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
         .authorizeRequests()
-                .antMatchers("/**").permitAll()
+                .antMatchers("/api/articles/login").permitAll()
+                //.antMatchers("/**").authenticated()
+                .antMatchers("/api/articles").authenticated()
+                .and()
 
                 //.anyRequest().permitAll()
             //    .authorizeRequests()
@@ -65,7 +68,7 @@ AuthenticationManager authenticationManager;
                // .authenticated()
                 //.and()
                 //.addFilter(jwtAuthenticationFilter)
-                //.addFilter(jwtAuthorizationManager)
+                .addFilter(new JwtAuthorizationFilter(authenticationManager));
         ;
 
     }
