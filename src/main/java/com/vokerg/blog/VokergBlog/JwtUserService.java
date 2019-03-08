@@ -9,10 +9,9 @@ import java.util.Date;
 
 @Service
 public class JwtUserService {
-    public String login(String username, String userId) {
+    public String generateJwtToken(String username, String userId) {
         Claims claims = Jwts.claims().setSubject(username);
         claims.put("userId", userId);
-        //claims.put("auth", )
 
         Date now = new Date();
         Date validity = new Date(now.getTime() + 3600000);
@@ -25,7 +24,5 @@ public class JwtUserService {
                 .setExpiration(validity)
                 .signWith(SignatureAlgorithm.HS512, secretKey)
                 .compact();
-
-        //return "working " + username + " " + password;
     }
 }

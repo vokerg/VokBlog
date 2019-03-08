@@ -48,19 +48,21 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
                 .parseClaimsJws(token).getBody();
 
         String username = (String) claims.getSubject();
-        String iduser = (String) claims.get("iserId");
-
+        String iduser = (String) claims.get("userId");
+/*
         UserDetails userDetails = User
                 .withUsername(username)
+                .password("")
                 .accountExpired(false)
                 .accountLocked(false)
                 .disabled(false)
+                .authorities(new ArrayList<>())
                 .build();
-                //TODO: .authorities(something)
-
-
+*/
         //TODO: add granted authority
-        Authentication auth = new UsernamePasswordAuthenticationToken(userDetails, false, new ArrayList<>());
+
+
+        Authentication auth = new UsernamePasswordAuthenticationToken(iduser, false, new ArrayList<>());
         SecurityContextHolder.getContext().setAuthentication(auth);
 
         chain.doFilter(request, response);

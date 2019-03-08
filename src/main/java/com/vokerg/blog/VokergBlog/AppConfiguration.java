@@ -19,18 +19,37 @@ public class AppConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     UserService userService;
 
+    @Autowired
+    JwtUserService jwtUserService;
+
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    public AuthenticationManager customAuthenticationManager() throws Exception {
-        return new AuthenticationManager() {
-            @Override
-            public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-                return new UsernamePasswordAuthenticationToken(authentication.getPrincipal(), authentication.getAuthorities(), null);
+    public AuthenticationManager customAuthenticationManager() {
+        return authentication -> {
+
+            String username = (String) authentication.getPrincipal();
+            String password = (String) authentication.getCredentials();
+
+            String userId = userService.authenticate(username, password);
+            String jwtToken = jwtUserService.generateJwtToken(username, userId);
+
+            if (userId == null) {
+                new UsernamePasswordAuthenticationToken("", "");
             }
+
+            AuthenticatedUser user = new AuthenticatedUserBuilder()
+                    .setUserId(userId)
+                    .setUsername(username)
+                    .setToken(jwtToken)
+                    .createAuthenticatedUser();
+
+
+
+            return new UsernamePasswordAuthenticationToken(user, null, null);
         };
     }
 /*
