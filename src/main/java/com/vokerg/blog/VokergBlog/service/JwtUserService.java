@@ -1,4 +1,4 @@
-package com.vokerg.blog.VokergBlog;
+package com.vokerg.blog.VokergBlog.service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -24,5 +24,20 @@ public class JwtUserService {
                 .setExpiration(validity)
                 .signWith(SignatureAlgorithm.HS512, secretKey)
                 .compact();
+    }
+
+    public String getUserIdFromJsonToken(String token) {
+        if (!validateToken(token)) {
+            throw new RuntimeException("Something bad happened");
+        }
+
+        Claims claims = Jwts.parser().setSigningKey("super_secret_key".getBytes())
+                .parseClaimsJws(token).getBody();
+
+        return (String) claims.get("userId");
+    }
+
+    private boolean validateToken(String token) {
+        return true;
     }
 }

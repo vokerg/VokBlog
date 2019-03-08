@@ -1,4 +1,4 @@
-package com.vokerg.blog.VokergBlog;
+package com.vokerg.blog.VokergBlog.model;
 
 public class AuthenticatedUserBuilder {
     private String userId;

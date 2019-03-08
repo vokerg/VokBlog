@@ -1,5 +1,6 @@
 package com.vokerg.blog.VokergBlog;
 
+import com.vokerg.blog.VokergBlog.service.JwtUserService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,20 +20,21 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-//@Component
 public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
-    //@Autowired
-    AuthenticationManager authenticationManager;
+    private JwtUserService jwtUserService;
+    private AuthenticationManager authenticationManager;
 
-    public JwtAuthorizationFilter(AuthenticationManager authenticationManager) {
+    public JwtAuthorizationFilter(AuthenticationManager authenticationManager, JwtUserService jwtUserService) {
         super(authenticationManager);
         this.authenticationManager = authenticationManager;
+        this.jwtUserService = jwtUserService;
     }
 
     @Override
     public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         String token = request.getHeader("Authorization");
+
         if (token != null && token.startsWith("Bearer ")) {
             token = token.substring(7);
         } else {
@@ -40,15 +42,9 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
             return;
         }
 
-        if (!validateToken(token)) {
-            throw new RuntimeException("Something bad happened");
-        }
+        String iduser = jwtUserService.getUserIdFromJsonToken(token);
 
-        Claims claims = Jwts.parser().setSigningKey("super_secret_key".getBytes())
-                .parseClaimsJws(token).getBody();
 
-        String username = (String) claims.getSubject();
-        String iduser = (String) claims.get("userId");
 /*
         UserDetails userDetails = User
                 .withUsername(username)
