@@ -31,13 +31,14 @@ public class UsersController {
     }
 
     @PutMapping("/signup")
-    public ResponseEntity<AuthenticatedUser> signup(@RequestParam Author author) {
+    public ResponseEntity<AuthenticatedUser> signup(@RequestBody Author author) {
         if (authorService.getAuthorByUsername(author.getUsername()) != null) {
-            return ResponseEntity.badRequest().body(null);
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
         }
+        String rawPassword = author.getPassword();
         Author persistedAuthor = authorService.signupUser(author);
         AuthenticatedUser user = authenticationService
-                .authenticatedUser(persistedAuthor.getUsername(), persistedAuthor.getPassword());
+                .authenticatedUser(persistedAuthor.getUsername(), rawPassword);
         return (user != null) ? ResponseEntity.ok(user) : ResponseEntity.badRequest().body(null);
     }
 }

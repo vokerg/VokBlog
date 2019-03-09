@@ -1,7 +1,8 @@
-package com.vokerg.blog.VokergBlog;
+package com.vokerg.blog.VokergBlog.configuration;
 
 import com.vokerg.blog.VokergBlog.model.AuthenticatedUser;
 import com.vokerg.blog.VokergBlog.model.AuthenticatedUserBuilder;
+import com.vokerg.blog.VokergBlog.model.Author;
 import com.vokerg.blog.VokergBlog.service.AuthorService;
 import com.vokerg.blog.VokergBlog.service.JwtUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-public class AppConfiguration extends WebSecurityConfigurerAdapter {
+public class AuthenticationConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     AuthorService authorService;
@@ -36,20 +37,19 @@ public class AppConfiguration extends WebSecurityConfigurerAdapter {
             String username = (String) authentication.getPrincipal();
             String password = (String) authentication.getCredentials();
 
-            String userId = authorService.authenticate(username, password);
-            String jwtToken = jwtUserService.generateJwtToken(username, userId);
+            Author author = authorService.authenticate(username, password);
 
-            if (userId == null) {
-                new UsernamePasswordAuthenticationToken("", "");
+            if (author == null) {
+                return new UsernamePasswordAuthenticationToken("", "");
             }
 
+            String jwtToken = jwtUserService.generateJwtToken(username, author.getId());
+
             AuthenticatedUser user = new AuthenticatedUserBuilder()
-                    .setUserId(userId)
+                    .setUserId(author.getId())
                     .setUsername(username)
                     .setToken(jwtToken)
                     .createAuthenticatedUser();
-
-
 
             return new UsernamePasswordAuthenticationToken(user, null, null);
         };
@@ -58,16 +58,14 @@ public class AppConfiguration extends WebSecurityConfigurerAdapter {
 @Autowired
 AuthenticationManager authenticationManager;
 
-
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
         .authorizeRequests()
                 .antMatchers("/api/users/login").permitAll()
                 .antMatchers("/api/users/signup").permitAll()
-                //.antMatchers("/**").authenticated()
-                .antMatchers("/api/articles").authenticated()
+                .antMatchers("/**").authenticated()
+                //.antMatchers("/api/articles").authenticated()
                 .and()
                 .addFilter(new JwtAuthorizationFilter(authenticationManager, new JwtUserService()));
     }

@@ -3,8 +3,12 @@ package com.vokerg.blog.VokergBlog.service;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AuthorizationServiceException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 
+import javax.naming.AuthenticationException;
 import java.util.Date;
 
 @Service
@@ -26,15 +30,14 @@ public class JwtUserService {
                 .compact();
     }
 
-    public String getUserIdFromJsonToken(String token) {
-        if (!validateToken(token)) {
-            throw new RuntimeException("Something bad happened");
+    public String getUserIdFromJsonToken(String token) throws AuthenticationException {
+        try {
+            Claims claims = Jwts.parser().setSigningKey("super_secret_key".getBytes())
+                    .parseClaimsJws(token).getBody();
+            return (String) claims.get("userId");
+        } catch (Exception e) {
+            throw new AuthenticationException("Json token expired or incorrect");
         }
-
-        Claims claims = Jwts.parser().setSigningKey("super_secret_key".getBytes())
-                .parseClaimsJws(token).getBody();
-
-        return (String) claims.get("userId");
     }
 
     private boolean validateToken(String token) {
