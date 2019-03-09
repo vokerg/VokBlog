@@ -10,8 +10,6 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 import javax.naming.AuthenticationException;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -37,15 +35,17 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
         } else {
             SecurityContextHolder.clearContext();
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            chain.doFilter(request, response);
             return;
         }
-        
+
         String iduser = null;
         try {
             iduser = jwtUserService.getUserIdFromJsonToken(token);
         } catch (AuthenticationException e) {
             SecurityContextHolder.clearContext();
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            chain.doFilter(request, response);
             return;
         }
 

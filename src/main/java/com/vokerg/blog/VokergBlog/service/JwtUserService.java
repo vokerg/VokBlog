@@ -3,10 +3,7 @@ package com.vokerg.blog.VokergBlog.service;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.http.HttpStatus;
-import org.springframework.security.access.AuthorizationServiceException;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
 
 import javax.naming.AuthenticationException;
 import java.util.Date;
@@ -40,7 +37,4 @@ public class JwtUserService {
         }
     }
 
-    private boolean validateToken(String token) {
-        return true;
-    }
 }

@@ -65,6 +65,7 @@ AuthenticationManager authenticationManager;
                 .antMatchers("/api/users/login").permitAll()
                 .antMatchers("/api/users/signup").permitAll()
                 .antMatchers("/**").authenticated()
+                .antMatchers("/**").permitAll()
                 //.antMatchers("/api/articles").authenticated()
                 .and()
                 .addFilter(new JwtAuthorizationFilter(authenticationManager, new JwtUserService()));
