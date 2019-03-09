@@ -6,14 +6,21 @@ import { Observable } from 'rxjs';
 import 'rxjs/Rx';
 import { Article } from '../model/article';
 import { Comment } from '../model/comment';
+import {AuthenticationService} from "./authentication.service";
 
 @Injectable()
 export class ArticlesService {
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private authenticationService: AuthenticationService
+  ) {}
 
   getArticles():Observable<Article[]> {
-    return this.http.get<any>('api/articles').pipe(map(articles => <Article[]>articles));
+    const token: String = this.authenticationService.getAuthenticationToken();
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+    const options = { headers: headers };
+    return this.http.get<any>('api/articles', options).pipe(map(articles => <Article[]>articles));
   }
 
   getArticle(articleId: number):Observable<Article> {
