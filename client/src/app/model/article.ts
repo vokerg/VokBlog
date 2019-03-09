@@ -1,18 +1,17 @@
 export class Article {
-  id: number;
+  id: string;
   title: string;
   subject: string;
   content: string;
-  id_author: number;
+  idAuthor: string;
   author: string;
   liked: boolean;
   tags: string;
   constructor() {
-    this.id = 0;
+    this.id = null;
     this.title = "";
     this.subject = "";
     this.content = "";
-    this.id_author = 0;
     this.author = "";
     this.liked = false;
     this.tags = "";

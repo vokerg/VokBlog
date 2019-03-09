@@ -25,6 +25,12 @@ public class ArticleController {
         return ResponseEntity.ok(articleRepository.findAll());
     }
 
+    @PutMapping("")
+    public ResponseEntity<Article> createArticle(@RequestBody Article article) {
+        articleRepository.save(article);
+        return ResponseEntity.ok(article);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Article> getArticle(@PathVariable(required = true) String id) {
         return ResponseEntity.ok(articleRepository.findById(id).orElse(null));

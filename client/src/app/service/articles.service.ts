@@ -6,21 +6,28 @@ import { Observable } from 'rxjs';
 import 'rxjs/Rx';
 import { Article } from '../model/article';
 import { Comment } from '../model/comment';
-import {AuthenticationService} from "./authentication.service";
+import {LocalStorageService} from "./local-storage.service";
 
 @Injectable()
 export class ArticlesService {
 
   constructor(
     private http: HttpClient,
-    private authenticationService: AuthenticationService
+    private authenticationService: LocalStorageService
   ) {}
 
-  getArticles():Observable<Article[]> {
+  private getAuthorizationHeader() : any {
     const token: String = this.authenticationService.getAuthenticationToken();
-    const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
-    const options = { headers: headers };
-    return this.http.get<any>('api/articles', options).pipe(map(articles => <Article[]>articles));
+    return{ 'Authorization': `Bearer ${token}` };
+  }
+
+  private getRequestOptions() {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', ...this.getAuthorizationHeader()});
+    return { headers: headers };
+  }
+
+  getArticles():Observable<Article[]> {
+    return this.http.get<any>('api/articles').pipe(map(articles => <Article[]>articles));
   }
 
   getArticle(articleId: number):Observable<Article> {
@@ -33,24 +40,19 @@ export class ArticlesService {
   }
 
   updateArticle(article: Article): Observable<number> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    const options = { headers: headers };
-    return this.http.post<any>(`api/articles/${article.id}`, article, options)
+    return this.http.post<any>(`api/articles/${article.id}`, article, this.getRequestOptions())
       .pipe(map((res, err) => err));
   }
 
   createArticle(article: Article) : Observable<number> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    const options = { headers: headers };
+    console.log("article in api", article)
     const {id, ...processedArticle} = article;
-    return this.http.put<any>('api/articles/', processedArticle, options)
+    return this.http.put<any>('api/articles/', processedArticle, this.getRequestOptions())
       .pipe(map((res, err) => err));
   }
 
   addComment(articleId: String, comment: Comment):Observable<number> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    const options = { headers: headers };
-    return this.http.put<any>(`api/articles/${articleId}/comments`, {...comment}, options)
+    return this.http.put<any>(`api/articles/${articleId}/comments`, {...comment}, this.getRequestOptions())
       .pipe(map((res, err) => err));
   }
 
