@@ -7,23 +7,16 @@ import 'rxjs/Rx';
 import { Article } from '../model/article';
 import { Comment } from '../model/comment';
 import {LocalStorageService} from "./local-storage.service";
+import {ApiService} from "./api.service";
 
 @Injectable()
-export class ArticlesService {
+export class ArticlesService extends ApiService{
 
   constructor(
     private http: HttpClient,
-    private authenticationService: LocalStorageService
-  ) {}
-
-  private getAuthorizationHeader() : any {
-    const token: String = this.authenticationService.getAuthenticationToken();
-    return{ 'Authorization': `Bearer ${token}` };
-  }
-
-  private getRequestOptions() {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json', ...this.getAuthorizationHeader()});
-    return { headers: headers };
+    localStorageService: LocalStorageService
+  ) {
+    super(localStorageService);
   }
 
   getArticles():Observable<Article[]> {

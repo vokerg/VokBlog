@@ -2,13 +2,24 @@ import { Injectable } from '@angular/core';
 import { Author } from '../model/author';
 import { Comment } from '../model/comment';
 import { Article } from '../model/article';
+import {ArticlesService} from "./articles.service";
+import {ApiService} from "./api.service";
+import {HttpClient} from "../../../node_modules/@angular/common/http";
+import {LocalStorageService} from "./local-storage.service";
+import {Observable} from "rxjs";
+import {map} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthorService {
+export class AuthorService extends ApiService{
 
-  constructor() { }
+  constructor(
+    private http: HttpClient,
+    localStorageService: LocalStorageService
+  ) {
+    super(localStorageService);
+  }
 
   getAuthor(authorId: number):Author {
     return new Author();
@@ -27,18 +38,8 @@ export class AuthorService {
     return [comment, comment1];
   }
 
-  getAuthorArticles(authorId: number):Article[] {
-    return [
-      <Article>({
-        title: "some title2",
-        subject: "some subject",
-        content: "some content"
-      }),
-      <Article>({
-        title: "some title3",
-        subject: "some subject",
-        content: "some content"
-      }),
-    ]
+  getAuthorArticles(authorId: string): Observable<Article[]> {
+    return this.http.get<any>(`api/authors/${authorId}/articles`)
+      .pipe(map(articles => <Article[]>articles));
   }
 }

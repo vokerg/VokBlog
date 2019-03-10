@@ -20,9 +20,7 @@ export class AuthorComponent implements OnInit {
   ngOnInit() {
     this.author = this.authorService.getAuthor(0);
     this.comments = this.authorService.getAuthorComments(0);
-    this.articles = this.authorService.getAuthorArticles(0);
-
-    console.log("Articles", this.articles);
+    this.authorService.getAuthorArticles("01").forEach(response => this.articles = response);
   }
 
 }

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ArticleRepository extends MongoRepository<Article, String> {
-    public List<Article> findAll();
-    public Optional<Article> findById(String id);
+    List<Article> findAll();
+    Optional<Article> findById(String id);
+    List<Article> findByIdAUthor(String idAuthor);
 }
