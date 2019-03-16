@@ -15,8 +15,10 @@ export class LoginComponent implements OnInit {
 
   onLogin() {
     console.log("in login function ", this.login, this.password);
-    this.loginService.login(this.login, this.password)
-    return null;
+    this.loginService.login(this.login, this.password).subscribe(
+      result => console.log("result in component", result),
+      error => console.log("error in the component", error)
+      );
   }
 
   ngOnInit() {

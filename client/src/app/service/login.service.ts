@@ -1,14 +1,17 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import 'rxjs/Rx';
-import { Observable } from 'rxjs';
+import {empty, Observable} from 'rxjs';
+import {AuthenticatedUser} from "../model/authenticatedUser";
+import {catchError, map} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
-  login(login: string, password: string) {
 
+
+  login(username: string, password: string): Observable<string> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -16,13 +19,17 @@ export class LoginService {
     };
 
     const body = new HttpParams()
-      .set('username', login)
+      .set('username', username)
       .set('password', password);
 
-    console.log(login, password);
+    console.log("in login method");
 
-    this.httpClient.post("api/users/login", body.toString(), httpOptions).subscribe(res => console.log(res));
-
+    return this.httpClient.post("api/users/login", body.toString(), httpOptions)
+      .pipe(
+        map(result => {
+          console.log("RESULT",result);
+          return "OK";
+        }));
   }
 
 
