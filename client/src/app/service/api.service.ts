@@ -13,11 +13,14 @@ export class ApiService {
 
   public getAuthorizationHeader() : any {
     const token: String = this.localStorageService.getAuthenticationToken();
-    return{ 'Authorization': `Bearer ${token}` };
+    return (token) ? {'Authorization': `Bearer ${token}`} : null;
   }
 
+
   public getRequestOptions() {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json', ...this.getAuthorizationHeader()});
-    return { headers: headers };
+    const authorizationHeader = this.getAuthorizationHeader();
+    const headers = (authorizationHeader)
+      ? new HttpHeaders({ 'Content-Type': 'application/json', ...authorizationHeader}) : null;
+    return (headers) ? { headers: headers } : null;
   }
 }
