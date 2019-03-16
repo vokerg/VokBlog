@@ -16,12 +16,14 @@ import { AuthorComponent } from './author/author/author.component';
 
 import { SharedModule } from './shared/shared.module';
 import { TagComponent } from './tag/tag.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EditArticleComponent,
-    TagComponent
+    TagComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +35,8 @@ import { TagComponent } from './tag/tag.component';
       {path: 'articles/:id', component: ArticleComponent},
       {path: 'articles/:id/edit', component: EditArticleComponent},
       {path: 'authors/:id', component: AuthorComponent},
-      {path: 'tags/:tag', component: TagComponent}
+      {path: 'tags/:tag', component: TagComponent},
+      {path: 'login', component: LoginComponent}
     ]),
     ArticlesModule,
     ArticleModule,

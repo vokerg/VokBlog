@@ -20,6 +20,6 @@ public class AuthorsController {
 
     @GetMapping("/{idAuthor}/articles")
     public ResponseEntity<List<Article>> getAuthorsArticles(@RequestParam String idAuthor) {
-        return ResponseEntity.ok(articleRepository.findByIdAUthor(idAuthor));
+        return ResponseEntity.ok(articleRepository.findByIdAuthor(idAuthor));
     }
 }
