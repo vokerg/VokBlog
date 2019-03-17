@@ -46,7 +46,7 @@ import { reducer } from './store/reducers';
     ArticleModule,
     AuthorModule,
     SharedModule,
-    StoreModule.forRoot(reducer)
+    StoreModule.forRoot({someElement: reducer})
   ],
   providers: [
     ArticlesService,
