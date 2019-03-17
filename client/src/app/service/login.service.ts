@@ -22,8 +22,6 @@ export class LoginService {
       .set('username', username)
       .set('password', password);
 
-    console.log("in login method");
-
     return this.httpClient.post("api/users/login", body.toString(), httpOptions)
       .pipe(
         map(result => {
@@ -37,6 +35,9 @@ export class LoginService {
       )
   }
 
+  isAuthenticated() {
+    return (this.localStorageService.getUserId() !== null);
+  }
 
   constructor(
     private httpClient: HttpClient,

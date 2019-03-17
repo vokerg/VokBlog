@@ -17,13 +17,17 @@ import { AuthorComponent } from './author/author/author.component';
 import { SharedModule } from './shared/shared.module';
 import { TagComponent } from './tag/tag.component';
 import { LoginComponent } from './login/login.component';
+import { NavigationComponent } from './navigation/navigation.component';
+import { StoreModule } from "@ngrx/store";
+import { reducer } from './store/reducers';
 
 @NgModule({
   declarations: [
     AppComponent,
     EditArticleComponent,
     TagComponent,
-    LoginComponent
+    LoginComponent,
+    NavigationComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +45,8 @@ import { LoginComponent } from './login/login.component';
     ArticlesModule,
     ArticleModule,
     AuthorModule,
-    SharedModule
+    SharedModule,
+    StoreModule.forRoot(reducer)
   ],
   providers: [
     ArticlesService,

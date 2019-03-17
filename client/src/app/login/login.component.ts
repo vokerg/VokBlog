@@ -9,7 +9,7 @@ import {Router} from "@angular/router";
 })
 export class LoginComponent implements OnInit {
 
-  login: string;
+  username: string;
   password: string;
 
   constructor(
@@ -18,8 +18,7 @@ export class LoginComponent implements OnInit {
   ) { }
 
   onLogin() {
-    console.log("in login function ", this.login, this.password);
-    this.loginService.login(this.login, this.password).take(1).subscribe(
+    this.loginService.login(this.username, this.password).take(1).subscribe(
       () => this.router.navigate(['/']),
       error => console.log("error in the component", error)
       );
