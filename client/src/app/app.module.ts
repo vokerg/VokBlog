@@ -19,7 +19,7 @@ import { TagComponent } from './tag/tag.component';
 import { LoginComponent } from './login/login.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { StoreModule } from "@ngrx/store";
-import { reducer } from './store/reducers';
+import * as fromReducers from './store/reducers';
 
 @NgModule({
   declarations: [
@@ -46,7 +46,7 @@ import { reducer } from './store/reducers';
     ArticleModule,
     AuthorModule,
     SharedModule,
-    StoreModule.forRoot({someElement: reducer})
+    StoreModule.forRoot(fromReducers.reducers, {metaReducers: fromReducers.metaReducers})
   ],
   providers: [
     ArticlesService,

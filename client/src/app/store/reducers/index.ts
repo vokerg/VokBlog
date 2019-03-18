@@ -1,4 +1,7 @@
-export interface Store {
+import {ActionReducer, ActionReducerMap} from "@ngrx/store";
+import {storeLogger} from "ngrx-store-logger";
+
+export interface State {
   someElement: string
 }
 
@@ -12,6 +15,17 @@ export function reducer(state:string="ahaha", action) {
       return state;
     }
   }
-
   return state;
 }
+
+export const reducers: ActionReducerMap<State> = {
+  someElement: reducer
+}
+
+
+export function logger(reducer: ActionReducer<State>): any {
+  return storeLogger()(reducer);
+}
+
+export const metaReducers = [logger];
+

@@ -13,7 +13,7 @@ export class AppComponent implements OnInit{
   title = 'app12';
 
   constructor(
-    private store: Store<fromReducers.Store>
+    private store: Store<fromReducers.State>
   ) {
     this.someString = store.select("someElement");
     console.log("some string obs", this.someString);
