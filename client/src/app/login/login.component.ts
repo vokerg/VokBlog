@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {LoginService} from "../service/login.service";
 import {Router} from "@angular/router";
+import {Store} from "@ngrx/store";
+import * as fromReducers from "../store/reducers";
+import {LoginAction, LoginUnsuccessful} from "../store/actions";
 
 @Component({
   selector: 'app-login',
@@ -14,14 +17,24 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private loginService: LoginService,
-    private router: Router
+    private router: Router,
+    private store: Store<fromReducers.State>
   ) { }
 
   onLogin() {
+
+    this.store.dispatch(new LoginAction(this.username, this.password))
+
+/*
     this.loginService.login(this.username, this.password).take(1).subscribe(
-      () => this.router.navigate(['/']),
-      error => console.log("error in the component", error)
+  () => {
+          this.store.dispatch(new LoginAction());
+          this.router.navigate(['/']);
+        },
+      () => this.store.dispatch(new LoginUnsuccessful())
       );
+
+    */
   }
 
   ngOnInit() {

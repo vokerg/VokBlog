@@ -23,12 +23,10 @@ export class AppComponent implements OnInit{
   someString: Observable<string>;
 
   doSomething() {
-    console.log("something happened");
     this.store.dispatch(new setSomething("another string"));
   }
 
   doSomethingElse() {
-    console.log("something else happened");
     this.store.dispatch(new SomeActionForEffects("another payload"));
   }
 
