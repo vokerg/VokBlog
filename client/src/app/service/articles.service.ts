@@ -20,7 +20,7 @@ export class ArticlesService extends ApiService{
   }
 
   getArticles():Observable<Article[]> {
-    return this.http.get<any>('api/articles').pipe(map(articles => <Article[]>articles));
+    return this.http.get<Article[]>('api/articles');
   }
 
   getArticle(articleId: number):Observable<Article> {
@@ -28,8 +28,7 @@ export class ArticlesService extends ApiService{
   }
 
   getComments(articleId: number):Observable<Comment[]> {
-    return this.http.get<any>(`api/articles/${articleId}/comments`)
-      .pipe(map(response => <Comment[]>response));
+    return this.http.get<Comment[]>(`api/articles/${articleId}/comments`);
   }
 
   updateArticle(article: Article): Observable<number> {

@@ -5,3 +5,14 @@ export class setSomething implements Action {
 
   constructor(public payload: string){}
 }
+
+export class SomeActionForEffects implements Action {
+  type = "ACTION_FOR_EFFECTS";
+
+  constructor(public payload: string){}
+}
+
+export class SetSomethingElse implements  Action {
+  type = "SET_SOMETHING_ELSE";
+  constructor() {}
+}

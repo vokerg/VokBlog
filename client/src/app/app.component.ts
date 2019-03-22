@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
 import * as fromReducers from './store/reducers';
 import {Observable} from "rxjs";
-import {setSomething} from "./store/actions";
+import {setSomething, SomeActionForEffects} from "./store/actions";
 
 @Component({
   selector: 'app-root',
@@ -25,6 +25,11 @@ export class AppComponent implements OnInit{
   doSomething() {
     console.log("something happened");
     this.store.dispatch(new setSomething("another string"));
+  }
+
+  doSomethingElse() {
+    console.log("something else happened");
+    this.store.dispatch(new SomeActionForEffects("another payload"));
   }
 
   ngOnInit() {}

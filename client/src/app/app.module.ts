@@ -20,6 +20,8 @@ import { LoginComponent } from './login/login.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { StoreModule } from "@ngrx/store";
 import * as fromReducers from './store/reducers';
+import {EffectsModule} from "@ngrx/effects";
+import {ArticlesEffects} from "./store/effects";
 
 @NgModule({
   declarations: [
@@ -46,6 +48,7 @@ import * as fromReducers from './store/reducers';
     ArticleModule,
     AuthorModule,
     SharedModule,
+    EffectsModule.forRoot([ArticlesEffects]),
     StoreModule.forRoot(fromReducers.reducers, {metaReducers: fromReducers.metaReducers})
   ],
   providers: [
