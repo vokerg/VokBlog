@@ -22,19 +22,11 @@ export class LoginComponent implements OnInit {
   ) { }
 
   onLogin() {
-
-    this.store.dispatch(new LoginAction(this.username, this.password))
-
-/*
-    this.loginService.login(this.username, this.password).take(1).subscribe(
-  () => {
-          this.store.dispatch(new LoginAction());
-          this.router.navigate(['/']);
-        },
-      () => this.store.dispatch(new LoginUnsuccessful())
-      );
-
-    */
+    this.store.dispatch(
+      new LoginAction(this.username, this.password, () =>
+        this.router.navigate(['/'])
+      )
+    );
   }
 
   ngOnInit() {

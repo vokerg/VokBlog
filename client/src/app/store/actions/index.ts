@@ -1,4 +1,5 @@
 import {Action} from "@ngrx/store";
+import {AuthenticatedUser} from "../../model/authenticatedUser";
 
 export class setSomething implements Action {
   type = "SET_SOMETHING";
@@ -19,11 +20,12 @@ export class SetSomethingElse implements  Action {
 
 export class LoginAction implements Action {
   type = "LOGIN";
-  constructor(public username: string, public password: string){}
+  constructor(public username: string, public password: string, public callback: ()=>void){}
 }
 
 export class LoginSuccessful implements Action {
   type = "LOGIN_SUCCESSFUL";
+  constructor (public payload:AuthenticatedUser) {};
 }
 
 export class LoginUnsuccessful implements Action {

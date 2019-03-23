@@ -11,7 +11,7 @@ import {LocalStorageService} from "./local-storage.service";
 export class LoginService {
 
 
-  login(username: string, password: string): Observable<string> {
+  login(username: string, password: string): Observable<AuthenticatedUser> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -26,13 +26,13 @@ export class LoginService {
       .pipe(
         map(result => {
           this.localStorageService.saveAuthenticatedUser((<AuthenticatedUser> result));
-          return "OK";
+          return <AuthenticatedUser> result;
         }),
-          catchError(err => {
-            this.localStorageService.clearAuthenticatedUser();
-            return throwError(err);
-          })
-      )
+        catchError(err => {
+          this.localStorageService.clearAuthenticatedUser();
+          return throwError(err);
+        })
+      );
   }
 
   isAuthenticated() {
