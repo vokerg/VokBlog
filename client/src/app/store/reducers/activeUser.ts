@@ -1,12 +1,13 @@
+
 export interface State {
   userId: string;
-  login: string;
+  username: string;
   token: string;
 }
 
 export function reducer(state:State={
   userId: "",
-  login: "",
+  username: "",
   token: ""
 }, action) {
   switch (action.type) {
@@ -26,3 +27,6 @@ export function reducer(state:State={
   }
   return state;
 }
+
+
+export const getActiveUsername = (state:State) => state.username;

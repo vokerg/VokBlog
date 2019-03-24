@@ -1,4 +1,7 @@
-<p>
+<div>
   navigation works!
   authenticated: {{isAuthenticated}}
-</p>
+  <div *ngIf="username$ | async; let username">
+    login: {{username}}
+  </div>
+</div>

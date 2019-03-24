@@ -16,8 +16,6 @@ export class AppComponent implements OnInit{
     private store: Store<fromReducers.State>
   ) {
     this.someString = store.select("someElement");
-    console.log("some string obs", this.someString);
-    console.log("store", store);
   }
 
   someString: Observable<string>;
