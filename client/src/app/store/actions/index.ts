@@ -23,6 +23,11 @@ export class LoginAction implements Action {
   constructor(public username: string, public password: string, public callback: ()=>void){}
 }
 
+export class Logout implements Action {
+  type = "LOGOUT";
+  constructor(){}
+}
+
 export class LoginSuccessful implements Action {
   type = "LOGIN_SUCCESSFUL";
   constructor (public payload:AuthenticatedUser) {};

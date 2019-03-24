@@ -1,7 +1,12 @@
 <div>
-  navigation works!
-  authenticated: {{isAuthenticated}}
-  <div *ngIf="username$ | async; let username">
+  <span *ngIf="username$ | async; let username">
     login: {{username}}
-  </div>
+  </span>
+  <span *ngIf="isAuthenticated$ | async; else loggedOut">
+    <button (click)="logout()">Logout</button>
+  </span>
+  <ng-template #loggedOut>
+    <button>Signup</button>
+    <button (click)="login()">Login</button>
+  </ng-template>
 </div>

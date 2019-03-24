@@ -13,7 +13,7 @@ export function reducer(state:State={
     case "LOGIN_SUCCESSFUL": {
       return action.payload;
     }
-    case "LOGIN_UNSUCCESSFUL": {
+    case "LOGIN_UNSUCCESSFUL": case "LOGOUT": {
       return {
         userId: "",
         login: "",
@@ -31,3 +31,5 @@ export function reducer(state:State={
 export const getActiveUsername = (state:State) => state.username;
 
 export var getToken = (state:State) => state.token;
+
+export var isAuthenticated = (state:State) => state.userId !== "";
