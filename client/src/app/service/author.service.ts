@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { Author } from '../model/author';
 import { Comment } from '../model/comment';
 import { Article } from '../model/article';
-import {ArticlesService} from "./articles.service";
 import {ApiService} from "./api.service";
 import {HttpClient} from "../../../node_modules/@angular/common/http";
-import {LocalStorageService} from "./local-storage.service";
 import {Observable} from "rxjs";
 import {map} from "rxjs/operators";
+import {Store} from "@ngrx/store";
+import * as fromRoot from "../store/reducers";
 
 @Injectable({
   providedIn: 'root'
@@ -16,9 +16,9 @@ export class AuthorService extends ApiService{
 
   constructor(
     private http: HttpClient,
-    localStorageService: LocalStorageService
+    store: Store<fromRoot.State>
   ) {
-    super(localStorageService);
+    super(store);
   }
 
   getAuthor(authorId: number):Author {

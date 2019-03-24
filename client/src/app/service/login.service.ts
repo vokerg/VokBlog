@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {Observable, throwError} from 'rxjs';
+import {Observable} from 'rxjs';
 import {AuthenticatedUser} from "../model/authenticatedUser";
-import {catchError, map} from "rxjs/operators";
 import {LocalStorageService} from "./local-storage.service";
 
 @Injectable({
@@ -22,25 +21,14 @@ export class LoginService {
       .set('username', username)
       .set('password', password);
 
-    return this.httpClient.post("api/users/login", body.toString(), httpOptions)
-      .pipe(
-        map(result => {
-          this.localStorageService.saveAuthenticatedUser((<AuthenticatedUser> result));
-          return <AuthenticatedUser> result;
-        }),
-        catchError(err => {
-          this.localStorageService.clearAuthenticatedUser();
-          return throwError(err);
-        })
-      );
+    return this.httpClient.post<AuthenticatedUser>("api/users/login", body.toString(), httpOptions);
   }
 
   isAuthenticated() {
-    return (this.localStorageService.getUserId() !== null);
+    return (false);
   }
 
   constructor(
     private httpClient: HttpClient,
-    private localStorageService: LocalStorageService
   ) { }
 }

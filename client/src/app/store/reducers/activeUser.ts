@@ -1,4 +1,3 @@
-
 export interface State {
   userId: string;
   username: string;
@@ -30,3 +29,5 @@ export function reducer(state:State={
 
 
 export const getActiveUsername = (state:State) => state.username;
+
+export var getToken = (state:State) => state.token;

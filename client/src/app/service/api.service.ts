@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import {HttpHeaders} from "../../../node_modules/@angular/common/http";
-import {LocalStorageService} from "./local-storage.service";
+import * as fromRoot from "../store/reducers";
+import {Store} from "@ngrx/store";
+import {Observable, of} from "rxjs";
+import {map} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -8,19 +11,23 @@ import {LocalStorageService} from "./local-storage.service";
 export class ApiService {
 
   constructor(
-    private localStorageService: LocalStorageService
+    private store: Store<fromRoot.State>
   ) { }
 
-  public getAuthorizationHeader() : any {
-    const token: String = this.localStorageService.getAuthenticationToken();
-    return (token) ? {'Authorization': `Bearer ${token}`} : null;
+  public getAuthorizationHeader() : Observable<any> {
+    return this.store.select(fromRoot.getToken).pipe(
+      map((token: string) => (token) ? {'Authorization': `Bearer ${token}`} : null)
+    )
   }
 
 
-  public getRequestOptions() {
-    const authorizationHeader = this.getAuthorizationHeader();
-    const headers = (authorizationHeader)
-      ? new HttpHeaders({ 'Content-Type': 'application/json', ...authorizationHeader}) : null;
-    return (headers) ? { headers: headers } : null;
+  public getRequestOptions(): Observable<any> {
+    return this.getAuthorizationHeader().pipe(
+      map(authorizationHeader => {
+        const headers = (authorizationHeader)
+          ? new HttpHeaders({ 'Content-Type': 'application/json', ...authorizationHeader}) : null;
+        return (headers) ? { headers: headers } : null;
+      })
+    );
   }
 }

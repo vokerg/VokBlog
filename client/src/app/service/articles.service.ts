@@ -6,17 +6,18 @@ import { Observable } from 'rxjs';
 import 'rxjs/Rx';
 import { Article } from '../model/article';
 import { Comment } from '../model/comment';
-import {LocalStorageService} from "./local-storage.service";
 import {ApiService} from "./api.service";
+import {Store} from "@ngrx/store";
+import * as fromRoot from "../store/reducers";
 
 @Injectable()
 export class ArticlesService extends ApiService{
 
   constructor(
     private http: HttpClient,
-    localStorageService: LocalStorageService
+    store: Store<fromRoot.State>
   ) {
-    super(localStorageService);
+    super(store);
   }
 
   getArticles():Observable<Article[]> {
@@ -32,18 +33,23 @@ export class ArticlesService extends ApiService{
   }
 
   updateArticle(article: Article): Observable<number> {
-    return this.http.post<any>(`api/articles/${article.id}`, article, this.getRequestOptions())
+//    return this.http.post<any>(`api/articles/${article.id}`, article, this.getRequestOptions())
+//      .pipe(map((res, err) => err));
+    return this.http.post<any>(`api/articles/${article.id}`, article)
       .pipe(map((res, err) => err));
   }
 
-  createArticle(article: Article) : Observable<number> {
+  createArticle(article: Article) : Observable<any> {
     const {id, ...processedArticle} = article;
-    return this.http.put<any>('api/articles/', processedArticle, this.getRequestOptions())
-      .pipe(map((res, err) => err));
+    return this.getRequestOptions().pipe(
+      map(requestOptions => this.http.put<any>('api/articles/', processedArticle, requestOptions))
+    );
   }
 
   addComment(articleId: String, comment: Comment):Observable<number> {
-    return this.http.put<any>(`api/articles/${articleId}/comments`, {...comment}, this.getRequestOptions())
+//    return this.http.put<any>(`api/articles/${articleId}/comments`, {...comment}, this.getRequestOptions())
+//      .pipe(map((res, err) => err));
+    return this.http.put<any>(`api/articles/${articleId}/comments`, {...comment})
       .pipe(map((res, err) => err));
   }
 
