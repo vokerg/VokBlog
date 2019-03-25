@@ -3,6 +3,7 @@ import { AuthorService } from '../../service/author.service';
 import { Author } from '../../model/author';
 import { Comment } from '../../model/comment'
 import { Article } from '../../model/article'
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-author',
@@ -14,13 +15,22 @@ export class AuthorComponent implements OnInit {
   author: Author;
   comments: Comment[];
   articles: Article[];
+  id: number;
 
-  constructor( private authorService: AuthorService ) { }
+  constructor(
+    private authorService: AuthorService,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
-    this.author = this.authorService.getAuthor(0);
-    this.comments = this.authorService.getAuthorComments(0);
-    this.authorService.getAuthorArticles("01").forEach(response => this.articles = response);
+    this.route.params.take(1).subscribe(params => {
+      this.id = params["id"];
+      this.author = this.authorService.getAuthor(this.id);
+      this.comments = this.authorService.getAuthorComments(this.id);
+      this.authorService.getAuthorArticles(this.id.toString())
+        .subscribe(response => this.articles = response);
+    })
+
   }
 
 }
