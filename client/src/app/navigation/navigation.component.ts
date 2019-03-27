@@ -25,6 +25,7 @@ export class NavigationComponent implements OnInit {
 
   logout = () => this.store.dispatch(new Logout());
   login = () => this.router.navigate(['/login']);
+  signup = () => this.router.navigate(['/signup']);
 
 
   ngOnInit() { }

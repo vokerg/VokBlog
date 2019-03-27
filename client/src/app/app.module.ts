@@ -22,6 +22,7 @@ import { StoreModule } from "@ngrx/store";
 import * as fromReducers from './store/reducers';
 import {EffectsModule} from "@ngrx/effects";
 import {ArticlesEffects} from "./store/effects";
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import {ArticlesEffects} from "./store/effects";
     EditArticleComponent,
     TagComponent,
     LoginComponent,
-    NavigationComponent
+    NavigationComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +44,8 @@ import {ArticlesEffects} from "./store/effects";
       {path: 'articles/:id/edit', component: EditArticleComponent},
       {path: 'authors/:id', component: AuthorComponent},
       {path: 'tags/:tag', component: TagComponent},
-      {path: 'login', component: LoginComponent}
+      {path: 'login', component: LoginComponent},
+      {path: 'signup', component: SignupComponent}
     ]),
     ArticlesModule,
     ArticleModule,
