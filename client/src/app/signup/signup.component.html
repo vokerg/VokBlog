@@ -1,3 +1,9 @@
-<p>
-  signup works!
-</p>
+<div>
+  <form (submit)="onSubmit()">
+    Username:<input type="text" [(ngModel)]="username"><br>
+    Password:<input type="password" [(ngModel)]="password"><br>
+    Confirm:<input type="password" [(ngModel)]="confirmPassword"><br>
+    <input type="submit"/>
+  </form>
+</div>
+

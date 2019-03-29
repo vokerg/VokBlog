@@ -10,9 +10,17 @@ import {Logout} from "../store/actions";
 })
 export class SignupComponent implements OnInit {
 
+  username: string;
+  password: string;
+  confirmPassword: string;
+
   constructor(
     private store: Store<fromReducers.State>
   ) { }
+
+  onSubmit() {
+    console.log("good");
+  }
 
   ngOnInit() {
     this.store.dispatch(new Logout());
