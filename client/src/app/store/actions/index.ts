@@ -36,3 +36,8 @@ export class LoginSuccessful implements Action {
 export class LoginUnsuccessful implements Action {
   type = "LOGIN_UNSUCCESSFUL";
 }
+
+export class SignupAction {
+  type = "SIGNUP";
+  constructor(public username: string, public password: string, public callback: ()=>void) {}
+}

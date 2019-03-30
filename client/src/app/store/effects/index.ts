@@ -1,7 +1,14 @@
 import {Injectable} from "@angular/core";
 import {Actions, Effect, ofType} from "@ngrx/effects";
 import {ArticlesService} from "../../service/articles.service";
-import {LoginAction, LoginSuccessful, LoginUnsuccessful, SetSomethingElse, SomeActionForEffects} from "../actions";
+import {
+  LoginAction,
+  LoginSuccessful,
+  LoginUnsuccessful,
+  SetSomethingElse,
+  SignupAction,
+  SomeActionForEffects
+} from "../actions";
 import {catchError, map, mergeMap} from "rxjs/operators";
 import {Action} from "@ngrx/store";
 import {Observable, of} from "rxjs";
@@ -41,6 +48,23 @@ export class ArticlesEffects {
               return new LoginSuccessful(authenticatedUser);
             }),
             catchError(() => of(new LoginUnsuccessful()))
+          )
+      )
+    )
+
+  @Effect()
+  signup$: Observable<Action> =
+    this.actions$.pipe(
+      ofType<SignupAction>('SIGNUP'),
+      map(action => {
+        return {username: action.username, password: action.password, callback: action.callback}
+      }),
+      mergeMap(({username, password, callback}) =>
+        this.loginService.signup(username, password)
+          .pipe(
+            map(() => {
+              return new LoginAction(username, password, callback)
+            })
           )
       )
     )

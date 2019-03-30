@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Store} from "@ngrx/store";
 import * as fromReducers from "../store/reducers";
-import {Logout} from "../store/actions";
+import {Logout, SignupAction} from "../store/actions";
 
 @Component({
   selector: 'app-signup',
@@ -19,7 +19,7 @@ export class SignupComponent implements OnInit {
   ) { }
 
   onSubmit() {
-    console.log("good");
+    this.store.dispatch(new SignupAction(this.username, this.password, () => console.log("done")));
   }
 
   ngOnInit() {
