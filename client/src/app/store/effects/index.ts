@@ -14,6 +14,7 @@ import {Action} from "@ngrx/store";
 import {Observable, of} from "rxjs";
 import {LoginService} from "../../service/login.service";
 import {AuthenticatedUser} from "../../model/authenticatedUser";
+import {AuthenticationUser} from "../../model/authenticationUser";
 
 @Injectable()
 export class ArticlesEffects {
@@ -57,13 +58,13 @@ export class ArticlesEffects {
     this.actions$.pipe(
       ofType<SignupAction>('SIGNUP'),
       map(action => {
-        return {username: action.username, password: action.password, callback: action.callback}
+        return {authenticationUser: action.authenticationUser, callback: action.callback}
       }),
-      mergeMap(({username, password, callback}) =>
-        this.loginService.signup(username, password)
+      mergeMap(({authenticationUser, callback}) =>
+        this.loginService.signup(authenticationUser)
           .pipe(
             map(() => {
-              return new LoginAction(username, password, callback)
+              return new LoginAction(authenticationUser.username, authenticationUser.password, callback)
             })
           )
       )

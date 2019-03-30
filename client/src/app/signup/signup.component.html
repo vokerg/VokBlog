@@ -1,7 +1,8 @@
 <div>
   <form (submit)="onSubmit()">
-    Username:<input type="text" [(ngModel)]="username" name="username"><br>
-    Password:<input type="password" [(ngModel)]="password" name="password"><br>
+    Display name:<input type="text" [(ngModel)]="authenticationUser.name" name="name"><br>
+    Username:<input type="text" [(ngModel)]="authenticationUser.username" name="username"><br>
+    Password:<input type="password" [(ngModel)]="authenticationUser.password" name="password"><br>
     Confirm:<input type="password" [(ngModel)]="confirmPassword" name="confirmPassword"><br>
     <input type="submit"/>
   </form>

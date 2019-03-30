@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {AuthenticatedUser} from "../model/authenticatedUser";
-import {LocalStorageService} from "./local-storage.service";
+import {AuthenticationUser} from "../model/authenticationUser";
 
 @Injectable({
   providedIn: 'root'
@@ -24,23 +24,17 @@ export class LoginService {
     return this.httpClient.post<AuthenticatedUser>("api/users/login", body.toString(), httpOptions);
   }
 
-  signup(username: string, password: string): Observable<any> {
+  signup(authenticationUser: AuthenticationUser): Observable<any> {
 
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/x-www-form-urlencoded'
+        'Content-Type':'application/json; charset=utf-8'
       })
     };
 
-    const body = new HttpParams()
-      .set('username', username)
-      .set('password', password);
+    console.log(JSON.stringify(authenticationUser));
 
-    return this.httpClient.put<any>("api/users/signup", body.toString(), httpOptions);
-  }
-
-  isAuthenticated() {
-    return (false);
+    return this.httpClient.put<any>("api/users/signup", JSON.stringify(authenticationUser), httpOptions);
   }
 
   constructor(
