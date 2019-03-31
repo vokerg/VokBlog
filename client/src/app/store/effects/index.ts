@@ -57,15 +57,11 @@ export class ArticlesEffects {
   signup$: Observable<Action> =
     this.actions$.pipe(
       ofType<SignupAction>('SIGNUP'),
-      map(action => {
-        return {authenticationUser: action.authenticationUser, callback: action.callback}
-      }),
+      map(action => ({authenticationUser: action.authenticationUser, callback: action.callback})),
       mergeMap(({authenticationUser, callback}) =>
         this.loginService.signup(authenticationUser)
           .pipe(
-            map(() => {
-              return new LoginAction(authenticationUser.username, authenticationUser.password, callback)
-            })
+            map(() => new LoginAction(authenticationUser.username, authenticationUser.password, callback))
           )
       )
     )

@@ -33,3 +33,5 @@ export const getActiveUsername = (state:State) => state.username;
 export var getToken = (state:State) => state.token;
 
 export var isAuthenticated = (state:State) => state.userId !== "";
+
+export var getActiveUser = (state:State) => state;

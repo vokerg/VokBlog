@@ -1,5 +1,5 @@
 
-import {map} from 'rxjs/operators';
+import {map, mergeAll} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -41,9 +41,11 @@ export class ArticlesService extends ApiService{
 
   createArticle(article: Article) : Observable<any> {
     const {id, ...processedArticle} = article;
-    return this.getRequestOptions().pipe(
-      map(requestOptions => this.http.put<any>('api/articles/', processedArticle, requestOptions))
-    );
+    return this.getRequestOptions()
+      .pipe(
+        map(requestOptions => this.http.put<any>('api/articles', processedArticle, requestOptions)),
+        mergeAll()
+      )
   }
 
   addComment(articleId: String, comment: Comment):Observable<number> {

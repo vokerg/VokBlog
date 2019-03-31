@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-import { NgZone } from "@angular/core";
+import { ActivatedRoute, Router } from '@angular/router';
 import { ArticlesService } from '../service/articles.service';
 import { Article } from '../model/article';
-import {LocalStorageService} from "../service/local-storage.service";
+import {Store} from "@ngrx/store";
+import * as fromRoot from "../store/reducers";
+import {Observable} from "rxjs";
+import * as fromActiveUser from "../store/reducers/activeUser";
+import * as fromReducersRoot from "../store/reducers";
 
 @Component({
   selector: 'app-edit-article',
@@ -13,6 +16,8 @@ import {LocalStorageService} from "../service/local-storage.service";
 export class EditArticleComponent implements OnInit {
   article: Article;
   id: number;
+  activeUser$: Observable<fromActiveUser.State>
+
 
   onSubmit() {
     if (this.id !== undefined) {
@@ -24,15 +29,14 @@ export class EditArticleComponent implements OnInit {
       });
     }
     else {
-      this.articlesService.createArticle({
-        ...this.article,
-        idAuthor: this.localStorageService.getUserId(),
-        author: this.localStorageService.getUsername()
-      } ).forEach(errorCode => {
-        if (errorCode !== 0) {
-          console.log("Couldn't save", errorCode);
-        }
-        this.redirect();
+
+      this.activeUser$.take(1).subscribe(activeUser => {
+        this.articlesService.createArticle({
+          ...this.article,
+          idAuthor: activeUser.userId,
+          author: activeUser.username
+        })
+          .subscribe(() => this.redirect())
       });
     }
   }
@@ -45,10 +49,10 @@ export class EditArticleComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private articlesService: ArticlesService,
-    private zone: NgZone,
-    private localStorageService: LocalStorageService
+    private store: Store<fromRoot.State>,
   ) {
       this.article = new Article();
+      this.activeUser$ = store.select(fromReducersRoot.getActiveUser);
   }
 
   ngOnInit() {

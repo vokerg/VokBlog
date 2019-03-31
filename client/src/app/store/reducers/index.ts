@@ -39,3 +39,8 @@ export const isAuthenticated = createSelector(
   getActiveUserState,
   fromActiveUser.isAuthenticated
 )
+
+export const getActiveUser = createSelector(
+  getActiveUserState,
+  fromActiveUser.getActiveUser
+)

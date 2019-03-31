@@ -31,9 +31,6 @@ export class LoginService {
         'Content-Type':'application/json; charset=utf-8'
       })
     };
-
-    console.log(JSON.stringify(authenticationUser));
-
     return this.httpClient.put<any>("api/users/signup", JSON.stringify(authenticationUser), httpOptions);
   }
 
