@@ -16,10 +16,12 @@ import * as fromReducersRoot from "../store/reducers";
 export class EditArticleComponent implements OnInit {
   article: Article;
   id: number;
-  activeUser$: Observable<fromActiveUser.State>
+  activeUser$: Observable<fromActiveUser.State>;
+  tags: string;
 
 
   onSubmit() {
+    this.article.tags = this.tags.split(",");
     if (this.id !== undefined) {
       this.articlesService.updateArticle(this.article).forEach(errorCode => {
         if (errorCode !== 0) {
@@ -61,6 +63,7 @@ export class EditArticleComponent implements OnInit {
       if (this.id !== undefined) {
         this.articlesService.getArticle(this.id).forEach(article => {
           this.article = article;
+          this.tags = article.tags.join(",");
         });
       };
     });

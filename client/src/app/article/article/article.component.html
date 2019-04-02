@@ -4,7 +4,7 @@
 <h4>{{article.content}}</h4>
 <h4>Author: <a [routerLink]="['/authors', article.idAuthor]">{{article.author}}</a></h4>
 <h4>
-  <span *ngFor="let tag of tags; let last = last">
+  <span *ngFor="let tag of article.tags; let last = last">
     <a [routerLink]="['/tags', tag]">{{ tag }}</a>
     <span [hidden]='last'>,</span>
   </span>

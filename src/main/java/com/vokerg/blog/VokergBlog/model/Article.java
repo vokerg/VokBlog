@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.math.BigInteger;
+import java.util.List;
 
 @Document(collection="articles")
 public class Article {
@@ -55,11 +56,11 @@ public class Article {
         this.author = author;
     }
 
-    public String getTags() {
+    public List<String> getTags() {
         return tags;
     }
 
-    public void setTags(String tags) {
+    public void setTags(List<String> tags) {
         this.tags = tags;
     }
 
@@ -78,6 +79,6 @@ public class Article {
     private String content;
     private String idAuthor;
     private String author;
-    private String tags;
+    private List<String> tags;
     private Boolean liked;
 }

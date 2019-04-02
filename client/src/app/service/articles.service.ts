@@ -1,5 +1,5 @@
 
-import {map, mergeAll} from 'rxjs/operators';
+import {map, mergeAll, mergeMap} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -33,10 +33,10 @@ export class ArticlesService extends ApiService{
   }
 
   updateArticle(article: Article): Observable<number> {
-//    return this.http.post<any>(`api/articles/${article.id}`, article, this.getRequestOptions())
-//      .pipe(map((res, err) => err));
-    return this.http.post<any>(`api/articles/${article.id}`, article)
-      .pipe(map((res, err) => err));
+    return this.getRequestOptions().pipe(
+      mergeMap(requestOptions => this.http.post<any>(`api/articles/${article.id}`, article, requestOptions)),
+      map((res, err) => err)
+    );
   }
 
   createArticle(article: Article) : Observable<any> {

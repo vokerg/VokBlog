@@ -6,7 +6,7 @@ export class Article {
   idAuthor: string;
   author: string;
   liked: boolean;
-  tags: string;
+  tags: string[];
   constructor() {
     this.id = null;
     this.title = "";
@@ -14,6 +14,6 @@ export class Article {
     this.content = "";
     this.author = "";
     this.liked = false;
-    this.tags = "";
+    this.tags = [];
   }
 }

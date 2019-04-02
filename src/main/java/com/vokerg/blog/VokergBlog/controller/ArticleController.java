@@ -32,8 +32,18 @@ public class ArticleController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Article> getArticle(@PathVariable(required = true) String id) {
+    public ResponseEntity<Article> getArticle(@PathVariable String id, @RequestParam(required = false) String tag) {
         return ResponseEntity.ok(articleRepository.findById(id).orElse(null));
+    }
+
+    @PostMapping("/{id}")
+    public ResponseEntity<Article> updateArticle(@PathVariable String id, @RequestBody Article article) {
+        if (article.getId().equals(id)) {
+            articleRepository.save(article);
+            return ResponseEntity.ok(article);
+        } else {
+            return ResponseEntity.badRequest().body(null);
+        }
     }
 
     @GetMapping("/{id}/comments")
