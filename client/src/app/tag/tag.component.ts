@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router'
-import { TagService } from '../service/tag.service';
 import { Article } from '../model/article';
+import {ArticlesService} from "../service/articles.service";
 
 @Component({
   selector: 'app-tag',
@@ -11,7 +11,7 @@ import { Article } from '../model/article';
 export class TagComponent implements OnInit {
 
   constructor(
-    private tagService: TagService,
+    private articleService: ArticlesService,
     private route: ActivatedRoute
   ) { }
 
@@ -19,9 +19,9 @@ export class TagComponent implements OnInit {
   articles: Article[];
 
   ngOnInit() {
-    this.route.params.forEach(params => {
+    this.route.params.subscribe(params => {
       this.tag = params["tag"];
-      this.articles = this.tagService.getTagArticles(this.tag);
+      this.articleService.getArticlesByTag(this.tag).subscribe(articles => this.articles = articles);
     });
   }
 

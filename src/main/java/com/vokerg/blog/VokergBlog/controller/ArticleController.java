@@ -21,7 +21,10 @@ public class ArticleController {
     CommentRepository commentRepository;
 
     @GetMapping("")
-    public ResponseEntity<List<Article>> getSomeResponse() {
+    public ResponseEntity<List<Article>> getSomeResponse(@RequestParam(required = false) String tag) {
+        if (tag != null) {
+            return ResponseEntity.ok(articleRepository.findByTagsContains(tag));
+        }
         return ResponseEntity.ok(articleRepository.findAll());
     }
 

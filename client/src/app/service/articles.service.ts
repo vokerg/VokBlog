@@ -24,6 +24,10 @@ export class ArticlesService extends ApiService{
     return this.http.get<Article[]>('api/articles');
   }
 
+  getArticlesByTag(tag:string):Observable<Article[]> {
+    return this.http.get<Article[]>(`api/articles?tag=${tag}`);
+  }
+
   getArticle(articleId: number):Observable<Article> {
     return this.http.get<any>('api/articles/' + articleId);
   }
