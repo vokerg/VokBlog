@@ -1,11 +1,15 @@
 <div>
   <div *ngIf="!isEdit">
-    <button (click)="showEditForm()">Add comment</button>
+    <button (click)="toggleEditForm()">Add comment</button>
   </div>
   <div *ngIf="isEdit">
     <form (ngSubmit)="onSubmit()">
-      author:
-      <input [(ngModel)]="comment.author" name="text">
+      <div *ngIf="activeUser$ | async  as activeUser">
+        <ng-container *ngIf="!activeUser.userId">
+          author:
+          <input [(ngModel)]="comment.author" name="text">
+        </ng-container>
+      </div>
       title:
       <input [(ngModel)]="comment.title" name="text">
       text:

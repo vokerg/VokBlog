@@ -15,7 +15,7 @@ export class TagComponent implements OnInit {
     private route: ActivatedRoute
   ) { }
 
-  tag: String;
+  tag: string;
   articles: Article[];
 
   ngOnInit() {
