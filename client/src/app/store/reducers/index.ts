@@ -1,14 +1,17 @@
 import {ActionReducer, ActionReducerMap, createFeatureSelector, createSelector} from "@ngrx/store";
 import {storeLogger} from "ngrx-store-logger";
 import * as fromActiveUser from "./activeUser";
+import * as fromCurrentArticle from "./currentArticle";
 import {localStorageSync} from "ngrx-store-localstorage";
 
 export interface State {
   activeUser: fromActiveUser.State;
+  currentArticle: fromCurrentArticle.State;
 }
 
 export const reducers: ActionReducerMap<State> = {
-  activeUser: fromActiveUser.reducer
+  activeUser: fromActiveUser.reducer,
+  currentArticle: fromCurrentArticle.reducer
 }
 
 export function logger(reducer: ActionReducer<State>): any {
@@ -16,31 +19,38 @@ export function logger(reducer: ActionReducer<State>): any {
 }
 
 export function localStorageSyncReducer(reducer: ActionReducer<State>): ActionReducer<any> {
-  console.log("in local storage sync reducer");
   return localStorageSync({keys: ['activeUser'], rehydrate:true})(reducer);
 }
 
 export const metaReducers = [localStorageSyncReducer, logger];
 
+
 /*selectors*/
-export const getActiveUserState = createFeatureSelector<fromActiveUser.State>('activeUser');
+export const activeUserStateFeatureSelector = createFeatureSelector<fromActiveUser.State>('activeUser');
 
 export const getActiveUsername = createSelector(
-  getActiveUserState,
+  activeUserStateFeatureSelector,
   fromActiveUser.getActiveUsername
 )
 
 export const getToken = createSelector(
-  getActiveUserState,
+  activeUserStateFeatureSelector,
   fromActiveUser.getToken
 )
 
 export const isAuthenticated = createSelector(
-  getActiveUserState,
+  activeUserStateFeatureSelector,
   fromActiveUser.isAuthenticated
 )
 
 export const getActiveUser = createSelector(
-  getActiveUserState,
+  activeUserStateFeatureSelector,
   fromActiveUser.getActiveUser
+)
+
+
+export const currentArticleFeatureSelector = createFeatureSelector<fromCurrentArticle.State>('currentArticleFeatureSelector');
+export const getCurrentArticle = createSelector(
+  currentArticleFeatureSelector,
+  fromCurrentArticle.getCurrentArticle
 )

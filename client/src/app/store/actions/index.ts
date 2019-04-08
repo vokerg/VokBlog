@@ -1,12 +1,9 @@
 import {Action} from "@ngrx/store";
 import {AuthenticatedUser} from "../../model/authenticatedUser";
 import {AuthenticationUser} from "../../model/authenticationUser";
-
-export class setSomething implements Action {
-  type = "SET_SOMETHING";
-
-  constructor(public payload: string){}
-}
+import {getConstructorDependencies} from "../../../../node_modules/@angular/compiler-cli/src/ngtsc/annotations/src/util";
+import {Article} from "../../model/article";
+import {Comment} from "../../model/comment";
 
 export class SomeActionForEffects implements Action {
   type = "ACTION_FOR_EFFECTS";
@@ -41,4 +38,14 @@ export class LoginUnsuccessful implements Action {
 export class SignupAction {
   type = "SIGNUP";
   constructor(public authenticationUser: AuthenticationUser, public callback: ()=>void) {}
+}
+
+export class LoadArticleAction {
+  type = "LOAD_ARTICLE";
+  constructor(public articleId: string) {}
+}
+
+export class FetchArticleAction {
+  type = "FETCH_ARTICLE";
+  constructor(public article: Article, public comments: Comment[]) {}
 }

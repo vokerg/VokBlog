@@ -2,19 +2,18 @@ import {Injectable} from "@angular/core";
 import {Actions, Effect, ofType} from "@ngrx/effects";
 import {ArticlesService} from "../../service/articles.service";
 import {
+  FetchArticleAction,
+  LoadArticleAction,
   LoginAction,
   LoginSuccessful,
   LoginUnsuccessful,
-  SetSomethingElse,
   SignupAction,
-  SomeActionForEffects
 } from "../actions";
 import {catchError, map, mergeMap} from "rxjs/operators";
 import {Action} from "@ngrx/store";
 import {Observable, of} from "rxjs";
 import {LoginService} from "../../service/login.service";
 import {AuthenticatedUser} from "../../model/authenticatedUser";
-import {AuthenticationUser} from "../../model/authenticationUser";
 
 @Injectable()
 export class ArticlesEffects {
@@ -23,16 +22,6 @@ export class ArticlesEffects {
     private articlesService: ArticlesService,
     private loginService: LoginService,
   ) {}
-
-
-  @Effect()
-  loadArticles$: Observable<Action> =
-    this.actions$.pipe(
-      ofType<SomeActionForEffects>('ACTION_FOR_EFFECTS'),
-      mergeMap(() => this.articlesService.getArticles()
-          .map(articles => new SetSomethingElse())
-        )
-    )
 
   @Effect()
   login$: Observable<Action> =
@@ -51,7 +40,7 @@ export class ArticlesEffects {
             catchError(() => of(new LoginUnsuccessful()))
           )
       )
-    )
+    );
 
   @Effect()
   signup$: Observable<Action> =
@@ -64,5 +53,21 @@ export class ArticlesEffects {
             map(() => new LoginAction(authenticationUser.username, authenticationUser.password, callback))
           )
       )
-    )
+    );
+
+  @Effect()
+  loadArticles$: Observable<Action> =
+    this.actions$.pipe(
+      ofType<LoadArticleAction>("LOAD_ARTICLE"),
+      mergeMap(({articleId}) =>
+        this.articlesService.getArticle(articleId).pipe(
+          mergeMap(article =>
+            this.articlesService.getComments(articleId).pipe(
+              map(comments => new FetchArticleAction(article, comments))
+            )
+          )
+        )
+      )
+    );
+
 }

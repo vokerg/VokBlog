@@ -28,11 +28,11 @@ export class ArticlesService extends ApiService{
     return this.http.get<Article[]>(`api/articles?tag=${tag}`);
   }
 
-  getArticle(articleId: number):Observable<Article> {
-    return this.http.get<any>('api/articles/' + articleId);
+  getArticle(articleId: string):Observable<Article> {
+    return this.http.get<Article>(`api/articles/${articleId}`);
   }
 
-  getComments(articleId: number):Observable<Comment[]> {
+  getComments(articleId: string):Observable<Comment[]> {
     return this.http.get<Comment[]>(`api/articles/${articleId}/comments`);
   }
 

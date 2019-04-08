@@ -8,7 +8,7 @@ export function reducer(state:State={
   userId: "",
   username: "",
   token: ""
-}, action) {
+}, action): State {
   switch (action.type) {
     case "LOGIN_SUCCESSFUL": {
       return action.payload;
@@ -16,7 +16,7 @@ export function reducer(state:State={
     case "LOGIN_UNSUCCESSFUL": case "LOGOUT": {
       return {
         userId: "",
-        login: "",
+        username: "",
         token: ""
       };
     }
@@ -30,8 +30,8 @@ export function reducer(state:State={
 
 export const getActiveUsername = (state:State) => state.username;
 
-export var getToken = (state:State) => state.token;
+export const getToken = (state:State) => state.token;
 
-export var isAuthenticated = (state:State) => state.userId !== "";
+export const isAuthenticated = (state:State) => state.userId !== "";
 
-export var getActiveUser = (state:State) => state;
+export const getActiveUser = (state:State) => state;

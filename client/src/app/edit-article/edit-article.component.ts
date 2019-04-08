@@ -15,7 +15,7 @@ import * as fromReducersRoot from "../store/reducers";
 })
 export class EditArticleComponent implements OnInit {
   article: Article;
-  id: number;
+  id: string;
   activeUser$: Observable<fromActiveUser.State>;
   tags: string;
 
