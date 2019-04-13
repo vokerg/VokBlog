@@ -1,20 +1,8 @@
 import {Action} from "@ngrx/store";
 import {AuthenticatedUser} from "../../model/authenticatedUser";
 import {AuthenticationUser} from "../../model/authenticationUser";
-import {getConstructorDependencies} from "../../../../node_modules/@angular/compiler-cli/src/ngtsc/annotations/src/util";
 import {Article} from "../../model/article";
 import {Comment} from "../../model/comment";
-
-export class SomeActionForEffects implements Action {
-  type = "ACTION_FOR_EFFECTS";
-
-  constructor(public payload: string){}
-}
-
-export class SetSomethingElse implements  Action {
-  type = "SET_SOMETHING_ELSE";
-  constructor() {}
-}
 
 export class LoginAction implements Action {
   type = "LOGIN";
@@ -48,4 +36,14 @@ export class LoadArticleAction {
 export class FetchArticleAction {
   type = "FETCH_ARTICLE";
   constructor(public article: Article, public comments: Comment[]) {}
+}
+
+export class AddComment {
+  type = "ADD_COMMENT";
+  constructor(public comment: Comment) {}
+}
+
+export class AddCommentToState {
+  type = "ADD_COMMENT_TO_STATE";
+  constructor(public comment: Comment) {}
 }

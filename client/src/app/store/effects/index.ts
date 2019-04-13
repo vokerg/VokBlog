@@ -2,6 +2,8 @@ import {Injectable} from "@angular/core";
 import {Actions, Effect, ofType} from "@ngrx/effects";
 import {ArticlesService} from "../../service/articles.service";
 import {
+  AddComment,
+  AddCommentToState,
   FetchArticleAction,
   LoadArticleAction,
   LoginAction,
@@ -66,6 +68,17 @@ export class ArticlesEffects {
               map(comments => new FetchArticleAction(article, comments))
             )
           )
+        )
+      )
+    );
+
+  @Effect()
+  addComment$: Observable<Action> =
+    this.actions$.pipe(
+      ofType<AddComment>("ADD_COMMENT"),
+      mergeMap(({comment}) =>
+        this.articlesService.addComment(comment.idArticle, comment).pipe(
+          map(serverComment => new AddCommentToState(serverComment))
         )
       )
     );

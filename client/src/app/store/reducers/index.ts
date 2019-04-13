@@ -12,7 +12,7 @@ export interface State {
 export const reducers: ActionReducerMap<State> = {
   activeUser: fromActiveUser.reducer,
   currentArticle: fromCurrentArticle.reducer
-}
+};
 
 export function logger(reducer: ActionReducer<State>): any {
   return storeLogger()(reducer);
@@ -31,26 +31,26 @@ export const activeUserStateFeatureSelector = createFeatureSelector<fromActiveUs
 export const getActiveUsername = createSelector(
   activeUserStateFeatureSelector,
   fromActiveUser.getActiveUsername
-)
+);
 
 export const getToken = createSelector(
   activeUserStateFeatureSelector,
   fromActiveUser.getToken
-)
+);
 
 export const isAuthenticated = createSelector(
   activeUserStateFeatureSelector,
   fromActiveUser.isAuthenticated
-)
+);
 
 export const getActiveUser = createSelector(
   activeUserStateFeatureSelector,
   fromActiveUser.getActiveUser
-)
+);
 
 
-export const currentArticleFeatureSelector = createFeatureSelector<fromCurrentArticle.State>('currentArticleFeatureSelector');
+export const currentArticleFeatureSelector = createFeatureSelector<fromCurrentArticle.State>('currentArticle');
 export const getCurrentArticle = createSelector(
   currentArticleFeatureSelector,
   fromCurrentArticle.getCurrentArticle
-)
+);

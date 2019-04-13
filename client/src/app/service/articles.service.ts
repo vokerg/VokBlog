@@ -52,11 +52,8 @@ export class ArticlesService extends ApiService{
       )
   }
 
-  addComment(articleId: String, comment: Comment):Observable<number> {
-//    return this.http.put<any>(`api/articles/${articleId}/comments`, {...comment}, this.getRequestOptions())
-//      .pipe(map((res, err) => err));
-    return this.http.put<any>(`api/articles/${articleId}/comments`, {...comment})
-      .pipe(map((res, err) => err));
+  addComment(articleId: String, comment: Comment):Observable<Comment> {
+    return this.http.put<any>(`api/articles/${articleId}/comments`, {...comment});
   }
 
 }

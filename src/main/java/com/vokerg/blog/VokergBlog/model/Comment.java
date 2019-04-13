@@ -5,7 +5,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection="comments")
 public class Comment {
-
     @Id
     private String id;
     private String idAuthor;
@@ -13,12 +12,14 @@ public class Comment {
     private String author;
     private String text;
 
-    public String getId() {
-        return id;
-    }
+    private String title;
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getIdAuthor() {
@@ -51,5 +52,13 @@ public class Comment {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }
