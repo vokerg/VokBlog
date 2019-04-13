@@ -2,14 +2,15 @@ import {Injectable} from "@angular/core";
 import {Actions, Effect, ofType} from "@ngrx/effects";
 import {ArticlesService} from "../../service/articles.service";
 import {
+  AddArticle, AddArticleCompleted,
   AddComment,
-  AddCommentToState,
+  AddCommentCompleted,
   FetchArticleAction,
   LoadArticleAction,
   LoginAction,
   LoginSuccessful,
   LoginUnsuccessful,
-  SignupAction,
+  SignupAction, UpdateArticle, UpdateArticleCompleted,
 } from "../actions";
 import {catchError, map, mergeMap} from "rxjs/operators";
 import {Action} from "@ngrx/store";
@@ -78,7 +79,35 @@ export class ArticlesEffects {
       ofType<AddComment>("ADD_COMMENT"),
       mergeMap(({comment}) =>
         this.articlesService.addComment(comment.idArticle, comment).pipe(
-          map(serverComment => new AddCommentToState(serverComment))
+          map(serverComment => new AddCommentCompleted(serverComment))
+        )
+      )
+    );
+
+  @Effect()
+  addArticle$: Observable<Action> =
+    this.actions$.pipe(
+      ofType<AddArticle>("ADD_ARTICLE"),
+      mergeMap(({article, callback}) =>
+        this.articlesService.createArticle(article).pipe(
+          map(serverArticle => {
+            callback(serverArticle.id)
+            return new AddArticleCompleted(serverArticle);
+          })
+        )
+      )
+    );
+
+  @Effect()
+  updateArticles$: Observable<Action> =
+    this.actions$.pipe(
+      ofType<UpdateArticle>("UPDATE_ARTICLE"),
+      mergeMap(({article, callback}) =>
+        this.articlesService.updateArticle(article).pipe(
+          map((serverArticle) => {
+            callback();
+            return new UpdateArticleCompleted(serverArticle);
+          })
         )
       )
     );

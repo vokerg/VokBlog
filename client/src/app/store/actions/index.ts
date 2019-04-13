@@ -38,12 +38,32 @@ export class FetchArticleAction {
   constructor(public article: Article, public comments: Comment[]) {}
 }
 
+export class AddArticle {
+  type = "ADD_ARTICLE";
+  constructor(public article: Article, public callback: (idArticle:string) => void) {}
+}
+
+export class AddArticleCompleted {
+  type = "ADD_ARTICLE_COMPLETED";
+  constructor(public article: Article) {}
+}
+
+export class UpdateArticle {
+  type: "UPDATE_ARTICLE";
+  constructor(public article: Article, public callback: () => void) {}
+}
+
+export class UpdateArticleCompleted {
+  type: "UPDATE_ARTICLE";
+  constructor(public article: Article) {}
+}
+
 export class AddComment {
   type = "ADD_COMMENT";
   constructor(public comment: Comment) {}
 }
 
-export class AddCommentToState {
-  type = "ADD_COMMENT_TO_STATE";
+export class AddCommentCompleted {
+  type = "ADD_COMMENT_COMPLETED";
   constructor(public comment: Comment) {}
 }

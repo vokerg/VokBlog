@@ -7,6 +7,7 @@ import * as fromRoot from "../store/reducers";
 import {Observable} from "rxjs";
 import * as fromActiveUser from "../store/reducers/activeUser";
 import * as fromReducersRoot from "../store/reducers";
+import {AddArticle, UpdateArticle} from "../store/actions";
 
 @Component({
   selector: 'app-edit-article',
@@ -23,28 +24,23 @@ export class EditArticleComponent implements OnInit {
   onSubmit() {
     this.article.tags = this.tags.split(",");
     if (this.id !== undefined) {
-      this.articlesService.updateArticle(this.article).forEach(errorCode => {
-        if (errorCode !== 0) {
-          console.log("Couldn't save", errorCode);
-        }
-        this.redirect();
-      });
+      this.store.dispatch(new UpdateArticle(this.article, () => this.redirect()));
     }
     else {
-
       this.activeUser$.take(1).subscribe(activeUser => {
-        this.articlesService.createArticle({
+        this.store.dispatch(new AddArticle({
           ...this.article,
           idAuthor: activeUser.userId,
           author: activeUser.username
-        })
-          .subscribe(() => this.redirect())
+        }, (idArticle:string) => this.redirect(idArticle)
+        ));
       });
     }
   }
 
-  redirect() {
-      this.router.navigate((this.id === undefined) ? ['/'] : ['/articles/', this.id]);
+  redirect(id?: string) {
+    const redirectId = id || this.id;
+      this.router.navigate((redirectId) ? ['/'] : ['/articles/', redirectId]);
   }
 
   constructor(
@@ -58,14 +54,14 @@ export class EditArticleComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.params.forEach(params => {
+    this.route.params.subscribe(params => {
       this.id = params["id"];
       if (this.id !== undefined) {
         this.articlesService.getArticle(this.id).forEach(article => {
           this.article = article;
           this.tags = article.tags.join(",");
         });
-      };
+      }
     });
   }
 

@@ -14,8 +14,11 @@ export function reducer(state:State={
     case "FETCH_ARTICLE": {
       return {article: action.article, comments: action.comments};
     }
-    case "ADD_COMMENT_TO_STATE": {
+    case "ADD_COMMENT_COMPLETED": {
       return {...state, comments: [...state.comments, action.comment]}
+    }
+    case "ADD_ARTICLE_COMPLETED": case "UPDATE_ARTICLE_COMPLETED": {
+      return {...state, article: action.article}
     }
     default: return state;
   }

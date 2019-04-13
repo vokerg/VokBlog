@@ -36,24 +36,28 @@ export class ArticlesService extends ApiService{
     return this.http.get<Comment[]>(`api/articles/${articleId}/comments`);
   }
 
-  updateArticle(article: Article): Observable<number> {
+  updateArticle(article: Article): Observable<Article> {
     return this.getRequestOptions().pipe(
-      mergeMap(requestOptions => this.http.post<any>(`api/articles/${article.id}`, article, requestOptions)),
-      map((res, err) => err)
+      map(requestOptions => this.http.post<Article>(`api/articles/${article.id}`, article, requestOptions)),
+      mergeAll()
     );
   }
 
-  createArticle(article: Article) : Observable<any> {
+  createArticle(article: Article) : Observable<Article> {
     const {id, ...processedArticle} = article;
     return this.getRequestOptions()
       .pipe(
-        map(requestOptions => this.http.put<any>('api/articles', processedArticle, requestOptions)),
+        map((requestOptions) => this.http.put<Article>('api/articles', processedArticle, requestOptions)),
         mergeAll()
       )
   }
 
   addComment(articleId: String, comment: Comment):Observable<Comment> {
-    return this.http.put<any>(`api/articles/${articleId}/comments`, {...comment});
+    return this.getRequestOptions()
+      .pipe(
+        map((requestOptions) => this.http.put<Comment>(`api/articles/${articleId}/comments`, {...comment}, requestOptions)),
+        mergeAll()
+      )
   }
 
 }

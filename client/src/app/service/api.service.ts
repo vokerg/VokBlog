@@ -4,6 +4,7 @@ import * as fromRoot from "../store/reducers";
 import {Store} from "@ngrx/store";
 import {Observable, of} from "rxjs";
 import {map} from "rxjs/operators";
+import {HttpParams} from "../../../node_modules/@angular/common/http/src/params";
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,12 @@ export class ApiService {
   }
 
 
-  public getRequestOptions(): Observable<any> {
+  public getRequestOptions(): Observable<{
+    headers?: HttpHeaders | {
+      [header: string]: string | string[];
+    };
+    observe?: 'body';
+    }> {
     return this.getAuthorizationHeader().pipe(
       map(authorizationHeader => {
         const headers = (authorizationHeader)
