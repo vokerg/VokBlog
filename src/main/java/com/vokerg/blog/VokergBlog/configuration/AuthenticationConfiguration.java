@@ -64,6 +64,7 @@ AuthenticationManager authenticationManager;
         .authorizeRequests()
                 .antMatchers("/api/users/login").permitAll()
                 .antMatchers("/api/users/signup").permitAll()
+                .antMatchers("/api/authors/**").permitAll()
                 .antMatchers("/**").authenticated()
                 .antMatchers("/**").permitAll()
                 //.antMatchers("/api/articles").authenticated()

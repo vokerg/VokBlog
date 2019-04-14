@@ -17,12 +17,14 @@ import {Action} from "@ngrx/store";
 import {Observable, of} from "rxjs";
 import {LoginService} from "../../service/login.service";
 import {AuthenticatedUser} from "../../model/authenticatedUser";
+import {CommentsService} from "../../service/comments.service";
 
 @Injectable()
 export class ArticlesEffects {
   constructor(
     private actions$: Actions,
     private articlesService: ArticlesService,
+    private commentsService: CommentsService,
     private loginService: LoginService,
   ) {}
 
@@ -65,7 +67,7 @@ export class ArticlesEffects {
       mergeMap(({articleId}) =>
         this.articlesService.getArticle(articleId).pipe(
           mergeMap(article =>
-            this.articlesService.getComments(articleId).pipe(
+            this.commentsService.getComments(articleId).pipe(
               map(comments => new FetchArticleAction(article, comments))
             )
           )
@@ -78,7 +80,7 @@ export class ArticlesEffects {
     this.actions$.pipe(
       ofType<AddComment>("ADD_COMMENT"),
       mergeMap(({comment}) =>
-        this.articlesService.addComment(comment.idArticle, comment).pipe(
+        this.commentsService.addComment(comment.idArticle, comment).pipe(
           map(serverComment => new AddCommentCompleted(serverComment))
         )
       )

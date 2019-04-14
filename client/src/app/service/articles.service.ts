@@ -1,11 +1,10 @@
 
-import {map, mergeAll, mergeMap} from 'rxjs/operators';
+import {map, mergeAll} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import 'rxjs/Rx';
 import { Article } from '../model/article';
-import { Comment } from '../model/comment';
 import {ApiService} from "./api.service";
 import {Store} from "@ngrx/store";
 import * as fromRoot from "../store/reducers";
@@ -28,12 +27,12 @@ export class ArticlesService extends ApiService{
     return this.http.get<Article[]>(`api/articles?tag=${tag}`);
   }
 
-  getArticle(articleId: string):Observable<Article> {
-    return this.http.get<Article>(`api/articles/${articleId}`);
+  getArticlesByAuthorId(authorId: string): Observable<Article[]> {
+    return this.http.get<Article[]>(`api/authors/${authorId}/articles`);
   }
 
-  getComments(articleId: string):Observable<Comment[]> {
-    return this.http.get<Comment[]>(`api/articles/${articleId}/comments`);
+  getArticle(articleId: string):Observable<Article> {
+    return this.http.get<Article>(`api/articles/${articleId}`);
   }
 
   updateArticle(article: Article): Observable<Article> {
@@ -51,13 +50,4 @@ export class ArticlesService extends ApiService{
         mergeAll()
       )
   }
-
-  addComment(articleId: String, comment: Comment):Observable<Comment> {
-    return this.getRequestOptions()
-      .pipe(
-        map((requestOptions) => this.http.put<Comment>(`api/articles/${articleId}/comments`, {...comment}, requestOptions)),
-        mergeAll()
-      )
-  }
-
 }

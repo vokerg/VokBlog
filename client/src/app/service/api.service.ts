@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import {HttpHeaders} from "../../../node_modules/@angular/common/http";
 import * as fromRoot from "../store/reducers";
 import {Store} from "@ngrx/store";
-import {Observable, of} from "rxjs";
+import {Observable} from "rxjs";
 import {map} from "rxjs/operators";
-import {HttpParams} from "../../../node_modules/@angular/common/http/src/params";
+import {HttpHeaders} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +19,6 @@ export class ApiService {
       map((token: string) => (token) ? {'Authorization': `Bearer ${token}`} : null)
     )
   }
-
 
   public getRequestOptions(): Observable<{
     headers?: HttpHeaders | {

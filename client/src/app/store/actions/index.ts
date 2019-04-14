@@ -49,12 +49,12 @@ export class AddArticleCompleted {
 }
 
 export class UpdateArticle {
-  type: "UPDATE_ARTICLE";
+  type = "UPDATE_ARTICLE";
   constructor(public article: Article, public callback: () => void) {}
 }
 
 export class UpdateArticleCompleted {
-  type: "UPDATE_ARTICLE";
+  type = "UPDATE_ARTICLE_COMPLETED";
   constructor(public article: Article) {}
 }
 

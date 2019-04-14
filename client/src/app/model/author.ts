@@ -1,16 +1,13 @@
-import { Article } from './article';
-
 export class Author {
   id: number;
   name: string;
-  countArticles: number;
-  countComments: number;
-  articles: Article[];
-  comments: Comment[];
+  username: string;
+  articlesCount: number;
+  commentsCount: number;
   constructor() {
     this.id = 0;
     this.name = '';
-    this.countArticles = 0;
-    this.countComments = 0;
+    this.articlesCount = 0;
+    this.commentsCount = 0;
   }
 }

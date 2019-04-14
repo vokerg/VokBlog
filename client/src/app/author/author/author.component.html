@@ -1,7 +1,8 @@
 <p>
   Author: {{author.name}}<br>
-  Posts: {{author.countArticles}}<br>
-  Comments: {{author.countComments}}<br>
+  Username: {{author.username}}<br>
+  Posts: {{author.articlesCount}}<br>
+  Comments: {{author.commentsCount}}<br>
   <br>
   Latest articles:<br>
   <app-article-preview *ngFor="let article of articles" [article]="article"></app-article-preview>
