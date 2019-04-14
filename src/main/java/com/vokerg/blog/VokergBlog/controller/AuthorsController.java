@@ -3,7 +3,7 @@ package com.vokerg.blog.VokergBlog.controller;
 import com.vokerg.blog.VokergBlog.model.AggregatedAuthor;
 import com.vokerg.blog.VokergBlog.model.Article;
 import com.vokerg.blog.VokergBlog.model.Comment;
-import com.vokerg.blog.VokergBlog.repository.AggregationService;
+import com.vokerg.blog.VokergBlog.service.AggregationService;
 import com.vokerg.blog.VokergBlog.repository.ArticleRepository;
 import com.vokerg.blog.VokergBlog.repository.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;

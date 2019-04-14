@@ -50,12 +50,12 @@ public class ArticleController {
     }
 
     @GetMapping("/{id}/comments")
-    public ResponseEntity<List<Comment>> getCommentsForArticle(@PathVariable(required = true) String id) {
+    public ResponseEntity<List<Comment>> getCommentsForArticle(@PathVariable String id) {
         return ResponseEntity.ok(commentRepository.findByIdArticle(id));
     }
 
     @PutMapping("/{id}/comments")
-    public ResponseEntity<Comment> createCommentForArticle(@PathVariable(required = true) String id,
+    public ResponseEntity<Comment> createCommentForArticle(@PathVariable String id,
                                                            @RequestBody Comment comment) {
         commentRepository.save(comment);
         return ResponseEntity.ok(comment);

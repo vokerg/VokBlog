@@ -11,4 +11,5 @@ public interface ArticleRepository extends MongoRepository<Article, String> {
     Optional<Article> findById(String id);
     List<Article> findByIdAuthor(String idAuthor);
     List<Article> findByTagsContains(String tag);
+    Integer countByIdAuthor(String idAuthor);
 }
