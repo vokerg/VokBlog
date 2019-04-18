@@ -9,9 +9,8 @@ public class Comment {
     private String id;
     private String idAuthor;
     private String idArticle;
-    private String author;
+    private String authorName;
     private String text;
-
     private String title;
 
     public void setId(String id) {
@@ -38,14 +37,6 @@ public class Comment {
         this.idArticle = idArticle;
     }
 
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
     public String getText() {
         return text;
     }
@@ -60,5 +51,13 @@ public class Comment {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getAuthorName() {
+        return authorName;
+    }
+
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
     }
 }
