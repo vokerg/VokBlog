@@ -1,5 +1,6 @@
 package com.vokerg.blog.VokergBlog.service;
 
+import com.vokerg.blog.VokergBlog.model.Comment;
 import com.vokerg.blog.VokergBlog.model.CommentFull;
 import com.vokerg.blog.VokergBlog.repository.ArticleRepository;
 import com.vokerg.blog.VokergBlog.repository.AuthorRepository;
@@ -14,16 +15,13 @@ import java.util.stream.Collectors;
 public class CommentsService {
 
     @Autowired
-    CommentRepository commentRepository;
-
-    @Autowired
     AuthorRepository authorRepository;
 
     @Autowired
     ArticleRepository articleRepository;
 
-    public List<CommentFull> getAllComments() {
-        return commentRepository.findAll().stream().map(comment -> {
+    public List<CommentFull> mapToFull(List<Comment> comments) {
+        return comments.stream().map(comment -> {
             CommentFull commentFull = new CommentFull();
             commentFull.setIdArticle(comment.getIdArticle());
             commentFull.setId(comment.getId());
