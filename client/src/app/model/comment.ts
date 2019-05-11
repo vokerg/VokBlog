@@ -1,3 +1,5 @@
+import {Article} from "./article";
+
 export class Comment {
   id: string;
   idAuthor: string;
@@ -5,6 +7,7 @@ export class Comment {
   author: string;
   title: string;
   text: string;
+  article: Article;
   constructor() {
     this.id=null;
     this.idAuthor="";

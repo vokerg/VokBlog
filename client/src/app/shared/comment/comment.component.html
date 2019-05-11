@@ -1,5 +1,10 @@
-<p>
-  Author: <a [routerLink]="['/authors', comment.idAuthor]">{{comment.author}}</a>:
+<div>
+  <span *ngIf="forAuthor==false">
+    Author: <a [routerLink]="['/authors', comment.idAuthor]">{{comment.author}}</a>
+  </span>
+  <span *ngIf="forArticle==false">
+    Article: <a [routerLink]="['/articles', comment.idArticle]">{{articleTitle}}</a>
+  </span>
   Title: {{comment.title}}
   Text: {{comment.text}}
-</p>
+</div>

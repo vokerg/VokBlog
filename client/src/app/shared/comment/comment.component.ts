@@ -13,6 +13,14 @@ export class CommentComponent implements OnInit {
 
   @Input() comment: Comment;
 
-  ngOnInit() { }
+  @Input() forAuthor: boolean = false;
+
+  @Input() forArticle: boolean = false;
+
+  articleTitle: string;
+
+  ngOnInit() {
+      this.articleTitle = this.comment.article ? this.comment.article.title : null;
+  }
 
 }

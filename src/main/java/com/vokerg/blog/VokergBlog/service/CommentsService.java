@@ -35,7 +35,7 @@ public class CommentsService {
 
         Aggregation aggregation = Aggregation
                 .newAggregation(
-                        match(Criteria.where("_id").is(idAuthor)),
+                        match(Criteria.where("idAuthor").is(idAuthor)),
                         project,
                         lookupOperation,
                         project(COMMENT_FIELDS).and("articles").arrayElementAt(0).as("article")

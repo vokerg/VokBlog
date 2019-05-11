@@ -13,7 +13,7 @@
   <a [routerLink]="['/articles', id, 'edit']">Edit</a>
 
   <div>
-    <app-comments [comments]="comments"></app-comments>
+    <app-comments [comments]="comments" [forArticle]="true"></app-comments>
     <app-edit-comment [articleId]="id"></app-edit-comment>
   </div>
 

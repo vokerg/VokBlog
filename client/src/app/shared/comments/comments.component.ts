@@ -12,6 +12,10 @@ export class CommentsComponent implements OnInit {
 
   @Input() comments: Comment[];
 
+  @Input() forAuthor: boolean = false;
+
+  @Input() forArticle: boolean = false;
+
   ngOnInit() {
   }
 
