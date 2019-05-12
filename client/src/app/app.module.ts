@@ -23,6 +23,9 @@ import * as fromReducers from './store/reducers';
 import {EffectsModule} from "@ngrx/effects";
 import {ArticlesEffects} from "./store/effects";
 import { SignupComponent } from './signup/signup.component';
+import {FlexLayoutModule} from "@angular/flex-layout";
+import {MainPageModule} from "./main-page/main-page.module";
+import {MainPageComponent} from "./main-page/main-page.component";
 
 @NgModule({
   declarations: [
@@ -36,9 +39,10 @@ import { SignupComponent } from './signup/signup.component';
   imports: [
     BrowserModule,
     HttpClientModule,
+    FlexLayoutModule,
     FormsModule,
     RouterModule.forRoot([
-      {path: '', component: ArticlesComponent},
+      {path: '', component: MainPageComponent},
       {path: 'articles/new', component: EditArticleComponent},
       {path: 'articles/:id', component: ArticleComponent},
       {path: 'articles/:id/edit', component: EditArticleComponent},
@@ -51,6 +55,7 @@ import { SignupComponent } from './signup/signup.component';
     ArticleModule,
     AuthorModule,
     SharedModule,
+    MainPageModule,
     EffectsModule.forRoot([ArticlesEffects]),
     StoreModule.forRoot(fromReducers.reducers, {metaReducers: fromReducers.metaReducers})
   ],

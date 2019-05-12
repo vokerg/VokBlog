@@ -24,7 +24,7 @@ export class EditCommentComponent implements OnInit {
     this.activeUser$.subscribe(activeUser => {
       if (activeUser) {
         this.comment.idAuthor = activeUser.userId;
-        this.comment.author = activeUser.username;
+        this.comment.authorName = activeUser.username;
       }
       this.store.dispatch(new AddComment(this.comment));
       this.toggleEditForm()

@@ -16,7 +16,7 @@ import static org.springframework.data.mongodb.core.aggregation.Aggregation.proj
 @Service
 public class CommentsService {
 
-    public static final String[] COMMENT_FIELDS = {"idAuthor", "idArticle", "text", "title"};
+    public static final String[] COMMENT_FIELDS = {"idAuthor", "authorName", "idArticle", "text", "title"};
     @Autowired
     AuthorRepository authorRepository;
 

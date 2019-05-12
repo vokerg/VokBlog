@@ -4,7 +4,7 @@ export class Comment {
   id: string;
   idAuthor: string;
   idArticle: string;
-  author: string;
+  authorName: string;
   title: string;
   text: string;
   article: Article;
@@ -12,7 +12,7 @@ export class Comment {
     this.id=null;
     this.idAuthor="";
     this.idArticle="";
-    this.author="";
+    this.authorName="";
     this.title="";
     this.text="";
   }
