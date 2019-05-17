@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class AggregationService {
     @Autowired
@@ -23,15 +26,13 @@ public class AggregationService {
     @Autowired
     CommentRepository commentRepository;
 
-    public AggregatedAuthor getAggregatedAuthorData(String id) {
+    public List<AggregatedAuthor> getAggregatedAuthors() {
+        return authorRepository.findAll().stream().map(author -> mapAuthor(author)).collect(Collectors.toList());
+    }
 
-        Author author = authorRepository.findById(id).orElse(null);
-        if (author == null) {
-            return null;
-        }
-
-        Integer articlesCount = articleRepository.countByIdAuthor(id);
-        Integer commentsCount = commentRepository.countByIdAuthor(id);
+    private AggregatedAuthor mapAuthor(Author author) {
+        Integer articlesCount = articleRepository.countByIdAuthor(author.getId());
+        Integer commentsCount = commentRepository.countByIdAuthor(author.getId());
 
         AggregatedAuthor aggregatedAuthor = new AggregatedAuthor();
         aggregatedAuthor.setId(author.getId());
@@ -41,5 +42,10 @@ public class AggregationService {
         aggregatedAuthor.setCommentsCount(commentsCount);
 
         return aggregatedAuthor;
+    }
+
+    public AggregatedAuthor getAggregatedAuthorData(String id) {
+        Author author = authorRepository.findById(id).orElse(null);
+        return (author == null) ? null : mapAuthor(author);
     }
 }

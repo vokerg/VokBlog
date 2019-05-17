@@ -28,8 +28,12 @@ export class CommentsService extends ApiService {
       )
   }
 
-  getComments(articleId: string):Observable<Comment[]> {
+  getCommentsForArticle(articleId: string):Observable<Comment[]> {
     return this.http.get<Comment[]>(`api/articles/${articleId}/comments`);
+  }
+
+  getTopComments():Observable<Comment[]> {
+    return this.http.get<Comment[]>('api/comments');
   }
 
   getCommentsByAuthorId(authorId: string): Observable<Comment[]> {

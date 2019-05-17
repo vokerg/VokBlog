@@ -14,7 +14,7 @@ public class CommentsController {
     @Autowired
     CommentsService commentsService;
 
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<List<CommentFull>> getTopComments() {
         return ResponseEntity.ok(commentsService.getTopFullComments());
     }

@@ -67,7 +67,7 @@ export class ArticlesEffects {
       mergeMap(({articleId}) =>
         this.articlesService.getArticle(articleId).pipe(
           mergeMap(article =>
-            this.commentsService.getComments(articleId).pipe(
+            this.commentsService.getCommentsForArticle(articleId).pipe(
               map(comments => new FetchArticleAction(article, comments))
             )
           )

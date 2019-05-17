@@ -6,6 +6,7 @@ import com.vokerg.blog.VokergBlog.model.CommentFull;
 import com.vokerg.blog.VokergBlog.service.AggregationService;
 import com.vokerg.blog.VokergBlog.repository.ArticleRepository;
 import com.vokerg.blog.VokergBlog.repository.CommentRepository;
+import com.vokerg.blog.VokergBlog.service.AuthorService;
 import com.vokerg.blog.VokergBlog.service.CommentsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -29,6 +30,14 @@ public class AuthorsController {
 
     @Autowired
     CommentsService commentsService;
+
+    @Autowired
+    AuthorService authorService;
+
+    @GetMapping("")
+    public ResponseEntity<List<AggregatedAuthor>> getTopAuthors() {
+        return ResponseEntity.ok(aggregationService.getAggregatedAuthors());
+    }
 
     @GetMapping("/{idAuthor}/articles")
     public ResponseEntity<List<Article>> getAuthorsArticles(@PathVariable String idAuthor) {
