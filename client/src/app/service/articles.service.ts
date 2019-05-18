@@ -52,8 +52,13 @@ export class ArticlesService extends ApiService{
   }
 
   likeArticle(articleId): Observable<any> {
+    console.log('likearticle service');
     return this.getRequestOptions().pipe(
-      map((requestOptions) => this.http.put<any>(`api/articles/${articleId}/like`, {}, requestOptions)),
+      map((requestOptions) => {
+          console.log('likearticle service1');
+        return this.http.put<any>(`api/articles/${articleId}/like`, {}, requestOptions)
+      }
+      ),
       mergeAll()
     )
   }

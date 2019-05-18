@@ -1,9 +1,12 @@
 package com.vokerg.blog.VokergBlog.controller;
 
+import com.vokerg.blog.VokergBlog.model.ArticleFull;
 import com.vokerg.blog.VokergBlog.model.Comment;
 import com.vokerg.blog.VokergBlog.repository.ArticleRepository;
 import com.vokerg.blog.VokergBlog.model.Article;
 import com.vokerg.blog.VokergBlog.repository.CommentRepository;
+import com.vokerg.blog.VokergBlog.service.ArticleService;
+import com.vokerg.blog.VokergBlog.service.LikeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,12 +24,22 @@ public class ArticleController {
     @Autowired
     CommentRepository commentRepository;
 
+    @Autowired
+    LikeService likeService;
+
+    @Autowired
+    ArticleService articleService;
+
     @GetMapping("")
-    public ResponseEntity<List<Article>> getSomeResponse(@RequestParam(required = false) String tag) {
-        if (tag != null) {
+    public ResponseEntity<List<ArticleFull>> getSomeResponse(@RequestParam(required = false) String tag) {
+
+        String userId =  SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        return ResponseEntity.ok(articleService.getAggregatedArticles(userId));
+
+/*        if (tag != null) {
             return ResponseEntity.ok(articleRepository.findByTagsContains(tag));
         }
-        return ResponseEntity.ok(articleRepository.findAll());
+        return ResponseEntity.ok(articleRepository.findAll());*/
     }
 
     @PutMapping("")
@@ -65,12 +78,14 @@ public class ArticleController {
     @PutMapping("/{id}/like")
     public ResponseEntity likeArticle(@PathVariable String id) {
         String userId =  SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        likeService.setLikeToArticle(id, userId);
         return ResponseEntity.ok(null);
     }
 
     @DeleteMapping("/{id}/like")
     public ResponseEntity unLikeArticle(@PathVariable String id) {
         String userId =  SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        likeService.unlikeArticle(id, userId);
         return ResponseEntity.ok(null);
     }
 

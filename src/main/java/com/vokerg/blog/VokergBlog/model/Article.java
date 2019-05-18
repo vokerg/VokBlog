@@ -1,6 +1,7 @@
 package com.vokerg.blog.VokergBlog.model;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
@@ -63,14 +64,6 @@ public class Article {
         this.tags = tags;
     }
 
-    public Boolean getLiked() {
-        return liked;
-    }
-
-    public void setLiked(Boolean liked) {
-        this.liked = liked;
-    }
-
     @Id
     private String id;
     private String title;
@@ -79,5 +72,4 @@ public class Article {
     private String idAuthor;
     private String author;
     private List<String> tags;
-    private Boolean liked;
 }

@@ -130,7 +130,7 @@ export class ArticlesEffects {
     );
 
   @Effect()
-  likeArticle$: Observable<Action> =
+  unLikeArticle$: Observable<Action> =
     this.actions$.pipe(
       ofType<UnLikeArticle>("UNLIKE_ARTICLE"),
       mergeMap(({articleId}) =>
