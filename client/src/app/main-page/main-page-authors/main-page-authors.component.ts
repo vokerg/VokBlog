@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {CommentsService} from "../../service/comments.service";
-import {Comment} from "../../model/comment";
+import {Author} from "../../model/author";
+import {AuthorService} from "../../service/author.service";
 
 @Component({
   selector: 'app-main-page-authors',
@@ -8,10 +8,12 @@ import {Comment} from "../../model/comment";
   styleUrls: ['./main-page-authors.component.css']
 })
 export class MainPageAuthorsComponent implements OnInit {
+  authors: Author[];
 
-  constructor() { }
+  constructor(private authorService: AuthorService) { }
 
   ngOnInit() {
+    this.authorService.getTopAuthors().subscribe(result => this.authors = result);
   }
 
 }

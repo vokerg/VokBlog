@@ -50,4 +50,18 @@ export class ArticlesService extends ApiService{
         mergeAll()
       )
   }
+
+  likeArticle(articleId): Observable<any> {
+    return this.getRequestOptions().pipe(
+      map((requestOptions) => this.http.put<any>(`api/articles/${articleId}/like`, {}, requestOptions)),
+      mergeAll()
+    )
+  }
+
+  unLikeArticle(articleId): Observable<any> {
+    return this.getRequestOptions().pipe(
+      map((requestOptions) => this.http.delete(`api/articles/${articleId}/like`, requestOptions)),
+      mergeAll()
+    )
+  }
 }

@@ -6,6 +6,7 @@ import com.vokerg.blog.VokergBlog.model.Article;
 import com.vokerg.blog.VokergBlog.repository.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -59,6 +60,18 @@ public class ArticleController {
                                                            @RequestBody Comment comment) {
         commentRepository.save(comment);
         return ResponseEntity.ok(comment);
+    }
+
+    @PutMapping("/{id}/like")
+    public ResponseEntity likeArticle(@PathVariable String id) {
+        String userId =  SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        return ResponseEntity.ok(null);
+    }
+
+    @DeleteMapping("/{id}/like")
+    public ResponseEntity unLikeArticle(@PathVariable String id) {
+        String userId =  SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        return ResponseEntity.ok(null);
     }
 
 }

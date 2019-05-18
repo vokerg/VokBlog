@@ -8,6 +8,7 @@ import com.vokerg.blog.VokergBlog.service.JwtUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -65,8 +66,9 @@ AuthenticationManager authenticationManager;
                 .antMatchers("/api/users/login").permitAll()
                 .antMatchers("/api/users/signup").permitAll()
                 .antMatchers("/api/authors/**").permitAll()
-                .antMatchers("/**").authenticated()
-                .antMatchers("/**").permitAll()
+                //.antMatchers("/**").authenticated()
+                .antMatchers(HttpMethod.PUT, "/api/articles/**").authenticated()
+                .antMatchers(HttpMethod.GET, "/**").permitAll()
                 //.antMatchers("/api/articles").authenticated()
                 .and()
                 .addFilter(new JwtAuthorizationFilter(authenticationManager, new JwtUserService()));

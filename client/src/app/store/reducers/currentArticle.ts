@@ -20,6 +20,17 @@ export function reducer(state:State={
     case "ADD_ARTICLE_COMPLETED": case "UPDATE_ARTICLE_COMPLETED": {
       return {...state, article: action.article}
     }
+    case "LIKE_ARTICLE_COMPLETED": {
+      return (state.article && state.article.id === action.articleId)
+        ? {...state, article: {...state.article, liked:true}}
+        : state;
+    }
+    case "UNLIKE_ARTICLE_COMPLETED": {
+      return (state.article && state.article.id === action.articleId)
+        ? {...state, article: {...state.article, liked:false}}
+        : state;
+    }
+
     default: return state;
   }
 }

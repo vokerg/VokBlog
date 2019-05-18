@@ -6,6 +6,7 @@ import {FlexLayoutModule} from "@angular/flex-layout";
 import { MainPageCommentsComponent } from './main-page-comments/main-page-comments.component';
 import { MainPageAuthorsComponent } from './main-page-authors/main-page-authors.component';
 import {SharedModule} from "../shared/shared.module";
+import {RouterModule} from "@angular/router";
 
 @NgModule({
   declarations: [MainPageComponent, MainPageCommentsComponent, MainPageAuthorsComponent],
@@ -13,7 +14,8 @@ import {SharedModule} from "../shared/shared.module";
     CommonModule,
     ArticlesModule,
     FlexLayoutModule,
-    SharedModule
+    SharedModule,
+    RouterModule,
   ]
 })
 export class MainPageModule { }

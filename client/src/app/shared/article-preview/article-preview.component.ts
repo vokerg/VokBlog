@@ -12,6 +12,7 @@ export class ArticlePreviewComponent implements OnInit {
   @Input() article: Article;
 
   setLike() {
+    //TODO: add new liking logic
     //this.articlesComponent.setLike(this.article);
     this.article.liked = !this.article.liked;
   }

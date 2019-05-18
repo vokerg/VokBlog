@@ -1,3 +1,6 @@
-<p>
-  main-page-authors works!
-</p>
+Authors:
+<div *ngFor="let author of authors">
+  <a [routerLink]="['/authors', author.id]">{{author.name}}</a>
+  <span>Articles:{{author.articlesCount}}</span>
+  <span>Comments:{{author.commentsCount}}</span>
+</div>

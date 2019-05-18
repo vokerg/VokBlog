@@ -30,7 +30,7 @@ export class ApiService {
       map(authorizationHeader => {
         const headers = (authorizationHeader)
           ? new HttpHeaders({ 'Content-Type': 'application/json', ...authorizationHeader}) : null;
-        return (headers) ? { headers: headers } : null;
+        return {headers};
       })
     );
   }

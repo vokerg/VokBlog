@@ -4,13 +4,13 @@ import {ArticlesService} from "../../service/articles.service";
 import {
   AddArticle, AddArticleCompleted,
   AddComment,
-  AddCommentCompleted,
-  FetchArticleAction,
+  AddCommentCompleted, FailedCallingApi,
+  FetchArticleAction, LikeArticle, LikeArticleCompleted,
   LoadArticleAction,
   LoginAction,
   LoginSuccessful,
   LoginUnsuccessful,
-  SignupAction, UpdateArticle, UpdateArticleCompleted,
+  SignupAction, UnLikeArticle, UnLikeArticleCompleted, UpdateArticle, UpdateArticleCompleted,
 } from "../actions";
 import {catchError, map, mergeMap} from "rxjs/operators";
 import {Action} from "@ngrx/store";
@@ -106,10 +106,37 @@ export class ArticlesEffects {
       ofType<UpdateArticle>("UPDATE_ARTICLE"),
       mergeMap(({article, callback}) =>
         this.articlesService.updateArticle(article).pipe(
-          map((serverArticle) => {
-            callback();
-            return new UpdateArticleCompleted(serverArticle);
-          })
+          map(
+            (serverArticle) => {
+                      callback();
+                      return new UpdateArticleCompleted(serverArticle);
+                    },
+            catchError(err => Observable.of(new FailedCallingApi(err)))
+          )
+        )
+      )
+    );
+
+  @Effect()
+  likeArticle$: Observable<Action> =
+    this.actions$.pipe(
+      ofType<LikeArticle>("LIKE_ARTICLE"),
+      mergeMap(({articleId}) =>
+        this.articlesService.likeArticle(articleId).pipe(
+          map(() => new LikeArticleCompleted(articleId)),
+          catchError(err => Observable.of(new FailedCallingApi(err)))
+        )
+      )
+    );
+
+  @Effect()
+  likeArticle$: Observable<Action> =
+    this.actions$.pipe(
+      ofType<UnLikeArticle>("UNLIKE_ARTICLE"),
+      mergeMap(({articleId}) =>
+        this.articlesService.unLikeArticle(articleId).pipe(
+          map(() => new UnLikeArticleCompleted(articleId)),
+          catchError(err => Observable.of(new FailedCallingApi(err)))
         )
       )
     );

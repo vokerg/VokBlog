@@ -67,3 +67,28 @@ export class AddCommentCompleted {
   type = "ADD_COMMENT_COMPLETED";
   constructor(public comment: Comment) {}
 }
+
+export class LikeArticle implements Action {
+  type = "LIKE_ARTICLE";
+  constructor(public articleId: String) {}
+}
+
+export class LikeArticleCompleted implements Action {
+  type = "LIKE_ARTICLE_COMPLETED";
+  constructor(public articleId: String) {}
+}
+
+export class UnLikeArticle implements Action {
+  type = "UNLIKE_ARTICLE";
+  constructor(public articleId: String) {}
+}
+
+export class UnLikeArticleCompleted implements Action {
+  type = "UNLIKE_ARTICLE_COMPLETED";
+  constructor(public articleId: String) {}
+}
+
+export class FailedCallingApi implements Action {
+  type = "FAILED_CALLING_API";
+  constructor(public error: any) {}
+}
