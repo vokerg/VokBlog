@@ -9,6 +9,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.*;
 import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,7 +32,23 @@ public class ArticleService {
     @Autowired
     MongoTemplate mongoTemplate;
 
-    public List<ArticleFull> getAggregatedArticles(String currentUserId) {
+    public ArticleFull getAggregatedArticle(String id) {
+        List<ArticleFull> list =  getAggregatedArticles(Criteria.where("_id").is(id));
+        return (list.size() > 0) ? list.get(0) : null;
+    }
+
+    public List<ArticleFull> getAggregatedArticlesForTag(String tag) {
+        return getAggregatedArticles(Criteria.where("tags").in(tag));
+    }
+
+    public List<ArticleFull> getAggregatedArticles() {
+        return getAggregatedArticles(Criteria.where("_id").ne(null));
+    }
+
+    protected List<ArticleFull> getAggregatedArticles(Criteria criteria) {
+
+        String currentUserId =  SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+
         LookupOperation lookupOperation = LookupOperation.newLookup()
                 .from("like")
                 .localField("newid")
@@ -40,7 +57,7 @@ public class ArticleService {
 
         Aggregation aggregation = Aggregation
                 .newAggregation(
-                        match(Criteria.where("_id").ne(null)),
+                        match(criteria),
                         sort(new Sort(Sort.Direction.DESC, "_id")),
                         project(ARTICLE_FIELDS).and(ConvertOperators.valueOf("_id").convertToString()).as("newid"),
                         lookupOperation,
@@ -51,7 +68,8 @@ public class ArticleService {
                                 .and("likes")
                                     .size().as("likeCount")
                                 ,
-                        project(ARTICLE_FIELDS1).and("likeByCurrentUser").size().gte(0).as("liked")//.andExclude("likeByCurrentUser")
+                        project(ARTICLE_FIELDS1)
+                                .and("likeByCurrentUser").size().gt(0).as("liked")//.andExclude("likeByCurrentUser")
                 );
 
         AggregationResults<ArticleFull> results = mongoTemplate.aggregate(aggregation, "articles", ArticleFull.class);

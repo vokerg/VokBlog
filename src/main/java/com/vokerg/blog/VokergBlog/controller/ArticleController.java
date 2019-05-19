@@ -32,14 +32,10 @@ public class ArticleController {
 
     @GetMapping("")
     public ResponseEntity<List<ArticleFull>> getSomeResponse(@RequestParam(required = false) String tag) {
-
-        String userId =  SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
-        return ResponseEntity.ok(articleService.getAggregatedArticles(userId));
-
-/*        if (tag != null) {
-            return ResponseEntity.ok(articleRepository.findByTagsContains(tag));
+        if (tag != null) {
+            return ResponseEntity.ok(articleService.getAggregatedArticlesForTag(tag));
         }
-        return ResponseEntity.ok(articleRepository.findAll());*/
+        return ResponseEntity.ok(articleService.getAggregatedArticles());
     }
 
     @PutMapping("")
@@ -49,8 +45,8 @@ public class ArticleController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Article> getArticle(@PathVariable String id, @RequestParam(required = false) String tag) {
-        return ResponseEntity.ok(articleRepository.findById(id).orElse(null));
+    public ResponseEntity<ArticleFull> getArticle(@PathVariable String id) {
+        return ResponseEntity.ok(articleService.getAggregatedArticle(id));
     }
 
     @PostMapping("/{id}")
