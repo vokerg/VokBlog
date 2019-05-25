@@ -7,6 +7,7 @@ export class Article {
   author: string;
   liked: boolean;
   tags: string[];
+  likeCount: number;
   constructor() {
     this.id = null;
     this.title = "";
@@ -15,5 +16,6 @@ export class Article {
     this.author = "";
     this.liked = false;
     this.tags = [];
+    this.likeCount = 0;
   }
 }

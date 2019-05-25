@@ -22,12 +22,12 @@ export function reducer(state:State={
     }
     case "LIKE_ARTICLE_COMPLETED": {
       return (state.article && state.article.id === action.articleId)
-        ? {...state, article: {...state.article, liked:true}}
+        ? {...state, article: {...state.article, liked:true, likeCount: state.article.likeCount + 1}}
         : state;
     }
     case "UNLIKE_ARTICLE_COMPLETED": {
       return (state.article && state.article.id === action.articleId)
-        ? {...state, article: {...state.article, liked:false}}
+        ? {...state, article: {...state.article, liked:false, likeCount: state.article.likeCount - 1}}
         : state;
     }
 

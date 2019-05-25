@@ -20,19 +20,31 @@ export class ArticlesService extends ApiService{
   }
 
   getArticles():Observable<Article[]> {
-    return this.http.get<Article[]>('api/articles');
+    return this.getRequestOptions().pipe(
+      map(requestOptions => this.http.get<Article[]>('api/articles', requestOptions)),
+      mergeAll()
+    );
   }
 
   getArticlesByTag(tag:string):Observable<Article[]> {
-    return this.http.get<Article[]>(`api/articles?tag=${tag}`);
+    return this.getRequestOptions().pipe(
+      map(requestOptions => this.http.get<Article[]>(`api/articles?tag=${tag}`, requestOptions)),
+      mergeAll()
+    );
   }
 
   getArticlesByAuthorId(authorId: string): Observable<Article[]> {
-    return this.http.get<Article[]>(`api/authors/${authorId}/articles`);
+    return this.getRequestOptions().pipe(
+      map(requestOptions => this.http.get<Article[]>(`api/authors/${authorId}/articles`, requestOptions)),
+      mergeAll()
+    );
   }
 
   getArticle(articleId: string):Observable<Article> {
-    return this.http.get<Article>(`api/articles/${articleId}`);
+    return this.getRequestOptions().pipe(
+      map(requestOptions => this.http.get<Article>(`api/articles/${articleId}`, requestOptions)),
+      mergeAll()
+    );
   }
 
   updateArticle(article: Article): Observable<Article> {
@@ -52,12 +64,9 @@ export class ArticlesService extends ApiService{
   }
 
   likeArticle(articleId): Observable<any> {
-    console.log('likearticle service');
     return this.getRequestOptions().pipe(
-      map((requestOptions) => {
-          console.log('likearticle service1');
-        return this.http.put<any>(`api/articles/${articleId}/like`, {}, requestOptions)
-      }
+      map((requestOptions) =>
+        this.http.put<any>(`api/articles/${articleId}/like`, {}, requestOptions)
       ),
       mergeAll()
     )

@@ -1,8 +1,6 @@
 package com.vokerg.blog.VokergBlog.service;
 
-import com.vokerg.blog.VokergBlog.model.Article;
 import com.vokerg.blog.VokergBlog.model.ArticleFull;
-import com.vokerg.blog.VokergBlog.model.CommentFull;
 import com.vokerg.blog.VokergBlog.repository.ArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -15,8 +13,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.*;
-import static org.springframework.data.mongodb.core.aggregation.Aggregation.*;
-import static org.springframework.data.mongodb.core.aggregation.ArrayOperators.Filter.filter;
 import static org.springframework.data.mongodb.core.aggregation.ComparisonOperators.Eq.valueOf;
 
 @Service
@@ -25,9 +21,6 @@ public class ArticleService {
     public static final String[] ARTICLE_FIELDS1 = {"title", "subject", "content", "idAuthor", "author", "tags", "likeCount"};
     @Autowired
     ArticleRepository articleRepository;
-
-
-
 
     @Autowired
     MongoTemplate mongoTemplate;
@@ -64,12 +57,11 @@ public class ArticleService {
                         project(ARTICLE_FIELDS)
                                 .and("likes")
                                     .filter("item", valueOf("item.authorId").equalToValue(currentUserId))
-                                    .as("likeByCurrentUser")
-                                .and("likes")
-                                    .size().as("likeCount")
+                                    .as("liked")
+                                .and("likes").size().as("likeCount")
                                 ,
-                        project(ARTICLE_FIELDS1)
-                                .and("likeByCurrentUser").size().gt(0).as("liked")//.andExclude("likeByCurrentUser")
+                        project(ARTICLE_FIELDS1).and("liked").size(),
+                        project(ARTICLE_FIELDS1).and("liked").gt(0)
                 );
 
         AggregationResults<ArticleFull> results = mongoTemplate.aggregate(aggregation, "articles", ArticleFull.class);
