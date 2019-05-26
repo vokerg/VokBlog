@@ -25,7 +25,23 @@ public class LikeService {
         return like;
     }
 
+    public Like setLikeToComment(String commentId, String authorId) {
+        List<Like> likes = likeRepository.getByCommentIdAndAuthorId(commentId, authorId);
+        if (likes.size() > 0) {
+            return likes.get(0);
+        }
+        Like like = new Like();
+        like.setCommentId(commentId);
+        like.setAuthorId(authorId);
+        likeRepository.save(like);
+        return like;
+    }
+
     public void unlikeArticle(String articleId, String authorId) {
         likeRepository.deleteAllByArticleIdAndAuthorId(articleId, authorId);
+    }
+
+    public void unlikeComment(String commentId, String authorId) {
+        likeRepository.deleteAllByCommentIdAndAuthorId(commentId, authorId);
     }
 }

@@ -42,24 +42,26 @@ public class ArticleService {
 
         String currentUserId =  SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
 
-        LookupOperation lookupOperation = LookupOperation.newLookup()
+        LookupOperation lookupOperationLikes = LookupOperation.newLookup()
                 .from("like")
                 .localField("newid")
                 .foreignField("articleId")
                 .as("likes");
 
+        ProjectionOperation projectLikes = project(ARTICLE_FIELDS)
+                .and("likes")
+                .filter("item", valueOf("item.authorId").equalToValue(currentUserId))
+                .as("liked")
+                .and("likes").size().as("likeCount");
+
+        ProjectionOperation projectStringId = project(ARTICLE_FIELDS).and(ConvertOperators.valueOf("_id").convertToString()).as("newid");
         Aggregation aggregation = Aggregation
                 .newAggregation(
                         match(criteria),
                         sort(new Sort(Sort.Direction.DESC, "_id")),
-                        project(ARTICLE_FIELDS).and(ConvertOperators.valueOf("_id").convertToString()).as("newid"),
-                        lookupOperation,
-                        project(ARTICLE_FIELDS)
-                                .and("likes")
-                                    .filter("item", valueOf("item.authorId").equalToValue(currentUserId))
-                                    .as("liked")
-                                .and("likes").size().as("likeCount")
-                                ,
+                        projectStringId,
+                        lookupOperationLikes,
+                        projectLikes,
                         project(ARTICLE_FIELDS1).and("liked").size(),
                         project(ARTICLE_FIELDS1).and("liked").gt(0)
                 );

@@ -6,7 +6,6 @@ import com.vokerg.blog.VokergBlog.repository.ArticleRepository;
 import com.vokerg.blog.VokergBlog.repository.AuthorRepository;
 import com.vokerg.blog.VokergBlog.repository.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,8 +13,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class AggregationService {
-    @Autowired
-    MongoTemplate mongoTemplate;
 
     @Autowired
     AuthorRepository authorRepository;

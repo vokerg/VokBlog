@@ -17,6 +17,25 @@ public class CommentFull extends Comment{
         this.author = author;
     }
 
+    public Boolean getLiked() {
+        return liked;
+    }
+
+    public void setLiked(Boolean liked) {
+        this.liked = liked;
+    }
+
+    public Integer getLikeCount() {
+        return likeCount;
+    }
+
+    public void setLikeCount(Integer likeCount) {
+        this.likeCount = likeCount;
+    }
+
+
     private Article article;
     private Author author;
+    private Boolean liked;
+    private Integer likeCount;
 }
