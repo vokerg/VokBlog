@@ -8,6 +8,8 @@ export class Comment {
   title: string;
   text: string;
   article: Article;
+  liked: boolean;
+  likeCount: number;
   constructor() {
     this.id=null;
     this.idAuthor="";
@@ -15,5 +17,7 @@ export class Comment {
     this.authorName="";
     this.title="";
     this.text="";
+    this.liked = false;
+    this.likeCount = 0;
   }
 }

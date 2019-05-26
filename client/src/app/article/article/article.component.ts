@@ -5,7 +5,7 @@ import { Comment } from '../../model/comment';
 import {Store} from "@ngrx/store";
 import * as fromRoot from "../../store/reducers";
 import * as fromCurrentArticle from "../../store/reducers/currentArticle";
-import {LikeArticle, LoadArticleAction, UnLikeArticle} from "../../store/actions";
+import {LoadArticleAction} from "../../store/actions";
 import {Observable} from "rxjs";
 
 @Component({
@@ -44,13 +44,4 @@ export class ArticleComponent implements OnInit {
   back() {
     this.router.navigate(['/']);
   }
-
-  like() {
-    this.store.dispatch(new LikeArticle(this.article.id));
-  }
-
-  unLike() {
-    this.store.dispatch(new UnLikeArticle(this.article.id));
-  }
-
 }

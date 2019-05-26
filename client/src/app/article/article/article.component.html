@@ -15,9 +15,7 @@
   <div>
     <app-comments [comments]="comments" [forArticle]="true"></app-comments>
     <app-edit-comment [articleId]="id"></app-edit-comment>
-    Likes: {{article.likeCount}}
-    <button *ngIf="!article.liked" (click)="like()">Like</button>
-    <button *ngIf="article.liked" (click)="unLike()">Unlike</button>
+    <app-like [article]="article"></app-like>
   </div>
 
 </div>

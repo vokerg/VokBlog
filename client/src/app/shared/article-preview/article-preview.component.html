@@ -4,7 +4,5 @@
   </a>
   Subject: {{article.subject}}
   <br>
-  Likes: {{article.likeCount}}
-  <button *ngIf="!article.liked" (click)="like()">Like</button>
-  <button *ngIf="article.liked" (click)="unLike()">Unlike</button>
+  <app-like [article]="article"></app-like>
 </p>
