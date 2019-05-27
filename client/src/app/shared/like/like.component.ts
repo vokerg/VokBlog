@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Comment} from "../../model/comment";
 import {Article} from "../../model/article";
-import {LikeArticle, UnLikeArticle} from "../../store/actions";
+import {LikeArticle, LikeComment, UnLikeArticle, UnLikeComment} from "../../store/actions";
 import {Store} from "@ngrx/store";
 import * as fromReducersRoot from "../../store/reducers";
 import {Observable} from "rxjs";
@@ -28,12 +28,20 @@ export class LikeComponent implements OnInit {
 
   ngOnInit() {}
 
-  like() {
+  likeArticle() {
     this.store.dispatch(new LikeArticle(this.article.id));
   }
 
-  unLike() {
+  unLikeArticle() {
     this.store.dispatch(new UnLikeArticle(this.article.id));
+  }
+
+  likeComment() {
+    this.store.dispatch(new LikeComment(this.comment.id));
+  }
+
+  unLikeComment() {
+    this.store.dispatch(new UnLikeComment(this.comment.id));
   }
 
 

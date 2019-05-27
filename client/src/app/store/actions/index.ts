@@ -88,6 +88,26 @@ export class UnLikeArticleCompleted implements Action {
   constructor(public articleId: String) {}
 }
 
+export class LikeComment implements Action {
+  type = "LIKE_COMMENT";
+  constructor(public commentId: String) {}
+}
+
+export class LikeCommentCompleted implements Action {
+  type = "LIKE_COMMENT_COMPLETED";
+  constructor(public commentId: String) {}
+}
+
+export class UnLikeComment implements Action {
+  type = "UNLIKE_COMMENT";
+  constructor(public commentId: String) {}
+}
+
+export class UnLikeCommentCompleted implements Action {
+  type = "UNLIKE_COMMENT_COMPLETED";
+  constructor(public commentId: String) {}
+}
+
 export class FailedCallingApi implements Action {
   type = "FAILED_CALLING_API";
   constructor(public error: any) {}

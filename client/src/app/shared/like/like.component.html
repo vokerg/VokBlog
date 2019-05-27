@@ -1,9 +1,14 @@
 <div>
   <span *ngIf="article">Likes: {{article.likeCount}}</span>
+  <span *ngIf="comment">Likes: {{comment.likeCount}}</span>
   <span *ngIf="activeUser$ | async; let activeUser">
-    <span *ngIf="activeUser.userId">
-      <button *ngIf="article && !article.liked" (click)="like()">Like</button>
-      <button *ngIf="article && article.liked" (click)="unLike()">Unlike</button>
+    <span *ngIf="activeUser.userId && article">
+      <button *ngIf="!article.liked" (click)="likeArticle()">Like</button>
+      <button *ngIf="article.liked" (click)="unLikeArticle()">Unlike</button>
+    </span>
+    <span *ngIf="activeUser.userId && comment">
+      <button *ngIf="!comment.liked" (click)="likeComment()">Like</button>
+      <button *ngIf="comment.liked" (click)="unLikeComment()">Unlike</button>
     </span>
   </span>
 </div>

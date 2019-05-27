@@ -2,15 +2,27 @@ import {Injectable} from "@angular/core";
 import {Actions, Effect, ofType} from "@ngrx/effects";
 import {ArticlesService} from "../../service/articles.service";
 import {
-  AddArticle, AddArticleCompleted,
+  AddArticle,
+  AddArticleCompleted,
   AddComment,
-  AddCommentCompleted, FailedCallingApi,
-  FetchArticleAction, LikeArticle, LikeArticleCompleted,
+  AddCommentCompleted,
+  FailedCallingApi,
+  FetchArticleAction,
+  LikeArticle,
+  LikeArticleCompleted,
+  LikeComment,
+  LikeCommentCompleted,
   LoadArticleAction,
   LoginAction,
   LoginSuccessful,
   LoginUnsuccessful,
-  SignupAction, UnLikeArticle, UnLikeArticleCompleted, UpdateArticle, UpdateArticleCompleted,
+  SignupAction,
+  UnLikeArticle,
+  UnLikeArticleCompleted,
+  UnLikeComment,
+  UnLikeCommentCompleted,
+  UpdateArticle,
+  UpdateArticleCompleted,
 } from "../actions";
 import {catchError, map, mergeMap} from "rxjs/operators";
 import {Action} from "@ngrx/store";
@@ -141,4 +153,27 @@ export class ArticlesEffects {
       )
     );
 
+  @Effect()
+  likeComment$: Observable<Action> =
+    this.actions$.pipe(
+      ofType<LikeComment>("LIKE_COMMENT"),
+      mergeMap(({commentId}) =>
+        this.commentsService.likeComment(commentId).pipe(
+          map(() => new LikeCommentCompleted(commentId)),
+          catchError(err => Observable.of(new FailedCallingApi(err)))
+        )
+      )
+    );
+
+  @Effect()
+  unLikeComments$: Observable<Action> =
+    this.actions$.pipe(
+      ofType<UnLikeComment>("UNLIKE_COMMENT"),
+      mergeMap(({commentId}) =>
+        this.commentsService.unLikeComment(commentId).pipe(
+          map(() => new UnLikeCommentCompleted(commentId)),
+          catchError(err => Observable.of(new FailedCallingApi(err)))
+        )
+      )
+    );
 }

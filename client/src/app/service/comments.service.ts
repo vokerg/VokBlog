@@ -39,4 +39,21 @@ export class CommentsService extends ApiService {
   getCommentsByAuthorId(authorId: string): Observable<Comment[]> {
     return this.http.get<Comment[]>(`api/authors/${authorId}/comments`);
   }
+
+  likeComment(commentId: string): Observable<any> {
+    return this.getRequestOptions().pipe(
+      map((requestOptions) =>
+        this.http.put<any>(`api/comments/${commentId}/like`, {}, requestOptions)
+      ),
+      mergeAll()
+    )
+  }
+
+  unLikeComment(commentId: string): Observable<any> {
+    return this.getRequestOptions().pipe(
+      map((requestOptions) => this.http.delete(`api/comments/${commentId}/like`, requestOptions)),
+      mergeAll()
+    )
+  }
+
 }
