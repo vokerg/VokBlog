@@ -54,7 +54,8 @@ public class ArticleService {
                 .as("liked")
                 .and("likes").size().as("likeCount");
 
-        ProjectionOperation projectStringId = project(ARTICLE_FIELDS).and(ConvertOperators.valueOf("_id").convertToString()).as("newid");
+        ProjectionOperation projectStringId = project(ARTICLE_FIELDS)
+                .and(ConvertOperators.valueOf("_id").convertToString()).as("newid");
         Aggregation aggregation = Aggregation
                 .newAggregation(
                         match(criteria),

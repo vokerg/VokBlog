@@ -19,8 +19,7 @@ import static org.springframework.data.mongodb.core.aggregation.ComparisonOperat
 public class CommentsService {
 
     public static final String[] COMMENT_FIELDS = {"idAuthor", "authorName", "idArticle", "text", "title"};
-    public static final String[] COMMENT_FIELDS1 = {"idAuthor", "authorName", "idArticle", "text", "title", "article"};
-    public static final String[] COMMENT_FIELDS2 = {"idAuthor", "authorName", "idArticle", "text", "title", "article", "likeCount"};
+    public static final String[] COMMENT_FIELDS1 = {"idAuthor", "authorName", "idArticle", "text", "title", "article", "likeCount"};
     @Autowired
     AuthorRepository authorRepository;
 
@@ -31,9 +30,13 @@ public class CommentsService {
 
         String currentUserId =  SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
 
+        ProjectionOperation projectPreProcessing = Aggregation.project(COMMENT_FIELDS)
+                .and(ConvertOperators.valueOf("idArticle").convertToObjectId()).as("new_article_id")
+                .and(ConvertOperators.valueOf("_id").convertToString()).as("newid");
+
         LookupOperation lookupOperationArticle = LookupOperation.newLookup()
                 .from("articles")
-                .localField("newid")
+                .localField("new_article_id")
                 .foreignField("_id")
                 .as("articles");
 
@@ -43,12 +46,9 @@ public class CommentsService {
                 .foreignField("commentId")
                 .as("likes");
 
-        ProjectionOperation projectStringId = Aggregation.project(COMMENT_FIELDS)
-                .and(ConvertOperators.valueOf("idArticle").convertToObjectId()).as("newid");
-        ProjectionOperation projectArticle = Aggregation.project(COMMENT_FIELDS).and("articles").arrayElementAt(0).as("article");
 
-
-        ProjectionOperation projectLikes = project(COMMENT_FIELDS1)
+        ProjectionOperation projectLikesAndArticle = project(COMMENT_FIELDS)
+                .and("articles").arrayElementAt(0).as("article")
                 .and("likes")
                 .filter("item", valueOf("item.authorId").equalToValue(currentUserId))
                 .as("liked")
@@ -60,13 +60,12 @@ public class CommentsService {
                         sort(new Sort(Sort.Direction.DESC, "_id")),
                         limit(queryLimit != null ? queryLimit : Long.MAX_VALUE),
                         skip(querySkip != null ? querySkip : 0),
-                        projectStringId,
+                        projectPreProcessing,
                         lookupOperationArticle,
-                        projectArticle,
                         lookupOperationLikes,
-                        projectLikes,
-                        project(COMMENT_FIELDS2).and("liked").size(),
-                        project(COMMENT_FIELDS2).and("liked").gt(0)
+                        projectLikesAndArticle,
+                        project(COMMENT_FIELDS1).and("liked").size(),
+                        project(COMMENT_FIELDS1).and("liked").gt(0)
                 );
 
         AggregationResults<CommentFull> results = mongoTemplate.aggregate(aggregation, "comments", CommentFull.class);
@@ -79,5 +78,9 @@ public class CommentsService {
 
     public List<CommentFull> getTopFullComments() {
         return getLatestFullComments(Criteria.where("_id").ne(null), Long.valueOf(10), null);
+    }
+
+    public List<CommentFull> getCommentByArticleId(String articleId) {
+        return getLatestFullComments(Criteria.where("idArticle").is(articleId), null, null);
     }
 }

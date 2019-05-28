@@ -2,10 +2,12 @@ package com.vokerg.blog.VokergBlog.controller;
 
 import com.vokerg.blog.VokergBlog.model.ArticleFull;
 import com.vokerg.blog.VokergBlog.model.Comment;
+import com.vokerg.blog.VokergBlog.model.CommentFull;
 import com.vokerg.blog.VokergBlog.repository.ArticleRepository;
 import com.vokerg.blog.VokergBlog.model.Article;
 import com.vokerg.blog.VokergBlog.repository.CommentRepository;
 import com.vokerg.blog.VokergBlog.service.ArticleService;
+import com.vokerg.blog.VokergBlog.service.CommentsService;
 import com.vokerg.blog.VokergBlog.service.LikeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +31,9 @@ public class ArticleController {
 
     @Autowired
     ArticleService articleService;
+
+    @Autowired
+    CommentsService commentsService;
 
     @GetMapping("")
     public ResponseEntity<List<ArticleFull>> getSomeResponse(@RequestParam(required = false) String tag) {
@@ -60,8 +65,8 @@ public class ArticleController {
     }
 
     @GetMapping("/{id}/comments")
-    public ResponseEntity<List<Comment>> getCommentsForArticle(@PathVariable String id) {
-        return ResponseEntity.ok(commentRepository.findByIdArticle(id));
+    public ResponseEntity<List<CommentFull>> getCommentsForArticle(@PathVariable String id) {
+        return ResponseEntity.ok(commentsService.getCommentByArticleId(id));
     }
 
     @PutMapping("/{id}/comments")
