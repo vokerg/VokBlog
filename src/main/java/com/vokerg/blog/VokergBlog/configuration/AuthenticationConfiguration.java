@@ -3,7 +3,7 @@ package com.vokerg.blog.VokergBlog.configuration;
 import com.vokerg.blog.VokergBlog.model.AuthenticatedUser;
 import com.vokerg.blog.VokergBlog.model.AuthenticatedUserBuilder;
 import com.vokerg.blog.VokergBlog.model.Author;
-import com.vokerg.blog.VokergBlog.service.AuthorService;
+import com.vokerg.blog.VokergBlog.service.AuthenticationService;
 import com.vokerg.blog.VokergBlog.service.JwtUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -21,7 +21,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class AuthenticationConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    AuthorService authorService;
+    AuthenticationService authenticationService;
 
     @Autowired
     JwtUserService jwtUserService;
@@ -38,7 +38,7 @@ public class AuthenticationConfiguration extends WebSecurityConfigurerAdapter {
             String username = (String) authentication.getPrincipal();
             String password = (String) authentication.getCredentials();
 
-            Author author = authorService.authenticate(username, password);
+            Author author = authenticationService.authenticate(username, password);
 
             if (author == null) {
                 return new UsernamePasswordAuthenticationToken("", "");

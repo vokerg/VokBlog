@@ -1,15 +1,12 @@
 package com.vokerg.blog.VokergBlog.controller;
 
 import com.vokerg.blog.VokergBlog.model.AggregatedAuthor;
-import com.vokerg.blog.VokergBlog.model.Article;
+import com.vokerg.blog.VokergBlog.model.ArticleFull;
 import com.vokerg.blog.VokergBlog.model.CommentFull;
-import com.vokerg.blog.VokergBlog.service.AggregationService;
-import com.vokerg.blog.VokergBlog.repository.ArticleRepository;
-import com.vokerg.blog.VokergBlog.repository.CommentRepository;
 import com.vokerg.blog.VokergBlog.service.AuthorService;
-import com.vokerg.blog.VokergBlog.service.CommentsService;
+import com.vokerg.blog.VokergBlog.service.ArticleService;
+import com.vokerg.blog.VokergBlog.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,40 +17,31 @@ import java.util.List;
 public class AuthorsController {
 
     @Autowired
-    ArticleRepository articleRepository;
-
-    @Autowired
-    CommentRepository commentRepository;
-
-    @Autowired
-    AggregationService aggregationService;
-
-    @Autowired
-    CommentsService commentsService;
+    ArticleService articleService;
 
     @Autowired
     AuthorService authorService;
 
+    @Autowired
+    CommentService commentService;
+
     @GetMapping("")
     public ResponseEntity<List<AggregatedAuthor>> getTopAuthors() {
-        return ResponseEntity.ok(aggregationService.getAggregatedAuthors());
+        return ResponseEntity.ok(authorService.getAggregatedAuthors());
     }
 
-    @GetMapping("/{idAuthor}/articles")
-    public ResponseEntity<List<Article>> getAuthorsArticles(@PathVariable String idAuthor) {
-        return ResponseEntity.ok(articleRepository.findByIdAuthor(idAuthor));
+    @GetMapping("/{authorId}/articles")
+    public ResponseEntity<List<ArticleFull>> getAuthorsArticles(@PathVariable String authorId) {
+        return ResponseEntity.ok(articleService.getAggregatedArticlesForAuthorId(authorId));
     }
-
-    @Autowired
-    MongoTemplate mongoTemplate;
 
     @GetMapping("/{idAuthor}/comments")
     public ResponseEntity<List<CommentFull>> getAuthorsComments(@PathVariable String idAuthor) {
-        return ResponseEntity.ok(commentsService.getFullCommentsForAuthorId(idAuthor));
+        return ResponseEntity.ok(commentService.getFullCommentsForAuthorId(idAuthor));
     }
 
     @GetMapping("/{idAuthor}/aggregated")
     public ResponseEntity<AggregatedAuthor> getAuthorsAggregation(@PathVariable String idAuthor) {
-        return ResponseEntity.ok(aggregationService.getAggregatedAuthorData(idAuthor));
+        return ResponseEntity.ok(authorService.getAggregatedAuthorData(idAuthor));
     }
 }

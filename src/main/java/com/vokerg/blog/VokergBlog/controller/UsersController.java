@@ -36,7 +36,7 @@ public class UsersController {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
         }
         String rawPassword = author.getPassword();
-        Author persistedAuthor = authorService.signupUser(author);
+        Author persistedAuthor = authenticationService.signupUser(author);
         AuthenticatedUser user = authenticationService
                 .authenticatedUser(persistedAuthor.getUsername(), rawPassword);
         return (user != null) ? ResponseEntity.ok(user) : ResponseEntity.badRequest().body(null);

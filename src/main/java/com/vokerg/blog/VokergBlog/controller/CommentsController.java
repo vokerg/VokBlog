@@ -1,7 +1,7 @@
 package com.vokerg.blog.VokergBlog.controller;
 
 import com.vokerg.blog.VokergBlog.model.CommentFull;
-import com.vokerg.blog.VokergBlog.service.CommentsService;
+import com.vokerg.blog.VokergBlog.service.CommentService;
 import com.vokerg.blog.VokergBlog.service.LikeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,14 +14,14 @@ import java.util.List;
 @RequestMapping(value="api/comments")
 public class CommentsController {
     @Autowired
-    CommentsService commentsService;
+    CommentService commentService;
 
     @Autowired
     LikeService likeService;
 
     @GetMapping("")
     public ResponseEntity<List<CommentFull>> getTopComments() {
-        return ResponseEntity.ok(commentsService.getTopFullComments());
+        return ResponseEntity.ok(commentService.getTopFullComments());
     }
 
     @PutMapping("/{id}/like")

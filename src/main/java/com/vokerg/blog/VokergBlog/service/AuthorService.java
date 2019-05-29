@@ -1,10 +1,15 @@
 package com.vokerg.blog.VokergBlog.service;
 
+import com.vokerg.blog.VokergBlog.model.AggregatedAuthor;
 import com.vokerg.blog.VokergBlog.model.Author;
+import com.vokerg.blog.VokergBlog.repository.ArticleRepository;
 import com.vokerg.blog.VokergBlog.repository.AuthorRepository;
+import com.vokerg.blog.VokergBlog.repository.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AuthorService {
@@ -13,26 +18,35 @@ public class AuthorService {
     AuthorRepository authorRepository;
 
     @Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;
+    ArticleRepository articleRepository;
 
-    public Author authenticate(String username, String password) {
-        Author author = getAuthorByUsername(username);
+    @Autowired
+    CommentRepository commentRepository;
 
-        if (author != null) {
-            if (!bCryptPasswordEncoder.matches(password, author.getPassword())) {
-                author = null;
-            }
-        }
-        return author;
+    public List<AggregatedAuthor> getAggregatedAuthors() {
+        return authorRepository.findAll().stream().map(author -> mapAuthor(author)).collect(Collectors.toList());
+    }
+
+    private AggregatedAuthor mapAuthor(Author author) {
+        Integer articlesCount = articleRepository.countByIdAuthor(author.getId());
+        Integer commentsCount = commentRepository.countByIdAuthor(author.getId());
+
+        AggregatedAuthor aggregatedAuthor = new AggregatedAuthor();
+        aggregatedAuthor.setId(author.getId());
+        aggregatedAuthor.setName(author.getName());
+        aggregatedAuthor.setUsername(author.getUsername());
+        aggregatedAuthor.setArticlesCount(articlesCount);
+        aggregatedAuthor.setCommentsCount(commentsCount);
+
+        return aggregatedAuthor;
+    }
+
+    public AggregatedAuthor getAggregatedAuthorData(String id) {
+        Author author = authorRepository.findById(id).orElse(null);
+        return (author == null) ? null : mapAuthor(author);
     }
 
     public Author getAuthorByUsername(String username) {
         return authorRepository.getByUsernameIgnoreCase(username);
-    }
-
-    public Author signupUser(Author author) {
-        author.setPassword(bCryptPasswordEncoder.encode(author.getPassword()));
-        authorRepository.save(author);
-        return author;
     }
 }
