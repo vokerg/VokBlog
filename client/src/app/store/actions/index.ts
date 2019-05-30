@@ -33,9 +33,19 @@ export class LoadArticleAction {
   constructor(public articleId: string) {}
 }
 
-export class FetchArticleAction {
-  type = "FETCH_ARTICLE";
+export class LoadArticleCompletedAction {
+  type = "LOAD_ARTICLE_COMPLETED";
   constructor(public article: Article, public comments: Comment[]) {}
+}
+
+export class LoadArticlesAction {
+  type = "LOAD_ARTICLES";
+  constructor() {}
+}
+
+export class LoadArticlesCompletedAction {
+  type = "LOAD_ARTICLES_COMPLETED";
+  constructor(public articles: Article[]) {}
 }
 
 export class AddArticle {
@@ -70,42 +80,42 @@ export class AddCommentCompleted {
 
 export class LikeArticle implements Action {
   type = "LIKE_ARTICLE";
-  constructor(public articleId: String) {}
+  constructor(public articleId: string) {}
 }
 
 export class LikeArticleCompleted implements Action {
   type = "LIKE_ARTICLE_COMPLETED";
-  constructor(public articleId: String) {}
+  constructor(public articleId: string) {}
 }
 
 export class UnLikeArticle implements Action {
   type = "UNLIKE_ARTICLE";
-  constructor(public articleId: String) {}
+  constructor(public articleId: string) {}
 }
 
 export class UnLikeArticleCompleted implements Action {
   type = "UNLIKE_ARTICLE_COMPLETED";
-  constructor(public articleId: String) {}
+  constructor(public articleId: string) {}
 }
 
 export class LikeComment implements Action {
   type = "LIKE_COMMENT";
-  constructor(public commentId: String) {}
+  constructor(public commentId: string) {}
 }
 
 export class LikeCommentCompleted implements Action {
   type = "LIKE_COMMENT_COMPLETED";
-  constructor(public commentId: String) {}
+  constructor(public commentId: string) {}
 }
 
 export class UnLikeComment implements Action {
   type = "UNLIKE_COMMENT";
-  constructor(public commentId: String) {}
+  constructor(public commentId: string) {}
 }
 
 export class UnLikeCommentCompleted implements Action {
   type = "UNLIKE_COMMENT_COMPLETED";
-  constructor(public commentId: String) {}
+  constructor(public commentId: string) {}
 }
 
 export class FailedCallingApi implements Action {

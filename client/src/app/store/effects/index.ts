@@ -7,12 +7,12 @@ import {
   AddComment,
   AddCommentCompleted,
   FailedCallingApi,
-  FetchArticleAction,
+  LoadArticleCompletedAction, LoadArticlesCompletedAction,
   LikeArticle,
   LikeArticleCompleted,
   LikeComment,
   LikeCommentCompleted,
-  LoadArticleAction,
+  LoadArticleAction, LoadArticlesAction,
   LoginAction,
   LoginSuccessful,
   LoginUnsuccessful,
@@ -73,19 +73,31 @@ export class ArticlesEffects {
     );
 
   @Effect()
-  loadArticles$: Observable<Action> =
+  loadArticle$: Observable<Action> =
     this.actions$.pipe(
       ofType<LoadArticleAction>("LOAD_ARTICLE"),
       mergeMap(({articleId}) =>
         this.articlesService.getArticle(articleId).pipe(
           mergeMap(article =>
             this.commentsService.getCommentsForArticle(articleId).pipe(
-              map(comments => new FetchArticleAction(article, comments))
+              map(comments => new LoadArticleCompletedAction(article, comments))
             )
           )
         )
       )
     );
+
+   @Effect()
+   loadArticles$: Observable<Action> =
+     this.actions$.pipe(
+       ofType<LoadArticlesAction>("LOAD_ARTICLES"),
+       mergeMap(() =>
+         this.articlesService.getArticles().pipe(
+           map(articles => new LoadArticlesCompletedAction(articles)),
+           catchError(err => Observable.of(new FailedCallingApi(err)))
+         )
+       )
+     );
 
   @Effect()
   addComment$: Observable<Action> =

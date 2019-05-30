@@ -34,8 +34,8 @@ public class ArticleService {
         return getAggregatedArticles(Criteria.where("tags").in(tag));
     }
 
-    public List<ArticleFull> getAggregatedArticlesForAuthorId(String authorId) {
-        return getAggregatedArticles(Criteria.where("authorId").is(authorId));
+    public List<ArticleFull> getAggregatedArticlesForAuthorId(String idAuthor) {
+        return getAggregatedArticles(Criteria.where("idAuthor").is(idAuthor));
     }
 
     public List<ArticleFull> getAggregatedArticles() {

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ArticlesService } from '../../service/articles.service';
 import { Article } from '../../model/article';
+import { LoadArticlesAction} from "../../store/actions";
+import {Store} from "@ngrx/store";
+import * as fromRoot from "../../store/reducers";
 
 @Component({
   selector: 'app-articles',
@@ -11,15 +14,14 @@ export class ArticlesComponent implements OnInit {
 
   articles: Article[];
 
-  constructor(private articlesService: ArticlesService) {
-   }
+  constructor(
+    private articlesService: ArticlesService,
+    private store: Store<fromRoot.State>,
+  ) { }
 
   ngOnInit() {
-    this.articlesService.getArticles().subscribe(response => this.articles = response);
-  }
-
-  setLike(article) {
-    article.liked = !article.liked;
+    this.store.dispatch(new LoadArticlesAction());
+//    this.articlesService.getArticles().subscribe(response => this.articles = response);
   }
 
 }

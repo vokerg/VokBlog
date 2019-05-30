@@ -11,7 +11,7 @@ export function reducer(state:State={
   comments: []
 }, action): State {
   switch (action.type) {
-    case "FETCH_ARTICLE": {
+    case "LOAD_ARTICLE_COMPLETED": {
       return {article: action.article, comments: action.comments};
     }
     case "ADD_COMMENT_COMPLETED": {

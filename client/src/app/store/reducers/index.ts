@@ -2,16 +2,19 @@ import {ActionReducer, ActionReducerMap, createFeatureSelector, createSelector} 
 import {storeLogger} from "ngrx-store-logger";
 import * as fromActiveUser from "./activeUser";
 import * as fromCurrentArticle from "./currentArticle";
+import * as fromMainPage from "./mainPage";
 import {localStorageSync} from "ngrx-store-localstorage";
 
 export interface State {
   activeUser: fromActiveUser.State;
   currentArticle: fromCurrentArticle.State;
+  mainPage: fromMainPage.State;
 }
 
 export const reducers: ActionReducerMap<State> = {
   activeUser: fromActiveUser.reducer,
-  currentArticle: fromCurrentArticle.reducer
+  currentArticle: fromCurrentArticle.reducer,
+  mainPage: fromMainPage.reducer,
 };
 
 export function logger(reducer: ActionReducer<State>): any {

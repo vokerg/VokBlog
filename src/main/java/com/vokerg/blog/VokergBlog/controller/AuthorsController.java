@@ -30,9 +30,9 @@ public class AuthorsController {
         return ResponseEntity.ok(authorService.getAggregatedAuthors());
     }
 
-    @GetMapping("/{authorId}/articles")
-    public ResponseEntity<List<ArticleFull>> getAuthorsArticles(@PathVariable String authorId) {
-        return ResponseEntity.ok(articleService.getAggregatedArticlesForAuthorId(authorId));
+    @GetMapping("/{idAuthor}/articles")
+    public ResponseEntity<List<ArticleFull>> getAuthorsArticles(@PathVariable String idAuthor) {
+        return ResponseEntity.ok(articleService.getAggregatedArticlesForAuthorId(idAuthor));
     }
 
     @GetMapping("/{idAuthor}/comments")
