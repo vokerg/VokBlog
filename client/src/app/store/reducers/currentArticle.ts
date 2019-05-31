@@ -35,7 +35,4 @@ export function reducer(state:State={
   }
 }
 
-export const getCurrentArticle = (state:State) => {
-  console.log("selector hit", state);
-  return state;
-}
+export const getCurrentArticle = (state:State) => state;

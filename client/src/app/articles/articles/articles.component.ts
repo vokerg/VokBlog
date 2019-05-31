@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ArticlesService } from '../../service/articles.service';
 import { Article } from '../../model/article';
 import { LoadArticlesAction} from "../../store/actions";
 import {Store} from "@ngrx/store";
@@ -15,13 +14,13 @@ export class ArticlesComponent implements OnInit {
   articles: Article[];
 
   constructor(
-    private articlesService: ArticlesService,
     private store: Store<fromRoot.State>,
-  ) { }
+  ) {
+    store.select(fromRoot.getMainPageArticles).subscribe(articles => this.articles = articles);
+  }
 
   ngOnInit() {
     this.store.dispatch(new LoadArticlesAction());
-//    this.articlesService.getArticles().subscribe(response => this.articles = response);
   }
 
 }

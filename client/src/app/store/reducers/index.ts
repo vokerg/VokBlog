@@ -57,3 +57,9 @@ export const getCurrentArticle = createSelector(
   currentArticleFeatureSelector,
   fromCurrentArticle.getCurrentArticle
 );
+
+export const mainPageFeatureSelector = createFeatureSelector<fromMainPage.State>('mainPage');
+export const getMainPageArticles = createSelector(
+  mainPageFeatureSelector,
+  fromMainPage.getArticles
+);
