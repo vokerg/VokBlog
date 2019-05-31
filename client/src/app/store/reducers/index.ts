@@ -63,3 +63,11 @@ export const getMainPageArticles = createSelector(
   mainPageFeatureSelector,
   fromMainPage.getArticles
 );
+export const getMainPageComments = createSelector(
+  mainPageFeatureSelector,
+  fromMainPage.getComments
+);
+export const getMainPageAuthors = createSelector(
+  mainPageFeatureSelector,
+  fromMainPage.getAuthors
+);

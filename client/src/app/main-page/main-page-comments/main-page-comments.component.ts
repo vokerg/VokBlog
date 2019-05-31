@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Comment} from "../../model/comment";
-import {CommentsService} from "../../service/comments.service";
+import {Store} from "@ngrx/store";
+import * as fromRoot from "../../store/reducers";
+import {LoadLatestCommentsAction} from "../../store/actions";
 
 @Component({
   selector: 'app-main-page-comments',
@@ -10,10 +12,15 @@ import {CommentsService} from "../../service/comments.service";
 export class MainPageCommentsComponent implements OnInit {
   comments: Comment[];
 
-  constructor(private commentsService: CommentsService) { }
+  constructor(
+    private store: Store<fromRoot.State>,
+  ) {
+    store.select(fromRoot.getMainPageComments)
+      .subscribe(comments => this.comments = comments);
+  }
 
   ngOnInit() {
-    this.commentsService.getTopComments().subscribe(response => this.comments = response);
+    this.store.dispatch(new LoadLatestCommentsAction());
   }
 
 }

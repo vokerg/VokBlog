@@ -7,12 +7,14 @@ import {
   AddComment,
   AddCommentCompleted,
   FailedCallingApi,
-  LoadArticleCompletedAction, LoadArticlesCompletedAction,
+  LoadArticleCompletedAction,
+  LoadArticlesCompletedAction,
   LikeArticle,
   LikeArticleCompleted,
   LikeComment,
   LikeCommentCompleted,
-  LoadArticleAction, LoadArticlesAction,
+  LoadArticleAction,
+  LoadArticlesAction,
   LoginAction,
   LoginSuccessful,
   LoginUnsuccessful,
@@ -23,6 +25,10 @@ import {
   UnLikeCommentCompleted,
   UpdateArticle,
   UpdateArticleCompleted,
+  LoadLatestCommentsAction,
+  LoadLatestCommentsCompletedAction,
+  LoadTopAuthorsAction,
+  LoadTopAuthorsCompletedAction,
 } from "../actions";
 import {catchError, map, mergeMap} from "rxjs/operators";
 import {Action} from "@ngrx/store";
@@ -30,6 +36,7 @@ import {Observable, of} from "rxjs";
 import {LoginService} from "../../service/login.service";
 import {AuthenticatedUser} from "../../model/authenticatedUser";
 import {CommentsService} from "../../service/comments.service";
+import {AuthorService} from "../../service/author.service";
 
 @Injectable()
 export class ArticlesEffects {
@@ -38,6 +45,7 @@ export class ArticlesEffects {
     private articlesService: ArticlesService,
     private commentsService: CommentsService,
     private loginService: LoginService,
+    private authorService: AuthorService
   ) {}
 
   @Effect()
@@ -98,6 +106,30 @@ export class ArticlesEffects {
          )
        )
      );
+
+   @Effect()
+   loadComments$: Observable<Action> =
+     this.actions$.pipe(
+       ofType<LoadLatestCommentsAction>("LOAD_LATEST_COMMENTS"),
+       mergeMap(() =>
+         this.commentsService.getTopComments().pipe(
+           map(comments => new LoadLatestCommentsCompletedAction(comments)),
+           catchError(err => Observable.of(new FailedCallingApi(err)))
+         )
+       )
+     );
+
+   @Effect()
+   loadAuthors$: Observable<Action> =
+   this.actions$.pipe(
+     ofType<LoadTopAuthorsAction>("LOAD_TOP_AUTHORS"),
+     mergeMap(() =>
+       this.authorService.getTopAuthors().pipe(
+         map(authors => new LoadTopAuthorsCompletedAction(authors)),
+         catchError(err => Observable.of(new FailedCallingApi(err)))
+       )
+    )
+   );
 
   @Effect()
   addComment$: Observable<Action> =

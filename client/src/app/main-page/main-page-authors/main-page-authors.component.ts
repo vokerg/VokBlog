@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Author} from "../../model/author";
-import {AuthorService} from "../../service/author.service";
+import {Store} from "@ngrx/store";
+import * as fromRoot from "../../store/reducers";
+import {LoadTopAuthorsAction} from "../../store/actions";
 
 @Component({
   selector: 'app-main-page-authors',
@@ -10,10 +12,14 @@ import {AuthorService} from "../../service/author.service";
 export class MainPageAuthorsComponent implements OnInit {
   authors: Author[];
 
-  constructor(private authorService: AuthorService) { }
+  constructor(
+    private store: Store<fromRoot.State>,
+  ) {
+    store.select(fromRoot.getMainPageAuthors).subscribe(authors => this.authors = authors);
+  }
 
   ngOnInit() {
-    this.authorService.getTopAuthors().subscribe(result => this.authors = result);
+    this.store.dispatch(new LoadTopAuthorsAction());
   }
 
 }

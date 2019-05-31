@@ -3,6 +3,7 @@ import {AuthenticatedUser} from "../../model/authenticatedUser";
 import {AuthenticationUser} from "../../model/authenticationUser";
 import {Article} from "../../model/article";
 import {Comment} from "../../model/comment";
+import {Author} from "../../model/author";
 
 export class LoginAction implements Action {
   type = "LOGIN";
@@ -46,6 +47,26 @@ export class LoadArticlesAction {
 export class LoadArticlesCompletedAction {
   type = "LOAD_ARTICLES_COMPLETED";
   constructor(public articles: Article[]) {}
+}
+
+export class LoadLatestCommentsAction {
+  type = "LOAD_LATEST_COMMENTS";
+  constructor() {}
+}
+
+export class LoadLatestCommentsCompletedAction {
+  type = "LOAD_LATEST_COMMENTS_COMPLETED";
+  constructor(public comments: Comment[]) {}
+}
+
+export class LoadTopAuthorsAction {
+  type = "LOAD_TOP_AUTHORS";
+  constructor() {}
+}
+
+export class LoadTopAuthorsCompletedAction {
+  type = "LOAD_TOP_AUTHORS_COMPLETED";
+  constructor(public authors: Author[]) {}
 }
 
 export class AddArticle {
