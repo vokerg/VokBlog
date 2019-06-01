@@ -30,6 +30,24 @@ export function reducer(state:State={
         ? {...state, article: {...state.article, liked:false, likeCount: state.article.likeCount - 1}}
         : state;
     }
+    case "LIKE_COMMENT_COMPLETED": {
+      return (state.comments
+        ? {...state, comments: state.comments.map(
+          comment => comment.id === action.commentId
+            ? {...comment, liked: true, likeCount: comment.likeCount+1}
+            : comment
+          )}
+        : state)
+    }
+    case "UNLIKE_COMMENT_COMPLETED": {
+      return (state.comments
+        ? {...state, comments: state.comments.map(
+            comment => comment.id === action.commentId
+              ? {...comment, liked: false, likeCount: comment.likeCount-1}
+              : comment
+          )}
+        : state)
+    }
 
     default: return state;
   }

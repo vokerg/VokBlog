@@ -70,10 +70,10 @@ public class ArticleController {
     }
 
     @PutMapping("/{id}/comments")
-    public ResponseEntity<Comment> createCommentForArticle(@PathVariable String id,
+    public ResponseEntity<CommentFull> createCommentForArticle(@PathVariable String id,
                                                            @RequestBody Comment comment) {
         commentRepository.save(comment);
-        return ResponseEntity.ok(comment);
+        return ResponseEntity.ok(commentService.getCommentById(comment.getId()));
     }
 
     @PutMapping("/{id}/like")

@@ -83,4 +83,9 @@ public class CommentService {
     public List<CommentFull> getCommentByArticleId(String articleId) {
         return getLatestFullComments(Criteria.where("idArticle").is(articleId), null, null);
     }
+
+    public CommentFull getCommentById(String id) {
+        List<CommentFull> comments = getLatestFullComments(Criteria.where("_id").is(id), null, null);
+        return (comments.size() > 0) ? comments.get(0) : null;
+    }
 }
