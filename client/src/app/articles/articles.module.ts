@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 
 import { ArticlesComponent } from './articles/articles.component';
-import { ArticleFullPreviewComponent } from './article-full-preview/article-full-preview.component';
+import { ArticleFullPreviewComponent } from '../shared/article-full-preview/article-full-preview.component';
 
 @NgModule({
   imports: [
@@ -14,7 +14,6 @@ import { ArticleFullPreviewComponent } from './article-full-preview/article-full
   ],
   declarations: [
     ArticlesComponent,
-    ArticleFullPreviewComponent,
   ],
   exports: [
     ArticlesComponent

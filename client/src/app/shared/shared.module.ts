@@ -5,12 +5,14 @@ import { RouterModule } from '@angular/router';
 import { CommentComponent } from './comment/comment.component';
 import { ArticlePreviewComponent } from './article-preview/article-preview.component';
 import { LikeComponent } from './like/like.component';
+import {ArticleFullPreviewComponent} from "./article-full-preview/article-full-preview.component";
 
 @NgModule({
   declarations: [
     CommentsComponent,
     CommentComponent,
     ArticlePreviewComponent,
+    ArticleFullPreviewComponent,
     LikeComponent
   ],
   imports: [
@@ -20,6 +22,7 @@ import { LikeComponent } from './like/like.component';
   exports: [
     CommentsComponent,
     ArticlePreviewComponent,
+    ArticleFullPreviewComponent,
     LikeComponent
   ]
 })

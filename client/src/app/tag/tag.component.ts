@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router'
 import { Article } from '../model/article';
 import {ArticlesService} from "../service/articles.service";
+import {Store} from "@ngrx/store";
+import * as fromRoot from "../store/reducers";
 
 @Component({
   selector: 'app-tag',
@@ -12,7 +14,7 @@ export class TagComponent implements OnInit {
 
   constructor(
     private articleService: ArticlesService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) { }
 
   tag: string;
