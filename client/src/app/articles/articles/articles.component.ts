@@ -20,7 +20,7 @@ export class ArticlesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.store.dispatch(new LoadArticlesAction());
+    this.store.dispatch(new LoadArticlesAction(""));
   }
 
 }

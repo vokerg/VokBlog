@@ -19,7 +19,11 @@ export class ArticlesService extends ApiService{
     super(store);
   }
 
-  getArticles():Observable<Article[]> {
+  getArticles(tag:string):Observable<Article[]> {
+    return (tag) ? this.getArticlesByTag(tag) : this.getAllArticles();
+  }
+
+  getAllArticles():Observable<Article[]> {
     return this.getRequestOptions().pipe(
       map(requestOptions => this.http.get<Article[]>('api/articles', requestOptions)),
       mergeAll()

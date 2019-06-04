@@ -99,8 +99,8 @@ export class ArticlesEffects {
    loadArticles$: Observable<Action> =
      this.actions$.pipe(
        ofType<LoadArticlesAction>("LOAD_ARTICLES"),
-       mergeMap(() =>
-         this.articlesService.getArticles().pipe(
+       mergeMap(({tag}) =>
+         this.articlesService.getArticles(tag).pipe(
            map(articles => new LoadArticlesCompletedAction(articles)),
            catchError(err => Observable.of(new FailedCallingApi(err)))
          )

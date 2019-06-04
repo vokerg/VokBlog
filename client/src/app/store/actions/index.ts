@@ -41,7 +41,7 @@ export class LoadArticleCompletedAction {
 
 export class LoadArticlesAction {
   type = "LOAD_ARTICLES";
-  constructor() {}
+  constructor(public tag: string) {}
 }
 
 export class LoadArticlesCompletedAction {
