@@ -18,7 +18,7 @@ export class TagComponent implements OnInit {
     private route: ActivatedRoute,
     private store: Store<fromRoot.State>,
   ) {
-    store.select(fromRoot.getMainPageArticles).subscribe(articles => this.articles = articles);
+    store.select(fromRoot.getTagArticles).subscribe(articles => this.articles = articles);
   }
 
   tag: string;

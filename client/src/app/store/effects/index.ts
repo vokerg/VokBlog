@@ -101,7 +101,7 @@ export class ArticlesEffects {
        ofType<LoadArticlesAction>("LOAD_ARTICLES"),
        mergeMap(({tag}) =>
          this.articlesService.getArticles(tag).pipe(
-           map(articles => new LoadArticlesCompletedAction(articles, 'All')),
+           map(articles => new LoadArticlesCompletedAction(articles, (tag) ? 'Tag' : 'All')),
            catchError(err => Observable.of(new FailedCallingApi(err)))
          )
        )

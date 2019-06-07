@@ -62,10 +62,6 @@ export const getCurrentArticle = createSelector(
 );
 
 export const mainPageFeatureSelector = createFeatureSelector<fromMainPage.State>('mainPage');
-export const getMainPageArticles = createSelector(
-  mainPageFeatureSelector,
-  fromMainPage.getArticles
-);
 export const getMainPageComments = createSelector(
   mainPageFeatureSelector,
   fromMainPage.getComments
@@ -73,4 +69,15 @@ export const getMainPageComments = createSelector(
 export const getMainPageAuthors = createSelector(
   mainPageFeatureSelector,
   fromMainPage.getAuthors
+);
+
+export const filteredArticlesFeatureSelector =
+  createFeatureSelector<fromFilteredArticles.State>('filteredArticles');
+export const getMainPageArticles = createSelector(
+  filteredArticlesFeatureSelector,
+  fromFilteredArticles.getMainPageArticles
+);
+export const getTagArticles = createSelector(
+  filteredArticlesFeatureSelector,
+  fromFilteredArticles.getTagArticles
 );
