@@ -81,3 +81,7 @@ export const getTagArticles = createSelector(
   filteredArticlesFeatureSelector,
   fromFilteredArticles.getTagArticles
 );
+export const getAuthorArticles = createSelector(
+  filteredArticlesFeatureSelector,
+  fromFilteredArticles.getAuthorArticles
+);

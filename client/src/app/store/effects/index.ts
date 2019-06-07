@@ -28,7 +28,7 @@ import {
   LoadLatestCommentsAction,
   LoadLatestCommentsCompletedAction,
   LoadTopAuthorsAction,
-  LoadTopAuthorsCompletedAction,
+  LoadTopAuthorsCompletedAction, LoadAuthorArticlesAction,
 } from "../actions";
 import {catchError, map, mergeMap} from "rxjs/operators";
 import {Action} from "@ngrx/store";
@@ -106,6 +106,18 @@ export class ArticlesEffects {
          )
        )
      );
+
+  @Effect()
+  loadAuthorArticles$: Observable<Action> =
+    this.actions$.pipe(
+      ofType<LoadAuthorArticlesAction>("LOAD_AUTHOR_ARTICLES"),
+      mergeMap(({authorId, tag}) =>
+        this.articlesService.getArticlesByAuthorId(authorId).pipe(
+          map(articles => new LoadArticlesCompletedAction(articles, 'Author')),
+          catchError(err => Observable.of(new FailedCallingApi(err)))
+        )
+      )
+    );
 
    @Effect()
    loadComments$: Observable<Action> =

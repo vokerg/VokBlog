@@ -6,6 +6,9 @@ import { Article } from '../../model/article'
 import {ActivatedRoute} from "@angular/router";
 import {CommentsService} from "../../service/comments.service";
 import {ArticlesService} from "../../service/articles.service";
+import {Store} from "@ngrx/store";
+import * as fromRoot from "../../store/reducers";
+import {LoadAuthorArticlesAction} from "../../store/actions";
 
 @Component({
   selector: 'app-author',
@@ -17,26 +20,32 @@ export class AuthorComponent implements OnInit {
   author: Author;
   comments: Comment[];
   articles: Article[];
-  id: number;
+  id: string;
 
   constructor(
     private authorService: AuthorService,
     private commentService: CommentsService,
     private articleService: ArticlesService,
-    private route: ActivatedRoute
-  ) { }
+    private route: ActivatedRoute,
+    private store: Store<fromRoot.State>,
+  ) {
+    store.select(fromRoot.getAuthorArticles).subscribe(articles => this.articles = articles);
+  }
 
   ngOnInit() {
     this.author = new Author();
     this.route.params.take(1).subscribe(params => {
       this.id = params["id"];
+
+      this.store.dispatch(new LoadAuthorArticlesAction(this.id, ""));
+
+
+
       this.authorService.getAuthor(this.id).subscribe(
         author => this.author = author
       );
       this.commentService.getCommentsByAuthorId(this.id.toString())
         .subscribe((comments) => this.comments = comments);
-      this.articleService.getArticlesByAuthorId(this.id.toString())
-        .subscribe(response => this.articles = response);
     })
 
   }

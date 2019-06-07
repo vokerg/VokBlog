@@ -18,7 +18,7 @@ export class AuthorService extends ApiService{
     super(store);
   }
 
-  getAuthor(authorId: number): Observable<Author> {
+  getAuthor(authorId: string): Observable<Author> {
     return this.http.get<Author>(`api/authors/${authorId}/aggregated`);
   }
 
