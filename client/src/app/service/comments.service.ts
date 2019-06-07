@@ -29,15 +29,24 @@ export class CommentsService extends ApiService {
   }
 
   getCommentsForArticle(articleId: string):Observable<Comment[]> {
-    return this.http.get<Comment[]>(`api/articles/${articleId}/comments`);
+    return this.getRequestOptions().pipe(
+      map(requestOptions => this.http.get<Comment[]>(`api/articles/${articleId}/comments`, requestOptions)),
+      mergeAll()
+    );
   }
 
   getTopComments():Observable<Comment[]> {
-    return this.http.get<Comment[]>('api/comments');
+    return this.getRequestOptions().pipe(
+      map(requestOptions => this.http.get<Comment[]>('api/comments', requestOptions)),
+      mergeAll()
+    );
   }
 
   getCommentsByAuthorId(authorId: string): Observable<Comment[]> {
-    return this.http.get<Comment[]>(`api/authors/${authorId}/comments`);
+    return this.getRequestOptions().pipe(
+      map(requestOptions => this.http.get<Comment[]>(`api/authors/${authorId}/comments`, requestOptions)),
+      mergeAll()
+    );
   }
 
   likeComment(commentId: string): Observable<any> {

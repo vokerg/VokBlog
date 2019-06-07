@@ -15,8 +15,36 @@ export function reducer(state:State={
 }, action): State {
   switch (action.type) {
     case 'LOAD_ARTICLES_COMPLETED': return {...state, articles: action.articles}; break;
-    case 'LOAD_LATEST_COMMENTS_COMPLETED': return {...state, comments: action.comments}
-    case 'LOAD_TOP_AUTHORS_COMPLETED': return {...state, authors: action.authors}
+    case 'LOAD_LATEST_COMMENTS_COMPLETED': return {...state, comments: action.comments}; break;
+    case 'LOAD_TOP_AUTHORS_COMPLETED': return {...state, authors: action.authors}; break;
+    case 'LIKE_ARTICLE_COMPLETED': {
+      return {...state, articles: state.articles.map(article =>
+          (article.id === action.articleId)
+            ? {...article, liked: true, likeCount: article.likeCount + 1}
+            : article
+        )}
+    }; break;
+    case 'UNLIKE_ARTICLE_COMPLETED': {
+      return {...state, articles: state.articles.map(article =>
+           (article.id === action.articleId)
+            ? {...article, liked: false, likeCount: article.likeCount - 1}
+            : article
+        )}
+    }; break;
+    case 'LIKE_COMMENT_COMPLETED': {
+      return {...state, comments: state.comments.map(comment =>
+          (comment.id === action.commentId)
+            ? {...comment, liked: true, likeCount: comment.likeCount + 1}
+            : comment
+        )}
+    }; break;
+    case 'UNLIKE_COMMENT_COMPLETED': {
+      return {...state, comments: state.comments.map(comment =>
+          (comment.id === action.commentId)
+            ? {...comment, liked: false, likeCount: comment.likeCount - 1}
+            : comment
+        )}
+    }; break;
     default: return state;
   }
 }

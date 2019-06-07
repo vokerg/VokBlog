@@ -46,7 +46,7 @@ export class LoadArticlesAction {
 
 export class LoadArticlesCompletedAction {
   type = "LOAD_ARTICLES_COMPLETED";
-  constructor(public articles: Article[]) {}
+  constructor(public articles: Article[], public filter:string) {}
 }
 
 export class LoadLatestCommentsAction {
