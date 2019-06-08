@@ -51,5 +51,3 @@ export const getMainPageArticles = (state:State) => state.mainPageArticles.artic
 export const getTagArticles = (state:State) => state.tagArticles.articles;
 
 export const getAuthorArticles = (state:State) => state.authorArticles.articles;
-
-

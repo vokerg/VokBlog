@@ -125,7 +125,7 @@ export class ArticlesEffects {
        ofType<LoadLatestCommentsAction>("LOAD_LATEST_COMMENTS"),
        mergeMap(() =>
          this.commentsService.getTopComments().pipe(
-           map(comments => new LoadLatestCommentsCompletedAction(comments)),
+           map(comments => new LoadLatestCommentsCompletedAction(comments, 'All')),
            catchError(err => Observable.of(new FailedCallingApi(err)))
          )
        )

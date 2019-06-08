@@ -61,7 +61,7 @@ export class LoadLatestCommentsAction {
 
 export class LoadLatestCommentsCompletedAction {
   type = "LOAD_LATEST_COMMENTS_COMPLETED";
-  constructor(public comments: Comment[]) {}
+  constructor(public comments: Comment[], public filter:string) {}
 }
 
 export class LoadTopAuthorsAction {

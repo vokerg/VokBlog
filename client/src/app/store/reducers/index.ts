@@ -4,20 +4,23 @@ import * as fromActiveUser from "./activeUser";
 import * as fromCurrentArticle from "./currentArticle";
 import * as fromMainPage from "./mainPage";
 import * as fromFilteredArticles from "./filteredArticles";
+import * as fromFilteredComments from "./filteredComments";
 import {localStorageSync} from "ngrx-store-localstorage";
 
 export interface State {
   activeUser: fromActiveUser.State;
   currentArticle: fromCurrentArticle.State;
   mainPage: fromMainPage.State;
-  filteredArticles: fromFilteredArticles.State
+  filteredArticles: fromFilteredArticles.State,
+  filteredComments: fromFilteredComments.State
 }
 
 export const reducers: ActionReducerMap<State> = {
   activeUser: fromActiveUser.reducer,
   currentArticle: fromCurrentArticle.reducer,
   mainPage: fromMainPage.reducer,
-  filteredArticles: fromFilteredArticles.reducer
+  filteredArticles: fromFilteredArticles.reducer,
+  filteredComments: fromFilteredComments.reducer,
 };
 
 export function logger(reducer: ActionReducer<State>): any {
@@ -62,10 +65,10 @@ export const getCurrentArticle = createSelector(
 );
 
 export const mainPageFeatureSelector = createFeatureSelector<fromMainPage.State>('mainPage');
-export const getMainPageComments = createSelector(
-  mainPageFeatureSelector,
-  fromMainPage.getComments
-);
+// export const getMainPageComments = createSelector(
+//   mainPageFeatureSelector,
+//   fromMainPage.getComments
+// );
 export const getMainPageAuthors = createSelector(
   mainPageFeatureSelector,
   fromMainPage.getAuthors
@@ -84,4 +87,11 @@ export const getTagArticles = createSelector(
 export const getAuthorArticles = createSelector(
   filteredArticlesFeatureSelector,
   fromFilteredArticles.getAuthorArticles
+);
+
+export const filteredCommentsFeatureSelector =
+  createFeatureSelector<fromFilteredComments.State>('filteredComments');
+export const getMainPageComments = createSelector(
+  filteredCommentsFeatureSelector,
+  fromFilteredComments.getMainPageComments
 );
