@@ -1,12 +1,23 @@
 <div>
+  <div>
+    <a [routerLink]="['/']">Application</a>
+  </div>
   <span *ngIf="username$ | async; let username">
     login: {{username}}
   </span>
   <span *ngIf="isAuthenticated$ | async; else loggedOut">
-    <button (click)="logout()">Logout</button>
+    <div>
+      <button (click)="logout()">Logout</button>
+    </div>
+    <div>
+      <a [routerLink]="['/']">My articles</a> |
+      <a [routerLink]="['/articles/new']">New article</a>
+    </div>
   </span>
   <ng-template #loggedOut>
-    <button (click)="signup()">Signup</button>
-    <button (click)="login()">Login</button>
+    <div>
+      <button (click)="signup()">Signup</button>
+      <button (click)="login()">Login</button>
+    </div>
   </ng-template>
 </div>
