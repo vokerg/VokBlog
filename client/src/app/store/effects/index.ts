@@ -137,7 +137,7 @@ export class ArticlesEffects {
      ofType<LoadTopAuthorsAction>("LOAD_TOP_AUTHORS"),
      mergeMap(() =>
        this.authorService.getTopAuthors().pipe(
-         map(authors => new LoadTopAuthorsCompletedAction(authors)),
+         map(authors => new LoadTopAuthorsCompletedAction(authors, 'All')),
          catchError(err => Observable.of(new FailedCallingApi(err)))
        )
     )

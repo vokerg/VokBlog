@@ -2,25 +2,25 @@ import {ActionReducer, ActionReducerMap, createFeatureSelector, createSelector} 
 import {storeLogger} from "ngrx-store-logger";
 import * as fromActiveUser from "./activeUser";
 import * as fromCurrentArticle from "./currentArticle";
-import * as fromMainPage from "./mainPage";
 import * as fromFilteredArticles from "./filteredArticles";
 import * as fromFilteredComments from "./filteredComments";
+import * as fromFilteredAuthors from "./filteredAuthors";
 import {localStorageSync} from "ngrx-store-localstorage";
 
 export interface State {
   activeUser: fromActiveUser.State;
   currentArticle: fromCurrentArticle.State;
-  mainPage: fromMainPage.State;
   filteredArticles: fromFilteredArticles.State,
   filteredComments: fromFilteredComments.State
+  filteredAuthors: fromFilteredAuthors.State
 }
 
 export const reducers: ActionReducerMap<State> = {
   activeUser: fromActiveUser.reducer,
   currentArticle: fromCurrentArticle.reducer,
-  mainPage: fromMainPage.reducer,
   filteredArticles: fromFilteredArticles.reducer,
   filteredComments: fromFilteredComments.reducer,
+  filteredAuthors: fromFilteredAuthors.reducer
 };
 
 export function logger(reducer: ActionReducer<State>): any {
@@ -35,7 +35,7 @@ export const metaReducers = [localStorageSyncReducer, logger];
 
 
 /*selectors*/
-export const activeUserStateFeatureSelector = createFeatureSelector<fromActiveUser.State>('activeUser');
+const activeUserStateFeatureSelector = createFeatureSelector<fromActiveUser.State>('activeUser');
 
 export const getActiveUsername = createSelector(
   activeUserStateFeatureSelector,
@@ -58,23 +58,13 @@ export const getActiveUser = createSelector(
 );
 
 
-export const currentArticleFeatureSelector = createFeatureSelector<fromCurrentArticle.State>('currentArticle');
+const currentArticleFeatureSelector = createFeatureSelector<fromCurrentArticle.State>('currentArticle');
 export const getCurrentArticle = createSelector(
   currentArticleFeatureSelector,
   fromCurrentArticle.getCurrentArticle
 );
 
-export const mainPageFeatureSelector = createFeatureSelector<fromMainPage.State>('mainPage');
-// export const getMainPageComments = createSelector(
-//   mainPageFeatureSelector,
-//   fromMainPage.getComments
-// );
-export const getMainPageAuthors = createSelector(
-  mainPageFeatureSelector,
-  fromMainPage.getAuthors
-);
-
-export const filteredArticlesFeatureSelector =
+const filteredArticlesFeatureSelector =
   createFeatureSelector<fromFilteredArticles.State>('filteredArticles');
 export const getMainPageArticles = createSelector(
   filteredArticlesFeatureSelector,
@@ -89,9 +79,16 @@ export const getAuthorArticles = createSelector(
   fromFilteredArticles.getAuthorArticles
 );
 
-export const filteredCommentsFeatureSelector =
+const filteredCommentsFeatureSelector =
   createFeatureSelector<fromFilteredComments.State>('filteredComments');
 export const getMainPageComments = createSelector(
   filteredCommentsFeatureSelector,
   fromFilteredComments.getMainPageComments
+);
+
+const filteredAuthorsFeatureSelector =
+  createFeatureSelector<fromFilteredAuthors.State>('filteredAuthors');
+export const getMainPageAuthors = createSelector(
+  filteredAuthorsFeatureSelector,
+  fromFilteredAuthors.getMainPageAuthors
 );

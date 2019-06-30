@@ -71,7 +71,7 @@ export class LoadTopAuthorsAction {
 
 export class LoadTopAuthorsCompletedAction {
   type = "LOAD_TOP_AUTHORS_COMPLETED";
-  constructor(public authors: Author[]) {}
+  constructor(public authors: Author[], public filter:string) {}
 }
 
 export class AddArticle {
