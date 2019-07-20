@@ -6,6 +6,7 @@ import { CommentComponent } from './comment/comment.component';
 import { ArticlePreviewComponent } from './article-preview/article-preview.component';
 import { LikeComponent } from './like/like.component';
 import {ArticleFullPreviewComponent} from "./article-full-preview/article-full-preview.component";
+import { ExpandCommentsComponent } from './expand-comments/expand-comments.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import {ArticleFullPreviewComponent} from "./article-full-preview/article-full-p
     CommentComponent,
     ArticlePreviewComponent,
     ArticleFullPreviewComponent,
-    LikeComponent
+    LikeComponent,
+    ExpandCommentsComponent
   ],
   imports: [
     CommonModule,

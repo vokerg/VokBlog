@@ -9,6 +9,7 @@ public class Comment {
     private String id;
     private String idAuthor;
     private String idArticle;
+    private String idParentComment;
     private String authorName;
     private String text;
     private String title;
@@ -59,5 +60,13 @@ public class Comment {
 
     public void setAuthorName(String authorName) {
         this.authorName = authorName;
+    }
+
+    public String getIdParentComment() {
+        return idParentComment;
+    }
+
+    public void setIdParentComment(String idParentComment) {
+        this.idParentComment = idParentComment;
     }
 }

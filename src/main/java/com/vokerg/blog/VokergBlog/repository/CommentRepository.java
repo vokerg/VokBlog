@@ -7,6 +7,5 @@ import java.util.List;
 
 public interface CommentRepository extends MongoRepository<Comment, String> {
     List<Comment> findAll();
-    List<Comment> findByIdArticle(String idArticle);
     Integer countByIdAuthor(String idAuthor);
 }
