@@ -1,6 +1,6 @@
 <div>
   <div *ngIf="!isEdit">
-    <button (click)="toggleEditForm()">Add comment</button>
+    <button (click)="toggleEditForm()">Comment</button>
   </div>
   <div *ngIf="isEdit">
     <form (ngSubmit)="onSubmit()">

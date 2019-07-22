@@ -7,6 +7,8 @@ import { ArticlePreviewComponent } from './article-preview/article-preview.compo
 import { LikeComponent } from './like/like.component';
 import {ArticleFullPreviewComponent} from "./article-full-preview/article-full-preview.component";
 import { ExpandCommentsComponent } from './expand-comments/expand-comments.component';
+import {EditCommentComponent} from "./edit-comment/edit-comment.component";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -15,17 +17,20 @@ import { ExpandCommentsComponent } from './expand-comments/expand-comments.compo
     ArticlePreviewComponent,
     ArticleFullPreviewComponent,
     LikeComponent,
-    ExpandCommentsComponent
+    ExpandCommentsComponent,
+    EditCommentComponent
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    FormsModule
   ],
   exports: [
     CommentsComponent,
     ArticlePreviewComponent,
     ArticleFullPreviewComponent,
-    LikeComponent
+    LikeComponent,
+    EditCommentComponent
   ]
 })
 export class SharedModule { }

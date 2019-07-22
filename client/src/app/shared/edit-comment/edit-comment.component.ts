@@ -2,10 +2,10 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Comment } from '../../model/comment';
 import {Observable} from "rxjs";
 import * as fromActiveUser from "../../store/reducers/activeUser";
-import * as fromReducersRoot from "../../store/reducers";
+import * as fromReducersRoot from "../../store/reducers/index";
 import {Store} from "@ngrx/store";
-import * as fromRoot from "../../store/reducers";
-import {AddComment} from "../../store/actions";
+import * as fromRoot from "../../store/reducers/index";
+import {AddComment} from "../../store/actions/index";
 
 @Component({
   selector: 'app-edit-comment',

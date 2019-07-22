@@ -4,7 +4,6 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { ArticleComponent } from './article/article.component';
-import { EditCommentComponent } from './edit-comment/edit-comment.component'
 
 @NgModule({
   imports: [
@@ -14,8 +13,7 @@ import { EditCommentComponent } from './edit-comment/edit-comment.component'
     SharedModule
   ],
   declarations: [
-    ArticleComponent,
-    EditCommentComponent
+    ArticleComponent
   ]
 })
 export class ArticleModule { }
