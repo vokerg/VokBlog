@@ -18,9 +18,11 @@ export class CommentComponent implements OnInit {
   @Input() forArticle: boolean = false;
 
   articleTitle: string;
+  articleId: string;
 
   ngOnInit() {
       this.articleTitle = this.comment.article ? this.comment.article.title : null;
+      this.articleId = this.comment.article ? this.comment.article.id : null;
   }
 
 }

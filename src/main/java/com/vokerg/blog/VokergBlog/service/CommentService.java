@@ -18,8 +18,8 @@ import static org.springframework.data.mongodb.core.aggregation.ComparisonOperat
 @Service
 public class CommentService {
 
-    public static final String[] COMMENT_FIELDS = {"idAuthor", "authorName", "idArticle", "text", "title"};
-    public static final String[] COMMENT_FIELDS1 = {"idAuthor", "authorName", "idArticle", "text", "title", "article", "likeCount"};
+    public static final String[] COMMENT_FIELDS = {"idAuthor", "authorName", "idArticle", "text", "title", "idParentComment"};
+    public static final String[] COMMENT_FIELDS1 = {"idAuthor", "authorName", "idArticle", "text", "title", "idParentComment", "article", "likeCount"};
     @Autowired
     AuthorRepository authorRepository;
 

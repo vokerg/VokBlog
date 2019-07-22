@@ -15,10 +15,12 @@ import {AddComment} from "../../store/actions/index";
 export class EditCommentComponent implements OnInit {
 
   @Input() articleId: string;
+  @Input() parentCommentId: string = null;
 
   isEdit: boolean;
   comment: Comment;
   activeUser$: Observable<fromActiveUser.State>;
+  buttonText: string;
 
   onSubmit() {
     this.activeUser$.subscribe(activeUser => {
@@ -35,6 +37,7 @@ export class EditCommentComponent implements OnInit {
     this.isEdit = !this.isEdit;
     this.comment = new Comment();
     this.comment.idArticle = this.articleId;
+    this.comment.idParentComment = this.parentCommentId;
   }
 
   constructor(
@@ -45,6 +48,8 @@ export class EditCommentComponent implements OnInit {
     this.activeUser$ = store.select(fromReducersRoot.getActiveUser);
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.buttonText = this.parentCommentId === null ? "Comment" : "Reply";
+  }
 
 }

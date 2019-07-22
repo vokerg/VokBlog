@@ -5,6 +5,7 @@ import * as fromCurrentArticle from "./currentArticle";
 import * as fromFilteredArticles from "./filteredArticles";
 import * as fromFilteredComments from "./filteredComments";
 import * as fromFilteredAuthors from "./filteredAuthors";
+import * as fromSubComments from "./subComments";
 import {localStorageSync} from "ngrx-store-localstorage";
 
 export interface State {
@@ -13,6 +14,7 @@ export interface State {
   filteredArticles: fromFilteredArticles.State,
   filteredComments: fromFilteredComments.State
   filteredAuthors: fromFilteredAuthors.State
+  subComments: Object
 }
 
 export const reducers: ActionReducerMap<State> = {
@@ -20,7 +22,8 @@ export const reducers: ActionReducerMap<State> = {
   currentArticle: fromCurrentArticle.reducer,
   filteredArticles: fromFilteredArticles.reducer,
   filteredComments: fromFilteredComments.reducer,
-  filteredAuthors: fromFilteredAuthors.reducer
+  filteredAuthors: fromFilteredAuthors.reducer,
+  subComments: fromSubComments.reducer
 };
 
 export function logger(reducer: ActionReducer<State>): any {

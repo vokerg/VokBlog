@@ -148,3 +148,13 @@ export class FailedCallingApi implements Action {
   type = "FAILED_CALLING_API";
   constructor(public error: any) {}
 }
+
+export class LoadSubComments implements Action {
+  type = "LOAD_SUBCOMMENTS";
+  constructor(public comment: Comment) {}
+}
+
+export class LoadSubCommentsCompleted implements Action {
+  type = "LOAD_SUBCOMMENTS";
+  constructor(public comment: Comment, public comments: Comment[]) {}
+}
