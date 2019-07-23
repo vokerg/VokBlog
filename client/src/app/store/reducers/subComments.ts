@@ -1,6 +1,8 @@
-export const reducer = (state, action) => {
+export const reducer = (state={}, action) => {
   switch (action.type) {
-    case 'LOAD_SUBCOMMENTS_COMPLETED': return {...state, [action.comment.id]: action.comments}
+    case 'LOAD_SUBCOMMENTS_COMPLETED': return {...state, [action.parentCommentId]: action.comments}
     default: return state;
   }
-}
+};
+
+export const getSubCommentsByCommentId = (state, {commentId}) => state[commentId];

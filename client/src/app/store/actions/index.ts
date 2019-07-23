@@ -149,12 +149,12 @@ export class FailedCallingApi implements Action {
   constructor(public error: any) {}
 }
 
-export class LoadSubComments implements Action {
+export class LoadSubCommentsAction implements Action {
   type = "LOAD_SUBCOMMENTS";
-  constructor(public comment: Comment) {}
+  constructor(public parentCommentId: string) {}
 }
 
-export class LoadSubCommentsCompleted implements Action {
-  type = "LOAD_SUBCOMMENTS";
-  constructor(public comment: Comment, public comments: Comment[]) {}
+export class LoadSubCommentsCompletedAction implements Action {
+  type = "LOAD_SUBCOMMENTS_COMPLETED";
+  constructor(public parentCommentId: string, public comments: Comment[]) {}
 }

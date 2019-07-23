@@ -35,6 +35,13 @@ export class CommentsService extends ApiService {
     );
   }
 
+  getCommentsForParentComment(parentCommentId: string):Observable<Comment[]> {
+    return this.getRequestOptions().pipe(
+      map(requestOptions => this.http.get<Comment[]>(`api/comments?idParentComment=${parentCommentId}`, requestOptions)),
+      mergeAll()
+    );
+  }
+
   getTopComments():Observable<Comment[]> {
     return this.getRequestOptions().pipe(
       map(requestOptions => this.http.get<Comment[]>('api/comments', requestOptions)),

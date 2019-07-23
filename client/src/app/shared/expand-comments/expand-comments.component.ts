@@ -1,5 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Comment} from "../../model/comment";
+import {Store} from "@ngrx/store";
+import * as fromRoot from "../../store/reducers";
+import {LoadSubCommentsAction} from "../../store/actions";
 
 @Component({
   selector: 'app-expand-comments',
@@ -10,9 +13,26 @@ export class ExpandCommentsComponent implements OnInit {
 
   @Input() comment: Comment;
 
-  constructor() { }
+  subComments: Comment[];
+
+  expanded: boolean = false;
+
+  constructor(
+    private store: Store<fromRoot.State>,
+  ) { }
+
+  expandComments() {
+    this.store.dispatch(new LoadSubCommentsAction(this.comment.id));
+    this.expanded = true;
+  }
+
+  collapseComments() {
+    this.expanded = false;
+  }
 
   ngOnInit() {
+    this.store.select(fromRoot.getSubCommentsByCommentId, {commentId: this.comment.id})
+      .subscribe(comments => this.subComments = comments);
   }
 
 }

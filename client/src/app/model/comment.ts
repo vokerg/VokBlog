@@ -11,6 +11,7 @@ export class Comment {
   liked: boolean;
   likeCount: number;
   idParentComment: string;
+  subCommentCount: number;
   constructor() {
     this.id=null;
     this.idAuthor="";
@@ -21,5 +22,6 @@ export class Comment {
     this.liked = false;
     this.likeCount = 0;
     this.idParentComment="";
+    this.subCommentCount=0;
   }
 }

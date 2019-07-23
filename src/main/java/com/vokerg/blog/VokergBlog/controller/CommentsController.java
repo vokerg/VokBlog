@@ -20,10 +20,10 @@ public class CommentsController {
     LikeService likeService;
 
     @GetMapping("")
-    public ResponseEntity<List<CommentFull>> getComments(@RequestParam(required = false) String parentId) {
-        return (parentId == null)
+    public ResponseEntity<List<CommentFull>> getComments(@RequestParam(required = false) String idParentComment) {
+        return (idParentComment == null)
                 ? ResponseEntity.ok(commentService.getTopFullComments())
-                : ResponseEntity.ok(commentService.getCommentsByParentId(parentId));
+                : ResponseEntity.ok(commentService.getCommentsByParentId(idParentComment));
     }
 
     @PutMapping("/{id}/like")

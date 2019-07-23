@@ -28,7 +28,7 @@ import {
   LoadLatestCommentsAction,
   LoadLatestCommentsCompletedAction,
   LoadTopAuthorsAction,
-  LoadTopAuthorsCompletedAction, LoadAuthorArticlesAction,
+  LoadTopAuthorsCompletedAction, LoadAuthorArticlesAction, LoadSubCommentsAction, LoadSubCommentsCompletedAction,
 } from "../actions";
 import {catchError, map, mergeMap} from "rxjs/operators";
 import {Action} from "@ngrx/store";
@@ -130,6 +130,18 @@ export class ArticlesEffects {
          )
        )
      );
+
+  @Effect()
+  loadSubComments$: Observable<Action> =
+    this.actions$.pipe(
+      ofType<LoadSubCommentsAction>("LOAD_SUBCOMMENTS"),
+      mergeMap(({parentCommentId}) =>
+        this.commentsService.getCommentsForParentComment(parentCommentId).pipe(
+          map(comments => new LoadSubCommentsCompletedAction(parentCommentId, comments)),
+          catchError(err => Observable.of(new FailedCallingApi(err)))
+        )
+      )
+    );
 
    @Effect()
    loadAuthors$: Observable<Action> =

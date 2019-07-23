@@ -19,7 +19,7 @@ import static org.springframework.data.mongodb.core.aggregation.ComparisonOperat
 public class CommentService {
 
     public static final String[] COMMENT_FIELDS = {"idAuthor", "authorName", "idArticle", "text", "title", "idParentComment"};
-    public static final String[] COMMENT_FIELDS1 = {"idAuthor", "authorName", "idArticle", "text", "title", "idParentComment", "article", "likeCount"};
+    public static final String[] COMMENT_FIELDS1 = {"idAuthor", "authorName", "idArticle", "text", "title", "idParentComment", "subCommentCount", "article", "likeCount"};
     @Autowired
     AuthorRepository authorRepository;
 
@@ -46,8 +46,14 @@ public class CommentService {
                 .foreignField("commentId")
                 .as("likes");
 
+        LookupOperation lookupOperationSubComments = LookupOperation.newLookup()
+                .from("comments")
+                .localField("newid")
+                .foreignField("idParentComment")
+                .as("subComments");
 
         ProjectionOperation projectLikesAndArticle = project(COMMENT_FIELDS)
+                .and("subComments").size().as("subCommentCount")
                 .and("articles").arrayElementAt(0).as("article")
                 .and("likes")
                 .filter("item", valueOf("item.authorId").equalToValue(currentUserId))
@@ -61,6 +67,7 @@ public class CommentService {
                         limit(queryLimit != null ? queryLimit : Long.MAX_VALUE),
                         skip(querySkip != null ? querySkip : 0),
                         projectPreProcessing,
+                        lookupOperationSubComments,
                         lookupOperationArticle,
                         lookupOperationLikes,
                         projectLikesAndArticle,
@@ -97,8 +104,8 @@ public class CommentService {
         return (comments.size() > 0) ? comments.get(0) : null;
     }
 
-    public List<CommentFull> getCommentsByParentId(String parentId) {
+    public List<CommentFull> getCommentsByParentId(String idParentComment) {
         return getLatestFullComments(Criteria.where("_id").ne(null)
-                .and("parentCommentId").is(parentId), null, null);
+                .and("idParentComment").is(idParentComment), null, null);
     }
 }

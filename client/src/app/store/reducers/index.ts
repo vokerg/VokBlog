@@ -60,7 +60,6 @@ export const getActiveUser = createSelector(
   fromActiveUser.getActiveUser
 );
 
-
 const currentArticleFeatureSelector = createFeatureSelector<fromCurrentArticle.State>('currentArticle');
 export const getCurrentArticle = createSelector(
   currentArticleFeatureSelector,
@@ -94,4 +93,11 @@ const filteredAuthorsFeatureSelector =
 export const getMainPageAuthors = createSelector(
   filteredAuthorsFeatureSelector,
   fromFilteredAuthors.getMainPageAuthors
+);
+
+const subCommentsFeatureSelector = createFeatureSelector<Object>('subComments');
+
+export const getSubCommentsByCommentId = createSelector(
+  subCommentsFeatureSelector,
+  fromSubComments.getSubCommentsByCommentId
 );

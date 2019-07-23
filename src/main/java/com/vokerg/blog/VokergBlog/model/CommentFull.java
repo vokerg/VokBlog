@@ -33,9 +33,17 @@ public class CommentFull extends Comment{
         this.likeCount = likeCount;
     }
 
+    public Integer getSubCommentCount() {
+        return subCommentCount;
+    }
+
+    public void setSubCommentCount(Integer subCommentCount) {
+        this.subCommentCount = subCommentCount;
+    }
 
     private Article article;
     private Author author;
     private Boolean liked;
     private Integer likeCount;
+    private Integer subCommentCount;
 }
