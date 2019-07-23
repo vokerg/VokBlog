@@ -18,7 +18,7 @@ import static org.springframework.data.mongodb.core.aggregation.ComparisonOperat
 @Service
 public class ArticleService {
     public static final String[] ARTICLE_FIELDS = {"title", "subject", "content", "idAuthor", "author", "tags"};
-    public static final String[] ARTICLE_FIELDS1 = {"title", "subject", "content", "idAuthor", "author", "tags", "likeCount"};
+    public static final String[] ARTICLE_FIELDS1 = {"title", "subject", "content", "idAuthor", "author", "tags", "likeCount", "commentsCount"};
     @Autowired
     ArticleRepository articleRepository;
 
@@ -47,16 +47,23 @@ public class ArticleService {
         String currentUserId =  SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
 
         LookupOperation lookupOperationLikes = LookupOperation.newLookup()
-                .from("like")
+                .from("likes")
                 .localField("newid")
-                .foreignField("articleId")
+                .foreignField("idArticle")
                 .as("likes");
 
-        ProjectionOperation projectLikes = project(ARTICLE_FIELDS)
+        LookupOperation lookupOperationComments = LookupOperation.newLookup()
+                .from("comments")
+                .localField("newid")
+                .foreignField("idArticle")
+                .as("comments");
+
+        ProjectionOperation projectLikesAndComments = project(ARTICLE_FIELDS)
                 .and("likes")
                 .filter("item", valueOf("item.authorId").equalToValue(currentUserId))
                 .as("liked")
-                .and("likes").size().as("likeCount");
+                .and("likes").size().as("likeCount")
+                .and("comments").size().as("commentsCount");
 
         ProjectionOperation projectStringId = project(ARTICLE_FIELDS)
                 .and(ConvertOperators.valueOf("_id").convertToString()).as("newid");
@@ -66,7 +73,8 @@ public class ArticleService {
                         sort(new Sort(Sort.Direction.DESC, "_id")),
                         projectStringId,
                         lookupOperationLikes,
-                        projectLikes,
+                        lookupOperationComments,
+                        projectLikesAndComments,
                         project(ARTICLE_FIELDS1).and("liked").size(),
                         project(ARTICLE_FIELDS1).and("liked").gt(0)
                 );

@@ -8,6 +8,7 @@ export class Article {
   liked: boolean;
   tags: string[];
   likeCount: number;
+  commentsCount: number;
   constructor() {
     this.id = null;
     this.title = "";
@@ -17,5 +18,6 @@ export class Article {
     this.liked = false;
     this.tags = [];
     this.likeCount = 0;
+    this.commentsCount = 0;
   }
 }

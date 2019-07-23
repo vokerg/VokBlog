@@ -6,4 +6,5 @@ import lombok.Data;
 public class ArticleFull extends Article{
     private Boolean liked;
     private Integer likeCount;
+    private Integer commentsCount;
 }

@@ -13,35 +13,37 @@ public class LikeService {
     @Autowired
     LikeRepository likeRepository;
 
-    public Like setLikeToArticle(String articleId, String authorId) {
-        List<Like> likes = likeRepository.getByArticleIdAndAuthorId(articleId, authorId);
+    public Like setLikeToArticle(String idArticle, String idAuthor) {
+        List<Like> likes = likeRepository.getByIdArticleAndIdAuthor(idArticle, idAuthor);
         if (likes.size() > 0) {
             return likes.get(0);
         }
-        Like like = new Like();
-        like.setArticleId(articleId);
-        like.setAuthorId(authorId);
+        Like like = Like.builder()
+                .idArticle(idArticle)
+                .idAuthor(idAuthor)
+                .build();
         likeRepository.save(like);
         return like;
     }
 
-    public Like setLikeToComment(String commentId, String authorId) {
-        List<Like> likes = likeRepository.getByCommentIdAndAuthorId(commentId, authorId);
+    public Like setLikeToComment(String idComment, String idAuthor) {
+        List<Like> likes = likeRepository.getByIdCommentAndIdAuthor(idComment, idAuthor);
         if (likes.size() > 0) {
             return likes.get(0);
         }
-        Like like = new Like();
-        like.setCommentId(commentId);
-        like.setAuthorId(authorId);
+        Like like = Like.builder()
+                .idComment(idComment)
+                .idAuthor(idAuthor)
+                .build();
         likeRepository.save(like);
         return like;
     }
 
-    public void unlikeArticle(String articleId, String authorId) {
-        likeRepository.deleteAllByArticleIdAndAuthorId(articleId, authorId);
+    public void unlikeArticle(String idArticle, String idAuthor) {
+        likeRepository.deleteAllByIdArticleAndIdAuthor(idArticle, idAuthor);
     }
 
-    public void unlikeComment(String commentId, String authorId) {
-        likeRepository.deleteAllByCommentIdAndAuthorId(commentId, authorId);
+    public void unlikeComment(String idComment, String idAuthor) {
+        likeRepository.deleteAllByIdCommentAndIdAuthor(idComment, idAuthor);
     }
 }

@@ -41,9 +41,9 @@ public class CommentService {
                 .as("articles");
 
         LookupOperation lookupOperationLikes = LookupOperation.newLookup()
-                .from("like")
+                .from("likes")
                 .localField("newid")
-                .foreignField("commentId")
+                .foreignField("idComment")
                 .as("likes");
 
         LookupOperation lookupOperationSubComments = LookupOperation.newLookup()
@@ -87,10 +87,10 @@ public class CommentService {
         return getLatestFullComments(Criteria.where("_id").ne(null), Long.valueOf(10), null);
     }
 
-    public List<CommentFull> getCommentByArticleId(String articleId) {
+    public List<CommentFull> getCommentByIdArticle(String idArticle) {
         return getLatestFullComments(
                 new Criteria().andOperator(
-                        Criteria.where("idArticle").is(articleId),
+                        Criteria.where("idArticle").is(idArticle),
                         new Criteria().orOperator(
                                 Criteria.where("idParentComment").is(""),
                                 Criteria.where("idParentComment").is(null)
