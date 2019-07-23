@@ -1,7 +1,6 @@
 package com.vokerg.blog.VokergBlog.configuration;
 
 import com.vokerg.blog.VokergBlog.model.AuthenticatedUser;
-import com.vokerg.blog.VokergBlog.model.AuthenticatedUserBuilder;
 import com.vokerg.blog.VokergBlog.model.Author;
 import com.vokerg.blog.VokergBlog.service.AuthenticationService;
 import com.vokerg.blog.VokergBlog.service.JwtUserService;
@@ -46,11 +45,12 @@ public class AuthenticationConfiguration extends WebSecurityConfigurerAdapter {
 
             String jwtToken = jwtUserService.generateJwtToken(username, author.getId());
 
-            AuthenticatedUser user = new AuthenticatedUserBuilder()
-                    .setUserId(author.getId())
-                    .setUsername(username)
-                    .setToken(jwtToken)
-                    .createAuthenticatedUser();
+
+            AuthenticatedUser user = AuthenticatedUser.builder()
+                    .userId(author.getId())
+                    .username(username)
+                    .token(jwtToken)
+                    .build();
 
             return new UsernamePasswordAuthenticationToken(user, null, null);
         };

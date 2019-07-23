@@ -31,14 +31,13 @@ public class AuthorService {
         Integer articlesCount = articleRepository.countByIdAuthor(author.getId());
         Integer commentsCount = commentRepository.countByIdAuthor(author.getId());
 
-        AggregatedAuthor aggregatedAuthor = new AggregatedAuthor();
-        aggregatedAuthor.setId(author.getId());
-        aggregatedAuthor.setName(author.getName());
-        aggregatedAuthor.setUsername(author.getUsername());
-        aggregatedAuthor.setArticlesCount(articlesCount);
-        aggregatedAuthor.setCommentsCount(commentsCount);
-
-        return aggregatedAuthor;
+        return AggregatedAuthor.builder()
+                .id(author.getId())
+                .name(author.getName())
+                .username(author.getUsername())
+                .articlesCount(articlesCount)
+                .commentsCount(commentsCount)
+                .build();
     }
 
     public AggregatedAuthor getAggregatedAuthorData(String id) {
