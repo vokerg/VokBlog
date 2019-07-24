@@ -151,10 +151,10 @@ export class FailedCallingApi implements Action {
 
 export class LoadSubCommentsAction implements Action {
   type = "LOAD_SUBCOMMENTS";
-  constructor(public parentCommentId: string) {}
+  constructor(public idParentComment: string) {}
 }
 
 export class LoadSubCommentsCompletedAction implements Action {
   type = "LOAD_SUBCOMMENTS_COMPLETED";
-  constructor(public parentCommentId: string, public comments: Comment[]) {}
+  constructor(public idParentComment: string, public comments: Comment[]) {}
 }

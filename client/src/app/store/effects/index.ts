@@ -135,9 +135,9 @@ export class ArticlesEffects {
   loadSubComments$: Observable<Action> =
     this.actions$.pipe(
       ofType<LoadSubCommentsAction>("LOAD_SUBCOMMENTS"),
-      mergeMap(({parentCommentId}) =>
-        this.commentsService.getCommentsForParentComment(parentCommentId).pipe(
-          map(comments => new LoadSubCommentsCompletedAction(parentCommentId, comments)),
+      mergeMap(({idParentComment}) =>
+        this.commentsService.getCommentsForParentComment(idParentComment).pipe(
+          map(comments => new LoadSubCommentsCompletedAction(idParentComment, comments)),
           catchError(err => Observable.of(new FailedCallingApi(err)))
         )
       )

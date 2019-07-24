@@ -15,7 +15,13 @@ export function reducer(state:State={
       return {article: action.article, comments: action.comments};
     }
     case "ADD_COMMENT_COMPLETED": {
-      return {...state, comments: [...state.comments, action.comment]}
+      return action.comment.idParentComment === null
+        ? {...state, comments: [...state.comments, action.comment]}
+        : {...state, comments: state.comments.map(
+            comment => comment.id !== action.comment.idParentComment
+                        ? comment
+                        : {...comment, subCommentCount: ++comment.subCommentCount}
+          )}
     }
     case "ADD_ARTICLE_COMPLETED": case "UPDATE_ARTICLE_COMPLETED": {
       return {...state, article: action.article}

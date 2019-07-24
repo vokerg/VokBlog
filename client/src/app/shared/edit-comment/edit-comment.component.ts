@@ -15,7 +15,7 @@ import {AddComment} from "../../store/actions/index";
 export class EditCommentComponent implements OnInit {
 
   @Input() articleId: string;
-  @Input() parentCommentId: string = null;
+  @Input() idParentComment: string = null;
 
   isEdit: boolean;
   comment: Comment;
@@ -35,9 +35,11 @@ export class EditCommentComponent implements OnInit {
 
   toggleEditForm() {
     this.isEdit = !this.isEdit;
-    this.comment = new Comment();
-    this.comment.idArticle = this.articleId;
-    this.comment.idParentComment = this.parentCommentId;
+    if (this.isEdit) {
+      this.comment = new Comment();
+      this.comment.idArticle = this.articleId;
+      this.comment.idParentComment = this.idParentComment;
+    }
   }
 
   constructor(
@@ -49,7 +51,7 @@ export class EditCommentComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.buttonText = this.parentCommentId === null ? "Comment" : "Reply";
+    this.buttonText = this.idParentComment === null ? "Comment" : "Reply";
   }
 
 }

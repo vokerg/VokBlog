@@ -7,7 +7,7 @@
       <div *ngIf="activeUser$ | async  as activeUser">
         <ng-container *ngIf="!activeUser.userId">
           author:
-          <input [(ngModel)]="comment.author" name="text">
+          <input [(ngModel)]="comment.authorName" name="text">
         </ng-container>
       </div>
       title:
@@ -15,6 +15,7 @@
       text:
       <input [(ngModel)]="comment.text" name="text">
       <button type="submit">Submit</button>
+      <button (click)="toggleEditForm()">Cancel</button>
     </form>
   </div>
 </div>

@@ -12,6 +12,13 @@ const commentsReducerMaker = filter =>
     comments: []
   }, action):FilteredCommentsState => {
     switch (action.type) {
+      case "ADD_COMMENT_COMPLETED": {
+        return {...state, comments: [action.comment, ...state.comments.map(
+            comment => comment.id !== action.comment.idParentComment
+              ? comment
+              : {...comment, subCommentCount: ++comment.subCommentCount}
+          )]}
+      }
       case 'LOAD_LATEST_COMMENTS_COMPLETED':
         return (filter === action.filter) ? {...state, comments: action.comments} : state; break;
       case 'LIKE_COMMENT_COMPLETED': {
