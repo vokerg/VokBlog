@@ -158,3 +158,13 @@ export class LoadSubCommentsCompletedAction implements Action {
   type = "LOAD_SUBCOMMENTS_COMPLETED";
   constructor(public idParentComment: string, public comments: Comment[]) {}
 }
+
+export class LoadArticleCommentsAction implements Action {
+  type = "LOAD_ARTICLE_COMMENTS";
+  constructor(public idArticle: string) {}
+}
+
+export class LoadArticleCommentsCompletedAction implements Action {
+  type = "LOAD_ARTICLE_COMMENTS_COMPLETED";
+  constructor(public idArticle: string, public comments: Comment[]) {};
+}

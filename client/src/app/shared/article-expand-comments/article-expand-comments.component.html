@@ -1,0 +1,7 @@
+<div *ngIf="article.commentsCount>0">
+  <button *ngIf="!expanded" (click)="expandComments()">{{article.commentsCount}} Comments</button>
+  <button *ngIf="expanded" (click)="collapseComments()">Close</button>
+  <div class="exp" *ngIf="expanded">
+    <app-comments [comments]="comments" [forArticle]="true"></app-comments>
+  </div>
+</div>

@@ -9,6 +9,7 @@ import {ArticleFullPreviewComponent} from "./article-full-preview/article-full-p
 import { ExpandCommentsComponent } from './expand-comments/expand-comments.component';
 import {EditCommentComponent} from "./edit-comment/edit-comment.component";
 import {FormsModule} from "@angular/forms";
+import { ArticleExpandCommentsComponent } from './article-expand-comments/article-expand-comments.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import {FormsModule} from "@angular/forms";
     ArticleFullPreviewComponent,
     LikeComponent,
     ExpandCommentsComponent,
-    EditCommentComponent
+    EditCommentComponent,
+    ArticleExpandCommentsComponent
   ],
   imports: [
     CommonModule,

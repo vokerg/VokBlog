@@ -6,6 +6,7 @@ import * as fromFilteredArticles from "./filteredArticles";
 import * as fromFilteredComments from "./filteredComments";
 import * as fromFilteredAuthors from "./filteredAuthors";
 import * as fromSubComments from "./subComments";
+import * as fromArticleComments from "./articleComments";
 import {localStorageSync} from "ngrx-store-localstorage";
 
 export interface State {
@@ -14,7 +15,8 @@ export interface State {
   filteredArticles: fromFilteredArticles.State,
   filteredComments: fromFilteredComments.State
   filteredAuthors: fromFilteredAuthors.State
-  subComments: Object
+  subComments: Object,
+  articleComments: Object
 }
 
 export const reducers: ActionReducerMap<State> = {
@@ -23,7 +25,8 @@ export const reducers: ActionReducerMap<State> = {
   filteredArticles: fromFilteredArticles.reducer,
   filteredComments: fromFilteredComments.reducer,
   filteredAuthors: fromFilteredAuthors.reducer,
-  subComments: fromSubComments.reducer
+  subComments: fromSubComments.reducer,
+  articleComments: fromArticleComments.reducer
 };
 
 export function logger(reducer: ActionReducer<State>): any {
@@ -96,8 +99,14 @@ export const getMainPageAuthors = createSelector(
 );
 
 const subCommentsFeatureSelector = createFeatureSelector<Object>('subComments');
-
 export const getSubCommentsByCommentId = createSelector(
   subCommentsFeatureSelector,
   fromSubComments.getSubCommentsByCommentId
+);
+
+const articleCommentsFeatureSelected =
+  createFeatureSelector<Object>('articleComments');
+export const getCommentsByArticleId = createSelector(
+  articleCommentsFeatureSelected,
+  fromArticleComments.getCommentsByArticleId
 );
