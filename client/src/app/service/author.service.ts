@@ -5,6 +5,7 @@ import {Store} from "@ngrx/store";
 import * as fromRoot from "../store/reducers";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {map, mergeAll} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -24,5 +25,14 @@ export class AuthorService extends ApiService{
 
   getTopAuthors(): Observable<Author[]> {
     return this.http.get<Author[]>('api/authors');
+  }
+
+  followAuthor(idAuthorFollowed: string, idAuthorFollower: string) {
+    return this.getRequestOptions().pipe(
+      map((requestOptions) =>
+        this.http.put<any>(`api/authors/${idAuthorFollower}/follows/${idAuthorFollowed}`, {}, requestOptions)
+      ),
+      mergeAll()
+    )
   }
 }

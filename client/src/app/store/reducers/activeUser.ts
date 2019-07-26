@@ -30,6 +30,8 @@ export function reducer(state:State={
 
 export const getActiveUsername = (state:State) => state.username;
 
+export const getActiveUserId = (state:State) => state.userId;
+
 export const getToken = (state:State) => state.token;
 
 export const isAuthenticated = (state:State) => state.userId !== "";

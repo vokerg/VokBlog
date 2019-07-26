@@ -63,6 +63,11 @@ export const getActiveUser = createSelector(
   fromActiveUser.getActiveUser
 );
 
+export const getActiveUserId = createSelector(
+  activeUserStateFeatureSelector,
+  fromActiveUser.getActiveUserId
+);
+
 const currentArticleFeatureSelector = createFeatureSelector<fromCurrentArticle.State>('currentArticle');
 export const getCurrentArticle = createSelector(
   currentArticleFeatureSelector,

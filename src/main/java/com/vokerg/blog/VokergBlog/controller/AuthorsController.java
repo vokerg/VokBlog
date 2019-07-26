@@ -3,11 +3,14 @@ package com.vokerg.blog.VokergBlog.controller;
 import com.vokerg.blog.VokergBlog.model.AggregatedAuthor;
 import com.vokerg.blog.VokergBlog.model.ArticleFull;
 import com.vokerg.blog.VokergBlog.model.CommentFull;
+import com.vokerg.blog.VokergBlog.model.Follow;
 import com.vokerg.blog.VokergBlog.service.AuthorService;
 import com.vokerg.blog.VokergBlog.service.ArticleService;
 import com.vokerg.blog.VokergBlog.service.CommentService;
+import com.vokerg.blog.VokergBlog.service.FollowService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +27,9 @@ public class AuthorsController {
 
     @Autowired
     CommentService commentService;
+
+    @Autowired
+    FollowService followService;
 
     @GetMapping("")
     public ResponseEntity<List<AggregatedAuthor>> getTopAuthors() {
@@ -43,5 +49,24 @@ public class AuthorsController {
     @GetMapping("/{idAuthor}/aggregated")
     public ResponseEntity<AggregatedAuthor> getAuthorsAggregation(@PathVariable String idAuthor) {
         return ResponseEntity.ok(authorService.getAggregatedAuthorData(idAuthor));
+    }
+
+    @PutMapping("/{idAuthor}/follows/{idAuthorFollowed}")
+    public ResponseEntity<Follow> followAuthor(@PathVariable String idAuthor, @PathVariable String idAuthorFollowed) {
+        String userId =  SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        if ((userId != null) && userId.equals(idAuthor)) {
+            return ResponseEntity.ok(followService.followAuthor(idAuthorFollowed, idAuthor));
+        }
+        return ResponseEntity.badRequest().body(null);
+    }
+
+    @DeleteMapping("/{idAuthor}/follows/{idAuthorFollowed}")
+    public ResponseEntity unfollowAuthor(@PathVariable String idAuthor, @PathVariable String idAuthorFollowed) {
+        String userId =  SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        if ((userId != null) && userId.equals(idAuthor)) {
+            followService.unfollowAuthor(idAuthorFollowed, idAuthor);
+            return ResponseEntity.ok(null);
+        }
+        return ResponseEntity.badRequest().body(null);
     }
 }

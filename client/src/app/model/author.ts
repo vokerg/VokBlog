@@ -1,11 +1,11 @@
 export class Author {
-  id: number;
+  id: string;
   name: string;
   username: string;
   articlesCount: number;
   commentsCount: number;
   constructor() {
-    this.id = 0;
+    this.id = '';
     this.name = '';
     this.articlesCount = 0;
     this.commentsCount = 0;

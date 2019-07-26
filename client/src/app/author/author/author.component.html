@@ -1,11 +1,12 @@
-<p>
+<div>
   Author: {{author.name}}<br>
   Username: {{author.username}}<br>
   Posts: {{author.articlesCount}}<br>
   Comments: {{author.commentsCount}}<br>
+  <button *ngIf="activeUserId$ | async" (click)="followAuthor()">Follow</button>
   <br>
   Latest articles:<br>
   <app-article-preview *ngFor="let article of articles" [article]="article"></app-article-preview>
   Latest comments:<br>
   <app-comments [comments]="comments" [forAuthor]="true"></app-comments>
-</p>
+</div>
