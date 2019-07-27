@@ -11,4 +11,5 @@ public class AggregatedAuthor {
     private String name;
     private Integer articlesCount;
     private Integer commentsCount;
+    private Integer followersCount;
 }

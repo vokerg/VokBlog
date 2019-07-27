@@ -3,6 +3,7 @@
   Username: {{author.username}}<br>
   Posts: {{author.articlesCount}}<br>
   Comments: {{author.commentsCount}}<br>
+  Followers: {{author.followersCount}} <br>
   <button *ngIf="activeUserId$ | async" (click)="followAuthor()">Follow</button>
   <br>
   Latest articles:<br>

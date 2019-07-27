@@ -5,6 +5,7 @@ import com.vokerg.blog.VokergBlog.model.Author;
 import com.vokerg.blog.VokergBlog.repository.ArticleRepository;
 import com.vokerg.blog.VokergBlog.repository.AuthorRepository;
 import com.vokerg.blog.VokergBlog.repository.CommentRepository;
+import com.vokerg.blog.VokergBlog.repository.FollowRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,9 @@ public class AuthorService {
     @Autowired
     CommentRepository commentRepository;
 
+    @Autowired
+    FollowRepository followRepository;
+
     public List<AggregatedAuthor> getAggregatedAuthors() {
         return authorRepository.findAll().stream().map(author -> mapAuthor(author)).collect(Collectors.toList());
     }
@@ -30,6 +34,7 @@ public class AuthorService {
     private AggregatedAuthor mapAuthor(Author author) {
         Integer articlesCount = articleRepository.countByIdAuthor(author.getId());
         Integer commentsCount = commentRepository.countByIdAuthor(author.getId());
+        Integer followersCount = followRepository.countByIdAuthorFollowed(author.getId());
 
         return AggregatedAuthor.builder()
                 .id(author.getId())
@@ -37,6 +42,7 @@ public class AuthorService {
                 .username(author.getUsername())
                 .articlesCount(articlesCount)
                 .commentsCount(commentsCount)
+                .followersCount(followersCount)
                 .build();
     }
 
