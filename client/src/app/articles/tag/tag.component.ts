@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router'
-import { Article } from '../model/article';
-import {ArticlesService} from "../service/articles.service";
+import { Article } from '../../model/article';
 import {Store} from "@ngrx/store";
-import * as fromRoot from "../store/reducers";
-import {LoadArticlesAction} from "../store/actions";
+import * as fromRoot from "../../store/reducers/index";
+import {LoadArticlesAction} from "../../store/actions/index";
 
 @Component({
   selector: 'app-tag',
@@ -14,7 +13,6 @@ import {LoadArticlesAction} from "../store/actions";
 export class TagComponent implements OnInit {
 
   constructor(
-    private articleService: ArticlesService,
     private route: ActivatedRoute,
     private store: Store<fromRoot.State>,
   ) {

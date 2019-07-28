@@ -54,6 +54,17 @@ export class LoadArticlesCompletedAction {
   constructor(public articles: Article[], public filter:string) {}
 }
 
+export class LoadArticlesByIdAuthorAction implements Action {
+  type = "LOAD_ARTICLES_BY_ID_AUTHOR";
+  constructor(public idAuthor: string){};
+}
+
+export class LoadArticlesByIdAuthorCompletedAction implements Action {
+  type = "LOAD_ARTICLES_BY_ID_AUTHOR_COMPLETED";
+  constructor(public idAuthor: string, public articles: Article[]){};
+}
+
+
 export class LoadLatestCommentsAction {
   type = "LOAD_LATEST_COMMENTS";
   constructor() {}

@@ -13,7 +13,7 @@ import { AuthorModule } from './author/author.module';
 import { AuthorComponent } from './author/author/author.component';
 
 import { SharedModule } from './shared/shared.module';
-import { TagComponent } from './tag/tag.component';
+import { TagComponent } from './articles/tag/tag.component';
 import { LoginComponent } from './login/login.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { StoreModule } from "@ngrx/store";
@@ -24,12 +24,13 @@ import { SignupComponent } from './signup/signup.component';
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {MainPageModule} from "./main-page/main-page.module";
 import {MainPageComponent} from "./main-page/main-page.component";
+import {SelfArticlesComponent} from "./articles/self-articles/self-articles.component";
+import {ArticlesModule} from "./articles/articles.module";
 
 @NgModule({
   declarations: [
     AppComponent,
     EditArticleComponent,
-    TagComponent,
     LoginComponent,
     NavigationComponent,
     SignupComponent
@@ -39,11 +40,13 @@ import {MainPageComponent} from "./main-page/main-page.component";
     HttpClientModule,
     FlexLayoutModule,
     FormsModule,
+    ArticlesModule,
     RouterModule.forRoot([
       {path: '', component: MainPageComponent},
       {path: 'articles/new', component: EditArticleComponent},
       {path: 'articles/:id', component: ArticleComponent},
       {path: 'articles/:id/edit', component: EditArticleComponent},
+      {path: 'self-articles', component: SelfArticlesComponent},
       {path: 'authors/:id', component: AuthorComponent},
       {path: 'tags/:tag', component: TagComponent},
       {path: 'login', component: LoginComponent},
