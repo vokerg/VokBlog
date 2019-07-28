@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Article } from '../../model/article';
-import { LoadArticlesAction} from "../../store/actions";
+import { LoadArticlesAction} from "../../store/actions/index";
 import {Store} from "@ngrx/store";
-import * as fromRoot from "../../store/reducers";
+import * as fromRoot from "../../store/reducers/index";
 
 @Component({
-  selector: 'app-articles',
-  templateUrl: './articles.component.html',
-  styleUrls: ['./articles.component.css']
+  selector: 'main-page-articles',
+  templateUrl: './main-page-articles.component.html',
+  styleUrls: ['./main-page-articles.component.css']
 })
-export class ArticlesComponent implements OnInit {
+export class MainPageArticlesComponent implements OnInit {
 
   articles: Article[];
 
