@@ -2,6 +2,7 @@ package com.vokerg.blog.VokergBlog.service;
 
 import com.vokerg.blog.VokergBlog.model.ArticleFull;
 import com.vokerg.blog.VokergBlog.repository.ArticleRepository;
+import com.vokerg.blog.VokergBlog.repository.FollowRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -11,6 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.*;
 import static org.springframework.data.mongodb.core.aggregation.ComparisonOperators.Eq.valueOf;
@@ -24,6 +26,9 @@ public class ArticleService {
 
     @Autowired
     MongoTemplate mongoTemplate;
+
+    @Autowired
+    FollowRepository followRepository;
 
     public ArticleFull getAggregatedArticle(String id) {
         List<ArticleFull> list =  getAggregatedArticles(Criteria.where("_id").is(id));
@@ -81,6 +86,13 @@ public class ArticleService {
 
         AggregationResults<ArticleFull> results = mongoTemplate.aggregate(aggregation, "articles", ArticleFull.class);
         return results.getMappedResults();
+    }
 
+    public List<ArticleFull> getAggregatedArticlesForUserFeed(String userId) {
+        List<String> followedAuthors = followRepository
+                .findByIdAuthorFollower(userId).stream()
+                .map(follow -> follow.getIdAuthorFollowed())
+                .collect(Collectors.toList());
+        return getAggregatedArticles(Criteria.where("idAuthor").in(followedAuthors));
     }
 }

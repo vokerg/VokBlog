@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface FollowRepository extends MongoRepository<Follow, String> {
     List<Follow> findByIdAuthorFollowedAndIdAuthorFollower(String idAuthorFollowed, String idAuthorFollower);
+    List<Follow> findByIdAuthorFollower(String idAuthorFollower);
     Integer countByIdAuthorFollowed(String idAuthorFollowed);
     void deleteAllByIdAuthorFollowedAndIdAuthorFollower(String idAuthorFollowed, String idAuthorFollower);
 }

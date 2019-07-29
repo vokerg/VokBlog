@@ -36,9 +36,16 @@ public class ArticleController {
     CommentService commentService;
 
     @GetMapping("")
-    public ResponseEntity<List<ArticleFull>> getSomeResponse(@RequestParam(required = false) String tag) {
+    public ResponseEntity<List<ArticleFull>> getSomeResponse(
+            @RequestParam(required = false) String tag,
+            @RequestParam(required = false) Boolean isFeed
+    ) {
         if (tag != null) {
             return ResponseEntity.ok(articleService.getAggregatedArticlesForTag(tag));
+        }
+        if (isFeed != null && isFeed) {
+            String userId =  SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+            return ResponseEntity.ok(articleService.getAggregatedArticlesForUserFeed(userId));
         }
         return ResponseEntity.ok(articleService.getAggregatedArticles());
     }

@@ -26,6 +26,7 @@ import {MainPageModule} from "./main-page/main-page.module";
 import {MainPageComponent} from "./main-page/main-page.component";
 import {SelfArticlesComponent} from "./articles/self-articles/self-articles.component";
 import {ArticlesModule} from "./articles/articles.module";
+import {FeedArticlesComponent} from "./articles/feed-articles/feed-articles.component";
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import {ArticlesModule} from "./articles/articles.module";
       {path: 'articles/:id', component: ArticleComponent},
       {path: 'articles/:id/edit', component: EditArticleComponent},
       {path: 'self-articles', component: SelfArticlesComponent},
+      {path: 'feed-articles', component: FeedArticlesComponent},
       {path: 'authors/:id', component: AuthorComponent},
       {path: 'tags/:tag', component: TagComponent},
       {path: 'login', component: LoginComponent},
