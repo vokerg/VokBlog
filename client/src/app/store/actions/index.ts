@@ -54,6 +54,11 @@ export class LoadArticlesCompletedAction {
   constructor(public articles: Article[], public filter:string) {}
 }
 
+export class LoadFeedArticlesAction {
+  type = 'LOAD_FEED_ARTICLES';
+  constructor(){}
+}
+
 export class LoadArticlesByIdAuthorAction implements Action {
   type = "LOAD_ARTICLES_BY_ID_AUTHOR";
   constructor(public idAuthor: string){};

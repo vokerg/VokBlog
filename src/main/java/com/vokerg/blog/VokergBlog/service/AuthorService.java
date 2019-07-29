@@ -7,6 +7,7 @@ import com.vokerg.blog.VokergBlog.repository.AuthorRepository;
 import com.vokerg.blog.VokergBlog.repository.CommentRepository;
 import com.vokerg.blog.VokergBlog.repository.FollowRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,9 +33,13 @@ public class AuthorService {
     }
 
     private AggregatedAuthor mapAuthor(Author author) {
+
+        String currentUserId =  SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+
         Integer articlesCount = articleRepository.countByIdAuthor(author.getId());
         Integer commentsCount = commentRepository.countByIdAuthor(author.getId());
         Integer followersCount = followRepository.countByIdAuthorFollowed(author.getId());
+        Boolean followedByCurrentUser = followRepository.findByIdAuthorFollowedAndIdAuthorFollower(author.getId(), currentUserId).size() > 0;
 
         return AggregatedAuthor.builder()
                 .id(author.getId())
@@ -43,6 +48,7 @@ public class AuthorService {
                 .articlesCount(articlesCount)
                 .commentsCount(commentsCount)
                 .followersCount(followersCount)
+                .followedByCurrentUser(followedByCurrentUser)
                 .build();
     }
 

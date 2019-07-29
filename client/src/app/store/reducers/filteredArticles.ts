@@ -36,12 +36,14 @@ export interface State {
   mainPageArticles: FilteredArticlesState,
   tagArticles: FilteredArticlesState,
   authorArticles: FilteredArticlesState,
+  feedArticles: FilteredArticlesState,
 }
 
 export const reducers = {
   mainPageArticles: articleReducerMaker("All"),
   tagArticles: articleReducerMaker("Tag"),
-  authorArticles: articleReducerMaker("Author")
+  authorArticles: articleReducerMaker("Author"),
+  feedArticles: articleReducerMaker("Feed"),
 };
 
 export const reducer: ActionReducer<State> = combineReducers(reducers);
@@ -51,3 +53,5 @@ export const getMainPageArticles = (state:State) => state.mainPageArticles.artic
 export const getTagArticles = (state:State) => state.tagArticles.articles;
 
 export const getAuthorArticles = (state:State) => state.authorArticles.articles;
+
+export const getFeedArticles = (state:State) => state.feedArticles.articles;

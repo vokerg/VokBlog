@@ -44,6 +44,13 @@ export class ArticlesService extends ApiService{
     );
   }
 
+  getFeedArticles(): Observable<Article[]> {
+    return this.getRequestOptions().pipe(
+      map(requestOptions => this.http.get<Article[]>(`api/articles/?isFeed=true`, requestOptions)),
+      mergeAll()
+    );
+  }
+
   getArticle(articleId: string):Observable<Article> {
     return this.getRequestOptions().pipe(
       map(requestOptions => this.http.get<Article>(`api/articles/${articleId}`, requestOptions)),

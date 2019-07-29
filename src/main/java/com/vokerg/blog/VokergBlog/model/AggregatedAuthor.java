@@ -12,4 +12,5 @@ public class AggregatedAuthor {
     private Integer articlesCount;
     private Integer commentsCount;
     private Integer followersCount;
+    private Boolean followedByCurrentUser;
 }

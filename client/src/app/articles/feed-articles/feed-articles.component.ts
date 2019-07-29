@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {Store} from "@ngrx/store";
+import * as fromRoot from "../../store/reducers";
+import {Article} from "../../model/article";
+import {LoadFeedArticlesAction} from "../../store/actions";
 
 @Component({
   selector: 'app-feed-articles',
@@ -6,10 +10,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./feed-articles.component.css']
 })
 export class FeedArticlesComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
+  constructor(
+    private store: Store<fromRoot.State>,
+  ) {
+    store.select(fromRoot.getFeedArticles).subscribe(articles => this.articles = articles);
   }
 
+  articles: Article[];
+
+  ngOnInit() {
+    this.store.dispatch(new LoadFeedArticlesAction());
+  }
 }

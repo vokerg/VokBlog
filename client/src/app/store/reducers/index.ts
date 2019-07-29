@@ -91,6 +91,10 @@ export const getAuthorArticles = createSelector(
   filteredArticlesFeatureSelector,
   fromFilteredArticles.getAuthorArticles
 );
+export const getFeedArticles = createSelector(
+  filteredArticlesFeatureSelector,
+  fromFilteredArticles.getFeedArticles
+);
 
 const filteredCommentsFeatureSelector =
   createFeatureSelector<fromFilteredComments.State>('filteredComments');

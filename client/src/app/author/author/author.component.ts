@@ -40,7 +40,14 @@ export class AuthorComponent implements OnInit {
   followAuthor() {
     this.activeUserId$.subscribe(activeUserId => {
       this.authorService.followAuthor(this.author.id, activeUserId)
-        .subscribe(()=>{});
+        .subscribe(()=>this.author.followedByCurrentUser = true);
+    });
+  }
+
+  unfollowAuthor() {
+    this.activeUserId$.subscribe(activeUserId => {
+      this.authorService.unfollowAuthor(this.author.id, activeUserId)
+        .subscribe(()=>this.author.followedByCurrentUser = false);
     });
   }
 

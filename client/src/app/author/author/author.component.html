@@ -4,7 +4,10 @@
   Posts: {{author.articlesCount}}<br>
   Comments: {{author.commentsCount}}<br>
   Followers: {{author.followersCount}} <br>
-  <button *ngIf="activeUserId$ | async" (click)="followAuthor()">Follow</button>
+  <div *ngIf="activeUserId$ | async">
+    <button *ngIf="!author.followedByCurrentUser" (click)="followAuthor()">Follow</button>
+    <button *ngIf="author.followedByCurrentUser" (click)="unfollowAuthor()">Unfollow</button>
+  </div>
   <br>
   Latest articles:<br>
   <app-article-preview *ngFor="let article of articles" [article]="article"></app-article-preview>

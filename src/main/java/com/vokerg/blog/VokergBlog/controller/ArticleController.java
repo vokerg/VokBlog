@@ -36,7 +36,7 @@ public class ArticleController {
     CommentService commentService;
 
     @GetMapping("")
-    public ResponseEntity<List<ArticleFull>> getSomeResponse(
+    public ResponseEntity<List<ArticleFull>> getArticles(
             @RequestParam(required = false) String tag,
             @RequestParam(required = false) Boolean isFeed
     ) {

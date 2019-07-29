@@ -35,7 +35,7 @@ import {
   LoadArticleCommentsAction,
   LoadArticleCommentsCompletedAction,
   LoadArticlesByIdAuthorAction,
-  LoadArticlesByIdAuthorCompletedAction,
+  LoadArticlesByIdAuthorCompletedAction, LoadFeedArticlesAction,
 } from "../actions";
 import {catchError, map, mergeMap} from "rxjs/operators";
 import {Action} from "@ngrx/store";
@@ -121,6 +121,18 @@ export class ArticlesEffects {
       mergeMap(({authorId, tag}) =>
         this.articlesService.getArticlesByAuthorId(authorId).pipe(
           map(articles => new LoadArticlesCompletedAction(articles, 'Author')),
+          catchError(err => Observable.of(new FailedCallingApi(err)))
+        )
+      )
+    );
+
+  @Effect()
+  loadFeedArticles$: Observable<Action> =
+    this.actions$.pipe(
+      ofType<LoadFeedArticlesAction>("LOAD_FEED_ARTICLES"),
+      mergeMap(() =>
+        this.articlesService.getFeedArticles().pipe(
+          map(articles => new LoadArticlesCompletedAction(articles, 'Feed')),
           catchError(err => Observable.of(new FailedCallingApi(err)))
         )
       )
