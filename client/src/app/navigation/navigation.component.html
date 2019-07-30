@@ -1,24 +1,35 @@
 <div>
-  <div>
-    <a [routerLink]="['/']">Application</a>
-  </div>
-  <span *ngIf="username$ | async; let username">
-    login: {{username}}
-  </span>
-  <span *ngIf="isAuthenticated$ | async; else loggedOut">
-    <div>
-      <button (click)="logout()">Logout</button>
-    </div>
-    <div>
-      <a [routerLink]="['/feed-articles']">My feed</a> |
-      <a [routerLink]="['/self-articles']">My articles</a> |
-      <a [routerLink]="['/articles/new']">New article</a>
-    </div>
-  </span>
-  <ng-template #loggedOut>
-    <div>
-      <button (click)="signup()">Signup</button>
-      <button (click)="login()">Login</button>
-    </div>
-  </ng-template>
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span>
+        <span>
+          <a [routerLink]="['/']">Application</a>
+        </span>
+        <span *ngIf="isAuthenticated$ | async">
+          | <a [routerLink]="['/feed-articles']">My feed</a> |
+          <a [routerLink]="['/self-articles']">My articles</a> |
+          <a [routerLink]="['/followers']">Followers</a> |
+          <a [routerLink]="['/articles/new']">New article</a>
+        </span>
+      </span>
+      <span class="spacer"></span>
+      <span>
+        <span *ngIf="isAuthenticated$ | async; else loggedOut">
+          <span *ngIf="username$ | async; let username">
+            login: {{username}}
+          </span>
+          <button (click)="logout()">Logout</button>
+        </span>
+        <ng-template #loggedOut>
+          <div>
+            <button (click)="signup()">Signup</button>
+            <button (click)="login()">Login</button>
+          </div>
+        </ng-template>
+      </span>
+    </mat-toolbar-row>
+    <mat-toolbar-row>
+
+    </mat-toolbar-row>
+  </mat-toolbar>
 </div>

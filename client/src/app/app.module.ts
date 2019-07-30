@@ -27,6 +27,7 @@ import {MainPageComponent} from "./main-page/main-page.component";
 import {SelfArticlesComponent} from "./articles/self-articles/self-articles.component";
 import {ArticlesModule} from "./articles/articles.module";
 import {FeedArticlesComponent} from "./articles/feed-articles/feed-articles.component";
+import {MatToolbarModule} from "@angular/material";
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import {FeedArticlesComponent} from "./articles/feed-articles/feed-articles.comp
     SharedModule,
     MainPageModule,
     EffectsModule.forRoot([ArticlesEffects]),
-    StoreModule.forRoot(fromReducers.reducers, {metaReducers: fromReducers.metaReducers})
+    StoreModule.forRoot(fromReducers.reducers, {metaReducers: fromReducers.metaReducers}),
+    MatToolbarModule
   ],
   providers: [
     ArticlesService,
