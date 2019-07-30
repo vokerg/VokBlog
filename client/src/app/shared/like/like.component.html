@@ -1,14 +1,16 @@
-<div>
+<span *ngIf="!isCompact">
   <span *ngIf="article">Likes: {{article.likeCount}}</span>
   <span *ngIf="comment">Likes: {{comment.likeCount}}</span>
+</span>
+<span>
   <span *ngIf="activeUser$ | async; let activeUser">
     <span *ngIf="activeUser.userId && article">
-      <button *ngIf="!article.liked" (click)="likeArticle()">Like</button>
-      <button *ngIf="article.liked" (click)="unLikeArticle()">Unlike</button>
+      <button mat-button *ngIf="!article.liked" (click)="likeArticle()">Like</button>
+      <button mat-button *ngIf="article.liked" (click)="unLikeArticle()">Unlike</button>
     </span>
     <span *ngIf="activeUser.userId && comment">
-      <button *ngIf="!comment.liked" (click)="likeComment()">Like</button>
-      <button *ngIf="comment.liked" (click)="unLikeComment()">Unlike</button>
+      <button mat-button *ngIf="!comment.liked" (click)="likeComment()">Like</button>
+      <button mat-button *ngIf="comment.liked" (click)="unLikeComment()">Unlike</button>
     </span>
   </span>
-</div>
+</span>

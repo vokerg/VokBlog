@@ -1,21 +1,28 @@
 <div *ngIf="article">
-  <button (click)="back()">Back</button>
-  <h2>{{article.title}}</h2>
-  <h3>{{article.subject}}</h3>
-  <h4>{{article.content}}</h4>
-  <h4>Author: <a [routerLink]="['/authors', article.idAuthor]">{{article.author}}</a></h4>
-  <h4>
-  <span *ngFor="let tag of article.tags; let last = last">
-    <a [routerLink]="['/tags', tag]">{{ tag }}</a>
-    <span [hidden]='last'>,</span>
-  </span>
-  </h4>
-  <a [routerLink]="['/articles', id, 'edit']">Edit</a>
+  <mat-card class="card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title><a [routerLink]="['/authors', article.idAuthor]">{{article.author}}</a></mat-card-title>
+      <mat-card-subtitle>{{article.title}}</mat-card-subtitle>
+      <mat-card-subtitle>{{article.subject}}</mat-card-subtitle>
+      <mat-card-subtitle>
+          <span *ngFor="let tag of article.tags; let last = last">
+            <a [routerLink]="['/tags', tag]">{{ tag }}</a>
+            <span [hidden]='last'>,</span>
+          </span>
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <p>{{article.content}}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <app-like [isCompact]="true" [article]="article"></app-like>
+      <button mat-button>Share</button>
+      <a [routerLink]="['/articles', id, 'edit']">Edit</a>
+      <app-edit-comment [articleId]="id"></app-edit-comment>
+    </mat-card-actions>
+  </mat-card>
 
-  <div>
-    <app-comments [comments]="comments" [forArticle]="true"></app-comments>
-    <app-edit-comment [articleId]="id"></app-edit-comment>
-    <app-like [article]="article"></app-like>
-  </div>
+  <app-comments [comments]="comments" [forArticle]="true"></app-comments>
 
 </div>

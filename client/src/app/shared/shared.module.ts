@@ -10,6 +10,7 @@ import { ExpandCommentsComponent } from './expand-comments/expand-comments.compo
 import {EditCommentComponent} from "./edit-comment/edit-comment.component";
 import {FormsModule} from "@angular/forms";
 import { ArticleExpandCommentsComponent } from './article-expand-comments/article-expand-comments.component';
+import {MatButtonModule, MatCardModule, MatIconModule, MatMenuModule, MatToolbarModule} from "@angular/material";
 
 @NgModule({
   declarations: [
@@ -25,7 +26,13 @@ import { ArticleExpandCommentsComponent } from './article-expand-comments/articl
   imports: [
     CommonModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+
+    MatButtonModule,
+    MatMenuModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatCardModule
   ],
   exports: [
     CommentsComponent,

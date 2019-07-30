@@ -1,15 +1,15 @@
-<div>
-  <div *ngIf="!isEdit">
+<span>
+  <span *ngIf="!isEdit">
     <button (click)="toggleEditForm()">{{buttonText}}</button>
-  </div>
-  <div *ngIf="isEdit">
+  </span>
+  <span *ngIf="isEdit">
     <form (ngSubmit)="onSubmit()">
-      <div *ngIf="activeUser$ | async  as activeUser">
+      <span *ngIf="activeUser$ | async  as activeUser">
         <ng-container *ngIf="!activeUser.userId">
           author:
           <input [(ngModel)]="comment.authorName" name="text">
         </ng-container>
-      </div>
+      </span>
       title:
       <input [(ngModel)]="comment.title" name="text">
       text:
@@ -17,5 +17,5 @@
       <button type="submit">Submit</button>
       <button (click)="toggleEditForm()">Cancel</button>
     </form>
-  </div>
-</div>
+  </span>
+</span>

@@ -24,6 +24,8 @@ export class LikeComponent implements OnInit {
 
   @Input() article: Article;
 
+  @Input() isCompact: boolean = false;
+
   activeUser$: Observable<fromActiveUser.State>;
 
   ngOnInit() {}

@@ -40,8 +40,4 @@ export class ArticleComponent implements OnInit {
       this.store.dispatch(new LoadArticleAction(this.id));
     });
   }
-
-  back() {
-    this.router.navigate(['/']);
-  }
 }
