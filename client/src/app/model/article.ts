@@ -4,6 +4,7 @@ export class Article {
   subject: string;
   content: string;
   idAuthor: string;
+  idSharedArticle: string;
   author: string;
   liked: boolean;
   tags: string[];

@@ -16,6 +16,7 @@ public class Article {
     private String subject;
     private String content;
     private String idAuthor;
+    private String idSharedArticle;
     private String author;
     private List<String> tags;
 }

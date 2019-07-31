@@ -19,8 +19,8 @@ import static org.springframework.data.mongodb.core.aggregation.ComparisonOperat
 
 @Service
 public class ArticleService {
-    public static final String[] ARTICLE_FIELDS = {"title", "subject", "content", "idAuthor", "author", "tags"};
-    public static final String[] ARTICLE_FIELDS1 = {"title", "subject", "content", "idAuthor", "author", "tags", "likeCount", "commentsCount"};
+    public static final String[] ARTICLE_FIELDS = {"title", "subject", "content", "idAuthor", "idSharedArticle", "author", "tags"};
+    public static final String[] ARTICLE_FIELDS1 = {"title", "subject", "content", "idAuthor", "idSharedArticle", "author", "tags", "likeCount", "commentsCount"};
     @Autowired
     ArticleRepository articleRepository;
 

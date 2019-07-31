@@ -7,12 +7,11 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { ArticleComponent } from './article/article/article.component';
 import { ArticlesService } from './service/articles.service';
-import { EditArticleComponent } from './edit-article/edit-article.component';
+import { EditArticleComponent } from './create-article/edit-article/edit-article.component';
 import { ArticleModule } from './article/article.module';
 import { AuthorModule } from './author/author.module';
 import { AuthorComponent } from './author/author/author.component';
 
-import { SharedModule } from './shared/shared.module';
 import { TagComponent } from './articles/tag/tag.component';
 import { LoginComponent } from './login/login.component';
 import { NavigationComponent } from './navigation/navigation.component';
@@ -27,12 +26,12 @@ import {MainPageComponent} from "./main-page/main-page.component";
 import {SelfArticlesComponent} from "./articles/self-articles/self-articles.component";
 import {ArticlesModule} from "./articles/articles.module";
 import {FeedArticlesComponent} from "./articles/feed-articles/feed-articles.component";
-import {MatToolbarModule} from "@angular/material";
+import {MatButtonModule, MatCardModule, MatIconModule, MatMenuModule, MatToolbarModule} from "@angular/material";
+import {CreateArticleModule} from "./create-article/create-article.module";
 
 @NgModule({
   declarations: [
     AppComponent,
-    EditArticleComponent,
     LoginComponent,
     NavigationComponent,
     SignupComponent
@@ -43,6 +42,7 @@ import {MatToolbarModule} from "@angular/material";
     FlexLayoutModule,
     FormsModule,
     ArticlesModule,
+    CreateArticleModule,
     RouterModule.forRoot([
       {path: '', component: MainPageComponent},
       {path: 'articles/new', component: EditArticleComponent},
@@ -57,11 +57,15 @@ import {MatToolbarModule} from "@angular/material";
     ]),
     ArticleModule,
     AuthorModule,
-    SharedModule,
     MainPageModule,
     EffectsModule.forRoot([ArticlesEffects]),
     StoreModule.forRoot(fromReducers.reducers, {metaReducers: fromReducers.metaReducers}),
-    MatToolbarModule
+
+    MatButtonModule,
+    MatMenuModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatCardModule
   ],
   providers: [
     ArticlesService,

@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { ArticleComponent } from './article/article.component';
 import {MatButtonModule, MatCardModule, MatIconModule, MatMenuModule, MatToolbarModule} from "@angular/material";
+import {CreateArticleModule} from "../create-article/create-article.module";
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import {MatButtonModule, MatCardModule, MatIconModule, MatMenuModule, MatToolbar
     MatMenuModule,
     MatToolbarModule,
     MatIconModule,
-    MatCardModule
+    MatCardModule,
+    CreateArticleModule
   ],
   declarations: [
     ArticleComponent

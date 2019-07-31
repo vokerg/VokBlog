@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ArticlesService } from '../service/articles.service';
-import { Article } from '../model/article';
+import { ArticlesService } from '../../service/articles.service';
+import { Article } from '../../model/article';
 import {Store} from "@ngrx/store";
-import * as fromRoot from "../store/reducers";
+import * as fromRoot from "../../store/reducers/index";
 import {Observable} from "rxjs";
-import * as fromActiveUser from "../store/reducers/activeUser";
-import * as fromReducersRoot from "../store/reducers";
-import {AddArticle, UpdateArticle} from "../store/actions";
+import * as fromActiveUser from "../../store/reducers/activeUser";
+import * as fromReducersRoot from "../../store/reducers/index";
+import {AddArticle, UpdateArticle} from "../../store/actions/index";
 
 @Component({
   selector: 'app-edit-article',
