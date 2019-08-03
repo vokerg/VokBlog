@@ -184,3 +184,9 @@ export class LoadArticleCommentsCompletedAction implements Action {
   type = "LOAD_ARTICLE_COMMENTS_COMPLETED";
   constructor(public idArticle: string, public comments: Comment[]) {};
 }
+
+export class PushShareButtonAction implements Action {
+  type = 'PUSH_SHARE_BUTTON_ACTION';
+  constructor(public id: string) {};
+}
+

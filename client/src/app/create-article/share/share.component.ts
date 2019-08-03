@@ -1,4 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Store} from "@ngrx/store";
+import * as fromRoot from "../../store/reducers";
 
 @Component({
   selector: 'app-share',
@@ -7,11 +9,17 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class ShareComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private store: Store<fromRoot.State>,
+  ) { }
 
   @Input() id: string;
 
+  isOpen:boolean = false;
+
   ngOnInit() {
+    this.store.select(fromRoot.isShareArticlePushed, {id: this.id})
+      .subscribe((isOpen) => this.isOpen = isOpen);
   }
 
 }

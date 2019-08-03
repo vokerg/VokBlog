@@ -8,6 +8,7 @@ import * as fromFilteredAuthors from "./filteredAuthors";
 import * as fromSubComments from "./subComments";
 import * as fromArticleComments from "./articleComments";
 import * as fromAuthorArticles from "./authorArticles";
+import * as fromShareArticle from "./shareArticle";
 import {localStorageSync} from "ngrx-store-localstorage";
 
 export interface State {
@@ -19,6 +20,7 @@ export interface State {
   subComments: Object,
   articleComments: Object,
   authorArticles: fromAuthorArticles.State,
+  shareArticle: fromShareArticle.State,
 }
 
 export const reducers: ActionReducerMap<State> = {
@@ -30,6 +32,7 @@ export const reducers: ActionReducerMap<State> = {
   subComments: fromSubComments.reducer,
   articleComments: fromArticleComments.reducer,
   authorArticles: fromAuthorArticles.reducer,
+  shareArticle: fromShareArticle.reducer,
 };
 
 export function logger(reducer: ActionReducer<State>): any {
@@ -128,4 +131,11 @@ const authorArticlesFeatureSelector =
 export const getArticlesByIdAuthor = createSelector(
   authorArticlesFeatureSelector,
   fromAuthorArticles.getArticlesByIdAuthor
+);
+
+const shareArticleFeatureSelector =
+  createFeatureSelector<fromShareArticle.State>('shareArticle');
+export const isShareArticlePushed = createSelector(
+  shareArticleFeatureSelector,
+  fromShareArticle.isShareArticlePushed
 )
