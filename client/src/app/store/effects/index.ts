@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Actions, Effect, ofType} from "@ngrx/effects";
-import {ArticlesService} from "../../service/articles.service";
+import {ArticlesService} from "../../services/articles.service";
 import {
   AddArticle,
   AddArticleCompleted,
@@ -40,10 +40,10 @@ import {
 import {catchError, map, mergeMap} from "rxjs/operators";
 import {Action} from "@ngrx/store";
 import {Observable, of} from "rxjs";
-import {LoginService} from "../../service/login.service";
-import {AuthenticatedUser} from "../../model/authenticatedUser";
-import {CommentsService} from "../../service/comments.service";
-import {AuthorService} from "../../service/author.service";
+import {LoginService} from "../../services/login.service";
+import {AuthenticatedUser} from "../../modules/model/authenticatedUser";
+import {CommentsService} from "../../services/comments.service";
+import {AuthorService} from "../../services/author.service";
 
 @Injectable()
 export class ArticlesEffects {

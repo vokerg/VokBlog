@@ -1,4 +1,4 @@
-import {Author} from "../../model/author";
+import {Author} from "../../modules/model/author";
 import {ActionReducer, combineReducers} from "@ngrx/store";
 
 interface FilteredAuthorsState {

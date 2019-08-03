@@ -1,4 +1,4 @@
-import {Comment} from "../../model/comment";
+import {Comment} from "../../modules/model/comment";
 import {ActionReducer, combineReducers} from "@ngrx/store";
 
 interface FilteredCommentsState {

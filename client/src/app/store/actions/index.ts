@@ -1,9 +1,9 @@
 import {Action} from "@ngrx/store";
-import {AuthenticatedUser} from "../../model/authenticatedUser";
-import {AuthenticationUser} from "../../model/authenticationUser";
-import {Article} from "../../model/article";
-import {Comment} from "../../model/comment";
-import {Author} from "../../model/author";
+import {AuthenticatedUser} from "../../modules/model/authenticatedUser";
+import {AuthenticationUser} from "../../modules/model/authenticationUser";
+import {Article} from "../../modules/model/article";
+import {Comment} from "../../modules/model/comment";
+import {Author} from "../../modules/model/author";
 
 export class LoginAction implements Action {
   type = "LOGIN";
