@@ -1,5 +1,6 @@
 package com.vokerg.blog.VokergBlog.service;
 
+import com.vokerg.blog.VokergBlog.model.Article;
 import com.vokerg.blog.VokergBlog.model.ArticleFull;
 import com.vokerg.blog.VokergBlog.repository.ArticleRepository;
 import com.vokerg.blog.VokergBlog.repository.FollowRepository;
@@ -94,5 +95,14 @@ public class ArticleService {
                 .map(follow -> follow.getIdAuthorFollowed())
                 .collect(Collectors.toList());
         return getAggregatedArticles(Criteria.where("idAuthor").in(followedAuthors));
+    }
+
+    public ArticleFull shareArticle(String idArticle, String idAuthor) {
+        Article newArticle = articleRepository.save(Article.builder()
+                .idAuthor(idAuthor)
+                .idSharedArticle(idArticle)
+                .build()
+        );
+        return getAggregatedArticle(newArticle.getId());
     }
 }

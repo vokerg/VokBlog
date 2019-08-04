@@ -89,4 +89,12 @@ export class ArticlesService extends ApiService{
       mergeAll()
     )
   }
+
+  shareArticle(articleId: string): Observable<Article> {
+    return this.getRequestOptions()
+      .pipe(
+        map((requestOptions) => this.http.put<Article>(`api/articles/${articleId}/shares`, null, requestOptions)),
+        mergeAll()
+      )
+  }
 }

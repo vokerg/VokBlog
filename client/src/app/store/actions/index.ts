@@ -90,6 +90,11 @@ export class LoadTopAuthorsCompletedAction {
   constructor(public authors: Author[], public filter:string) {}
 }
 
+export class ShareArticleAction {
+  type = "SHARE_ARTICLE_ACTION";
+  constructor(public parentArticleId: string) {}
+}
+
 export class AddArticle {
   type = "ADD_ARTICLE";
   constructor(public article: Article, public callback: (idArticle:string) => void) {}
@@ -187,6 +192,11 @@ export class LoadArticleCommentsCompletedAction implements Action {
 
 export class PushShareButtonAction implements Action {
   type = 'PUSH_SHARE_BUTTON_ACTION';
+  constructor(public id: string) {};
+}
+
+export class CloseShareAction implements Action {
+  type = 'CLOSE_SHARE_ACTION';
   constructor(public id: string) {};
 }
 

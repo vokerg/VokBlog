@@ -97,4 +97,11 @@ public class ArticleController {
         return ResponseEntity.ok(null);
     }
 
+    @PutMapping("/{id}/shares")
+    public ResponseEntity<ArticleFull> shareArticle(@PathVariable String id) {
+        String authorId =  SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        return ResponseEntity.ok(articleService.shareArticle(id, authorId));
+    }
+
+
 }

@@ -35,7 +35,7 @@ import {
   LoadArticleCommentsAction,
   LoadArticleCommentsCompletedAction,
   LoadArticlesByIdAuthorAction,
-  LoadArticlesByIdAuthorCompletedAction, LoadFeedArticlesAction,
+  LoadArticlesByIdAuthorCompletedAction, LoadFeedArticlesAction, ShareArticleAction,
 } from "../actions";
 import {catchError, map, mergeMap} from "rxjs/operators";
 import {Action} from "@ngrx/store";
@@ -219,6 +219,17 @@ export class ArticlesEffects {
             callback(serverArticle.id)
             return new AddArticleCompleted(serverArticle);
           })
+        )
+      )
+    );
+
+  @Effect()
+  shareArticle$: Observable<Action> =
+    this.actions$.pipe(
+      ofType<ShareArticleAction>("SHARE_ARTICLE_ACTION"),
+      mergeMap(({parentArticleId}) =>
+        this.articlesService.shareArticle(parentArticleId).pipe(
+          map(serverArticle => new AddArticleCompleted(serverArticle))
         )
       )
     );

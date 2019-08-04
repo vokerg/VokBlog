@@ -20,7 +20,7 @@
       <app-share-button [id]="unicComponentId"></app-share-button>
       <a [routerLink]="['/articles', id, 'edit']">Edit</a>
       <app-edit-comment [articleId]="id"></app-edit-comment>
-      <app-share [id]="unicComponentId"></app-share>
+      <app-share [id]="unicComponentId" [articleId]="article.id"></app-share>
     </mat-card-actions>
   </mat-card>
 

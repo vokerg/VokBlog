@@ -7,6 +7,9 @@ export function reducer(state:State={openSharePanels:[]}, action) {
     case 'PUSH_SHARE_BUTTON_ACTION':
       return state.openSharePanels.includes(action.id)
         ? state : {...state, openSharePanels: [...state.openSharePanels, action.id]};
+    case 'CLOSE_SHARE_ACTION':
+      return {...state, openSharePanels: state.openSharePanels
+          .filter(element => element !== action.id)}
     default: return state;
   }
 }
