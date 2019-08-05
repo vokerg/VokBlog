@@ -1,11 +1,16 @@
-<p>
-  Title: <a [routerLink]="['/articles', article.id]">
-     {{article.title}}
-  </a>
-  Subject: {{article.subject}}
-  <br>
+<div>
+
+  <div *ngIf="!article.idSharedArticle">
+    Title: <a [routerLink]="['/articles', article.id]">{{article.title}}</a>
+    Subject: {{article.subject}}
+    <br>
+  </div>
+  <div *ngIf="article.idSharedArticle">
+    shared article {{article.sharedArticle.title}}
+  </div>
+
   <app-like [article]="article"></app-like>
   Comments: {{article.commentsCount}}
   <app-edit-comment [articleId]="article.id"></app-edit-comment>
   <app-article-expand-comments [article]="article"></app-article-expand-comments>
-</p>
+</div>

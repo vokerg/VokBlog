@@ -21,7 +21,8 @@ import static org.springframework.data.mongodb.core.aggregation.ComparisonOperat
 @Service
 public class ArticleService {
     public static final String[] ARTICLE_FIELDS = {"title", "subject", "content", "idAuthor", "idSharedArticle", "author", "tags"};
-    public static final String[] ARTICLE_FIELDS1 = {"title", "subject", "content", "idAuthor", "idSharedArticle", "author", "tags", "likeCount", "commentsCount"};
+    public static final String[] ARTICLE_FIELDS1 = {"title", "subject", "content", "idAuthor", "idSharedArticle", "author", "tags", "likeCount", "commentsCount", "sharedArticle"};
+
     @Autowired
     ArticleRepository articleRepository;
 
@@ -58,6 +59,12 @@ public class ArticleService {
                 .foreignField("idArticle")
                 .as("likes");
 
+        LookupOperation lookupOperationParentArticle = LookupOperation.newLookup()
+                .from("articles")
+                .localField("new_id_shared_article")
+                .foreignField("id")
+                .as("sharedArticle");
+
         LookupOperation lookupOperationComments = LookupOperation.newLookup()
                 .from("comments")
                 .localField("newid")
@@ -69,7 +76,8 @@ public class ArticleService {
                 .filter("item", valueOf("item.authorId").equalToValue(currentUserId))
                 .as("liked")
                 .and("likes").size().as("likeCount")
-                .and("comments").size().as("commentsCount");
+                .and("comments").size().as("commentsCount")
+                .and(ConvertOperators.valueOf("idSharedArticle").convertToObjectId()).as("new_id_shared_article");
 
         ProjectionOperation projectStringId = project(ARTICLE_FIELDS)
                 .and(ConvertOperators.valueOf("_id").convertToString()).as("newid");
@@ -81,6 +89,7 @@ public class ArticleService {
                         lookupOperationLikes,
                         lookupOperationComments,
                         projectLikesAndComments,
+                        lookupOperationParentArticle,
                         project(ARTICLE_FIELDS1).and("liked").size(),
                         project(ARTICLE_FIELDS1).and("liked").gt(0)
                 );

@@ -10,6 +10,7 @@ export class Article {
   tags: string[];
   likeCount: number;
   commentsCount: number;
+  sharedArticle: Article
   constructor() {
     this.id = null;
     this.title = "";
