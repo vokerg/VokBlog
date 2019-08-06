@@ -2,7 +2,9 @@ package com.vokerg.blog.VokergBlog.service;
 
 import com.vokerg.blog.VokergBlog.model.Article;
 import com.vokerg.blog.VokergBlog.model.ArticleFull;
+import com.vokerg.blog.VokergBlog.model.Author;
 import com.vokerg.blog.VokergBlog.repository.ArticleRepository;
+import com.vokerg.blog.VokergBlog.repository.AuthorRepository;
 import com.vokerg.blog.VokergBlog.repository.FollowRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -31,6 +33,9 @@ public class ArticleService {
 
     @Autowired
     FollowRepository followRepository;
+
+    @Autowired
+    AuthorRepository authorRepository;
 
     public ArticleFull getAggregatedArticle(String id) {
         List<ArticleFull> list =  getAggregatedArticles(Criteria.where("_id").is(id));
@@ -62,7 +67,7 @@ public class ArticleService {
         LookupOperation lookupOperationParentArticle = LookupOperation.newLookup()
                 .from("articles")
                 .localField("new_id_shared_article")
-                .foreignField("id")
+                .foreignField("_id")
                 .as("sharedArticle");
 
         LookupOperation lookupOperationComments = LookupOperation.newLookup()
@@ -109,6 +114,7 @@ public class ArticleService {
     public ArticleFull shareArticle(String idArticle, String idAuthor) {
         Article newArticle = articleRepository.save(Article.builder()
                 .idAuthor(idAuthor)
+                .author(authorRepository.findById(idAuthor).orElse(new Author()).getUsername())
                 .idSharedArticle(idArticle)
                 .build()
         );

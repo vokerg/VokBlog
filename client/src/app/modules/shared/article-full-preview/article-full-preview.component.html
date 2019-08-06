@@ -1,5 +1,4 @@
 <p>
-  Author: <a [routerLink]="['/authors', article.idAuthor]">{{article.author}}</a>
-  <br>
-  <app-article-preview [article]="article"></app-article-preview>
+  <a [routerLink]="['/authors', article.idAuthor]">{{article.author}}</a>:
+  <app-article-preview [article]="article" [noActions]="noActions"></app-article-preview>
 </p>

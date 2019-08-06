@@ -9,6 +9,7 @@ import { Article } from '../../model/article';
 export class ArticlePreviewComponent implements OnInit {
 
   @Input() article: Article;
+  @Input() noActions:Boolean = false;
 
   constructor() { }
 

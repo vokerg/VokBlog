@@ -11,6 +11,7 @@ import {EditCommentComponent} from "./edit-comment/edit-comment.component";
 import {FormsModule} from "@angular/forms";
 import { ArticleExpandCommentsComponent } from './article-expand-comments/article-expand-comments.component';
 import {MatButtonModule, MatCardModule, MatIconModule, MatMenuModule, MatToolbarModule} from "@angular/material";
+import { SharedArticleComponent } from './shared-article/shared-article.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import {MatButtonModule, MatCardModule, MatIconModule, MatMenuModule, MatToolbar
     LikeComponent,
     ExpandCommentsComponent,
     EditCommentComponent,
-    ArticleExpandCommentsComponent
+    ArticleExpandCommentsComponent,
+    SharedArticleComponent,
   ],
   imports: [
     CommonModule,
