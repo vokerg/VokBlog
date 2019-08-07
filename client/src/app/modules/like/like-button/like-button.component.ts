@@ -8,11 +8,11 @@ import {Observable} from "rxjs";
 import * as fromActiveUser from "../../../store/reducers/activeUser";
 
 @Component({
-  selector: 'app-like',
-  templateUrl: './like.component.html',
-  styleUrls: ['./like.component.css']
+  selector: 'app-like-button',
+  templateUrl: './like-button.component.html',
+  styleUrls: ['./like-button.component.css']
 })
-export class LikeComponent implements OnInit {
+export class LikeButtonComponent implements OnInit {
 
   constructor(
     private store: Store<fromReducersRoot.State>,
@@ -23,8 +23,6 @@ export class LikeComponent implements OnInit {
   @Input() comment: Comment;
 
   @Input() article: Article;
-
-  @Input() isCompact: boolean = false;
 
   activeUser$: Observable<fromActiveUser.State>;
 

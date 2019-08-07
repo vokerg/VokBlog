@@ -11,6 +11,8 @@ export class ArticlePreviewComponent implements OnInit {
   @Input() article: Article;
   @Input() noActions:Boolean = false;
 
+  unicComponentId: string = Math.random().toString(25);
+
   constructor() { }
 
   ngOnInit() {

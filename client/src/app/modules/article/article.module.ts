@@ -6,6 +6,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ArticleComponent } from './article/article.component';
 import {MatButtonModule, MatCardModule, MatIconModule, MatMenuModule, MatToolbarModule} from "@angular/material";
 import {CreateArticleModule} from "../create-article/create-article.module";
+import {LikeModule} from "../like/like.module";
 
 @NgModule({
   imports: [
@@ -19,7 +20,9 @@ import {CreateArticleModule} from "../create-article/create-article.module";
     MatToolbarModule,
     MatIconModule,
     MatCardModule,
-    CreateArticleModule
+
+    CreateArticleModule,
+    LikeModule
   ],
   declarations: [
     ArticleComponent

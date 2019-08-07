@@ -7,7 +7,7 @@
   </span>
   Title: {{comment.title}}
   Text: {{comment.text}}
-  <app-like [comment]="comment"></app-like>
+  <app-like-button [comment]="comment"></app-like-button>
   <app-edit-comment [articleId]="articleId" [idParentComment]="comment.id"></app-edit-comment>
   <app-expand-comments [comment]="comment"></app-expand-comments>
 </div>

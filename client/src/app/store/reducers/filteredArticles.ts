@@ -28,6 +28,13 @@ const articleReducerMaker = filter =>
               : article
           )}
       }; break;
+      case 'ADD_COMMENT_COMPLETED': {
+        return {...state, articles: state.articles
+            .map(article => article.id === action.comment.idArticle
+              ? {...article, commentsCount: article.commentsCount + 1} : article
+            )
+        }
+      }
       default: return state;
     }
   };

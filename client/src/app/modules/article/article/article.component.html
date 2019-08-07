@@ -16,7 +16,7 @@
         <p>{{article.content}}</p>
     </mat-card-content>
     <mat-card-actions>
-      <app-like [isCompact]="true" [article]="article"></app-like>
+      <app-like-button [article]="article"></app-like-button>
       <app-share-button [id]="unicComponentId"></app-share-button>
       <a [routerLink]="['/articles', id, 'edit']">Edit</a>
       <app-edit-comment [articleId]="id"></app-edit-comment>
