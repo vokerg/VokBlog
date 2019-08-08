@@ -7,14 +7,17 @@ import { MainPageAuthorsComponent } from './main-page-authors/main-page-authors.
 import {SharedModule} from "../shared/shared.module";
 import {RouterModule} from "@angular/router";
 import {MainPageArticlesComponent} from "./main-page-articles/main-page-articles.component";
+import {CommentModule} from "../comment/comment.module";
 
 @NgModule({
   declarations: [MainPageComponent, MainPageCommentsComponent, MainPageAuthorsComponent, MainPageArticlesComponent],
   imports: [
     CommonModule,
     FlexLayoutModule,
-    SharedModule,
     RouterModule,
+
+    SharedModule,
+    CommentModule,
   ]
 })
 export class MainPageModule { }

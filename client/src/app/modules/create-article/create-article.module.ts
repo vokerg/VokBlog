@@ -5,12 +5,14 @@ import {FormsModule} from "@angular/forms";
 import { ShareComponent } from './share/share.component';
 import { ShareButtonComponent } from './share-button/share-button.component';
 import {MatButtonModule, MatCardModule, MatIconModule, MatMenuModule, MatToolbarModule} from "@angular/material";
+import { ShareCounterComponent } from './share-counter/share-counter.component';
 
 @NgModule({
   declarations: [
     EditArticleComponent,
     ShareComponent,
-    ShareButtonComponent
+    ShareButtonComponent,
+    ShareCounterComponent
   ],
   imports: [
     CommonModule,
@@ -25,7 +27,8 @@ import {MatButtonModule, MatCardModule, MatIconModule, MatMenuModule, MatToolbar
   exports: [
     EditArticleComponent,
     ShareButtonComponent,
-    ShareComponent
+    ShareComponent,
+    ShareCounterComponent,
   ]
 })
 export class CreateArticleModule { }
