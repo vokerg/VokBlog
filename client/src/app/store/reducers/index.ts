@@ -9,6 +9,7 @@ import * as fromSubComments from "./subComments";
 import * as fromArticleComments from "./articleComments";
 import * as fromAuthorArticles from "./authorArticles";
 import * as fromShareArticle from "./shareArticle";
+import * as fromExpandComments from "./expandComments";
 import {localStorageSync} from "ngrx-store-localstorage";
 
 export interface State {
@@ -21,6 +22,7 @@ export interface State {
   articleComments: Object,
   authorArticles: fromAuthorArticles.State,
   shareArticle: fromShareArticle.State,
+  expandComments: fromExpandComments.State,
 }
 
 export const reducers: ActionReducerMap<State> = {
@@ -33,6 +35,7 @@ export const reducers: ActionReducerMap<State> = {
   articleComments: fromArticleComments.reducer,
   authorArticles: fromAuthorArticles.reducer,
   shareArticle: fromShareArticle.reducer,
+  expandComments: fromExpandComments.reducer,
 };
 
 export function logger(reducer: ActionReducer<State>): any {
@@ -138,4 +141,11 @@ const shareArticleFeatureSelector =
 export const isShareArticlePushed = createSelector(
   shareArticleFeatureSelector,
   fromShareArticle.isShareArticlePushed
-)
+);
+
+const expandArticleFeatureSelector =
+  createFeatureSelector<fromExpandComments.State>('expandComments');
+export const isExpandCommentsPushed = createSelector(
+  expandArticleFeatureSelector,
+  fromExpandComments.isExpandedPanelPushed,
+);

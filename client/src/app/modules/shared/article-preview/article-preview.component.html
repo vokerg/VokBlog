@@ -14,11 +14,11 @@
     <app-share-button [id]="unicComponentId"></app-share-button>
     <app-edit-comment [articleId]="article.id"></app-edit-comment>
     <app-share [id]="unicComponentId" [articleId]="article.id"></app-share>
-    <app-article-expand-comments [article]="article"></app-article-expand-comments>
   </span>
   <div>
     <app-likes-counter [article]="article"></app-likes-counter>|
     <app-share-counter [article]="article"></app-share-counter>|
-    <app-comments-counter [article]="article"></app-comments-counter>
+    <app-comments-counter [article]="article" [id]="unicComponentId"></app-comments-counter>
   </div>
+  <app-article-expand-comments [article]="article" [id]="unicComponentId"></app-article-expand-comments>
 </span>

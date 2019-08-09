@@ -2,7 +2,11 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Comment} from "../../model/comment";
 import {select, Store} from "@ngrx/store";
 import * as fromRoot from "../../../store/reducers/index";
-import {LoadArticleCommentsAction, LoadSubCommentsAction} from "../../../store/actions/index";
+import {
+  CloseExpandCommentsAction,
+  LoadArticleCommentsAction,
+  LoadSubCommentsAction
+} from "../../../store/actions/index";
 import {Article} from "../../model/article";
 
 @Component({
@@ -12,26 +16,27 @@ import {Article} from "../../model/article";
 })
 export class ArticleExpandCommentsComponent implements OnInit {
   @Input() article: Article;
+  @Input() id: string;
+
+  isOpen:boolean = false;
 
   comments: Comment[];
-
-  expanded: boolean = false;
 
   constructor(
     private store: Store<fromRoot.State>,
   ) { }
 
-  expandComments() {
-    this.store.dispatch(new LoadArticleCommentsAction(this.article.id));
-    this.expanded = true;
-  }
-
   collapseComments() {
-    this.expanded = false;
+    this.store.dispatch(new CloseExpandCommentsAction(this.id));
   }
 
   ngOnInit() {
     this.store.select(fromRoot.getCommentsByArticleId, { articleId: this.article.id })
       .subscribe(comments => this.comments = comments);
+    this.store.select(fromRoot.isExpandCommentsPushed, {id: this.id})
+      .subscribe(isOpen => {
+        this.store.dispatch(new LoadArticleCommentsAction(this.article.id));
+        this.isOpen = isOpen;
+      });
   }
 }

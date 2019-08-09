@@ -200,3 +200,13 @@ export class CloseShareAction implements Action {
   constructor(public id: string) {};
 }
 
+export class PushExpandCommentsAction implements Action {
+  type = "PUSH_EXPAND_COMMENTS_ACTION";
+  constructor(public id: string) {};
+}
+
+export class CloseExpandCommentsAction implements Action {
+  type = "CLOSE_EXPAND_COMMENTS_ACTION";
+  constructor(public id: string) {};
+}
+
