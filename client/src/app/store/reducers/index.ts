@@ -8,8 +8,7 @@ import * as fromFilteredAuthors from "./filteredAuthors";
 import * as fromSubComments from "./subComments";
 import * as fromArticleComments from "./articleComments";
 import * as fromAuthorArticles from "./authorArticles";
-import * as fromShareArticle from "./shareArticle";
-import * as fromExpandComments from "./expandComments";
+import * as fromOpenPanels from "./openPanels";
 import {localStorageSync} from "ngrx-store-localstorage";
 
 export interface State {
@@ -21,8 +20,7 @@ export interface State {
   subComments: Object,
   articleComments: Object,
   authorArticles: fromAuthorArticles.State,
-  shareArticle: fromShareArticle.State,
-  expandComments: fromExpandComments.State,
+  openPanels: fromOpenPanels.State,
 }
 
 export const reducers: ActionReducerMap<State> = {
@@ -34,8 +32,7 @@ export const reducers: ActionReducerMap<State> = {
   subComments: fromSubComments.reducer,
   articleComments: fromArticleComments.reducer,
   authorArticles: fromAuthorArticles.reducer,
-  shareArticle: fromShareArticle.reducer,
-  expandComments: fromExpandComments.reducer,
+  openPanels: fromOpenPanels.reducer,
 };
 
 export function logger(reducer: ActionReducer<State>): any {
@@ -136,16 +133,13 @@ export const getArticlesByIdAuthor = createSelector(
   fromAuthorArticles.getArticlesByIdAuthor
 );
 
-const shareArticleFeatureSelector =
-  createFeatureSelector<fromShareArticle.State>('shareArticle');
+const openPanelsFeatureSelector =
+  createFeatureSelector<fromOpenPanels.State>('openPanels');
 export const isShareArticlePushed = createSelector(
-  shareArticleFeatureSelector,
-  fromShareArticle.isShareArticlePushed
+  openPanelsFeatureSelector,
+  fromOpenPanels.isShareArticlePushed
 );
-
-const expandArticleFeatureSelector =
-  createFeatureSelector<fromExpandComments.State>('expandComments');
 export const isExpandCommentsPushed = createSelector(
-  expandArticleFeatureSelector,
-  fromExpandComments.isExpandedPanelPushed,
+  openPanelsFeatureSelector,
+  fromOpenPanels.isExpandCommentsPushed,
 );
