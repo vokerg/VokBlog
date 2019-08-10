@@ -7,6 +7,7 @@
   </span>
  {{comment.text}}
   <app-like-button [comment]="comment"></app-like-button>
-  <app-edit-comment [articleId]="articleId" [idParentComment]="comment.id"></app-edit-comment>
+  <app-add-comment-button [id]="componentId" [isForArticle]="false"></app-add-comment-button>
   <app-expand-comments [comment]="comment"></app-expand-comments>
+  <app-edit-comment [articleId]="articleId" [idParentComment]="comment.id" [id]="componentId"></app-edit-comment>
 </div>

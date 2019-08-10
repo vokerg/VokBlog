@@ -1,7 +1,4 @@
 <span>
-  <span *ngIf="!isEdit">
-    <button (click)="toggleEditForm()">{{buttonText}}</button>
-  </span>
   <span *ngIf="isEdit">
     <form (ngSubmit)="onSubmit()">
       <span *ngIf="activeUser$ | async  as activeUser">
@@ -15,7 +12,7 @@
       text:
       <input [(ngModel)]="comment.text" name="text">
       <button type="submit">Submit</button>
-      <button (click)="toggleEditForm()">Cancel</button>
+      <button type="button" (click)="closeEditForm()">Cancel</button>
     </form>
   </span>
 </span>

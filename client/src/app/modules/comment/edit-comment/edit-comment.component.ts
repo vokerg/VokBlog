@@ -5,7 +5,7 @@ import * as fromActiveUser from "../../../store/reducers/activeUser";
 import * as fromReducersRoot from "../../../store/reducers/index";
 import {Store} from "@ngrx/store";
 import * as fromRoot from "../../../store/reducers/index";
-import {AddComment} from "../../../store/actions/index";
+import {AddComment, CloseAddCommentAction} from "../../../store/actions/index";
 
 @Component({
   selector: 'app-edit-comment',
@@ -14,32 +14,28 @@ import {AddComment} from "../../../store/actions/index";
 })
 export class EditCommentComponent implements OnInit {
 
+  @Input() id: string;
   @Input() articleId: string;
   @Input() idParentComment: string = null;
 
-  isEdit: boolean;
+  isEdit: boolean=false;
   comment: Comment;
   activeUser$: Observable<fromActiveUser.State>;
-  buttonText: string;
 
   onSubmit() {
+    console.log('submit fired');
     this.activeUser$.subscribe(activeUser => {
       if (activeUser) {
         this.comment.idAuthor = activeUser.userId;
         this.comment.authorName = activeUser.username;
       }
       this.store.dispatch(new AddComment(this.comment));
-      this.toggleEditForm()
+      this.closeEditForm()
     });
   }
 
-  toggleEditForm() {
-    this.isEdit = !this.isEdit;
-    if (this.isEdit) {
-      this.comment = new Comment();
-      this.comment.idArticle = this.articleId;
-      this.comment.idParentComment = this.idParentComment;
-    }
+  closeEditForm() {
+   this.store.dispatch(new CloseAddCommentAction(this.id));
   }
 
   constructor(
@@ -51,7 +47,17 @@ export class EditCommentComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.buttonText = this.idParentComment === null ? "Comment" : "Reply";
+    this.store.select(fromRoot.isAddCommentOpened, {id:this.id})
+      .subscribe(isOpen => {
+        if (isOpen) {
+          this.isEdit = true;
+          this.comment = new Comment();
+          this.comment.idArticle = this.articleId;
+          this.comment.idParentComment = this.idParentComment;
+        } else {
+          this.isEdit = false;
+        }
+      });
   }
 
 }

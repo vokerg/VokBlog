@@ -143,3 +143,7 @@ export const isExpandCommentsPushed = createSelector(
   openPanelsFeatureSelector,
   fromOpenPanels.isExpandCommentsPushed,
 );
+export const isAddCommentOpened = createSelector(
+  openPanelsFeatureSelector,
+  fromOpenPanels.isAddCommentOpened,
+);

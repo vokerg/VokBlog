@@ -19,6 +19,7 @@ export class CommentComponent implements OnInit {
 
   articleTitle: string;
   articleId: string;
+  componentId: string = Math.random().toString(25);
 
   ngOnInit() {
       this.articleTitle = this.comment.article ? this.comment.article.title : null;

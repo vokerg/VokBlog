@@ -34,7 +34,7 @@ export class ArticleComponent implements OnInit {
   article: Article;
   comments: Comment[];
 
-  unicComponentId: string = Math.random().toString(25);
+  componentId: string = Math.random().toString(25);
 
   ngOnInit() {
     this.route.params.subscribe(params => {

@@ -7,6 +7,7 @@ interface StateOpenedPanel {
 export interface State {
   shareArticle: StateOpenedPanel,
   expandComments: StateOpenedPanel,
+  addComment: StateOpenedPanel,
 }
 
 const openPanelsReducer = (openPanelAction:string, closePanelAction:string) =>
@@ -25,6 +26,7 @@ const openPanelsReducer = (openPanelAction:string, closePanelAction:string) =>
 const reducers = {
   shareArticle: openPanelsReducer('PUSH_SHARE_BUTTON_ACTION', 'CLOSE_SHARE_ACTION'),
   expandComments: openPanelsReducer('PUSH_EXPAND_COMMENTS_ACTION', 'CLOSE_EXPAND_COMMENTS_ACTION'),
+  addComment: openPanelsReducer('PUSH_ADD_COMMENT', 'CLOSE_ADD_COMMENT'),
 };
 
 export const reducer: ActionReducer<State> = combineReducers(reducers);
@@ -33,3 +35,5 @@ export const isShareArticlePushed = (state:State, {id}):boolean =>
   state.shareArticle.openedPanel.includes(id);
 export const isExpandCommentsPushed = (state:State, {id}):boolean =>
   state.expandComments.openedPanel.includes(id);
+export const isAddCommentOpened = (state:State, {id}):boolean =>
+  state.addComment.openedPanel.includes(id);

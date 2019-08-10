@@ -210,3 +210,12 @@ export class CloseExpandCommentsAction implements Action {
   constructor(public id: string) {};
 }
 
+export class PushAddCommentButtonAction implements Action {
+  type = "PUSH_ADD_COMMENT";
+  constructor(public id: string) {}
+}
+
+export class CloseAddCommentAction implements Action {
+  type = "CLOSE_ADD_COMMENT";
+  constructor(public id: string){}
+}
