@@ -4,8 +4,17 @@ import {EditArticleComponent} from "./edit-article/edit-article.component";
 import {FormsModule} from "@angular/forms";
 import { ShareComponent } from './share/share.component';
 import { ShareButtonComponent } from './share-button/share-button.component';
-import {MatButtonModule, MatCardModule, MatIconModule, MatMenuModule, MatToolbarModule} from "@angular/material";
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatIconModule,
+  MatInputModule,
+  MatMenuModule,
+  MatToolbarModule
+} from "@angular/material";
 import { ShareCounterComponent } from './share-counter/share-counter.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+
 
 @NgModule({
   declarations: [
@@ -22,7 +31,9 @@ import { ShareCounterComponent } from './share-counter/share-counter.component';
     MatMenuModule,
     MatToolbarModule,
     MatIconModule,
-    MatCardModule
+    MatCardModule,
+    MatInputModule,
+    MatFormFieldModule,
   ],
   exports: [
     EditArticleComponent,

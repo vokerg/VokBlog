@@ -1,18 +1,17 @@
 <span>
   <span *ngIf="isEdit">
-    <form (ngSubmit)="onSubmit()">
+    <form (ngSubmit)="onSubmit()" class="form">
       <span *ngIf="activeUser$ | async  as activeUser">
         <ng-container *ngIf="!activeUser.userId">
-          author:
-          <input [(ngModel)]="comment.authorName" name="text">
+          author:<br>
+          <input [(ngModel)]="comment.authorName" name="text"><br>
         </ng-container>
       </span>
-      title:
-      <input [(ngModel)]="comment.title" name="text">
-      text:
-      <input [(ngModel)]="comment.text" name="text">
-      <button type="submit">Submit</button>
-      <button type="button" (click)="closeEditForm()">Cancel</button>
+      <mat-form-field class="full-width">
+        <textarea matInput placeholder="Comment" [(ngModel)]="comment.text" name="text"></textarea>
+      </mat-form-field>
+      <button mat-button type="submit">Submit</button>
+      <button mat-button type="button" (click)="closeEditForm()">Cancel</button>
     </form>
   </span>
 </span>
