@@ -3,9 +3,7 @@ import {Comment} from "../../model/comment";
 import {select, Store} from "@ngrx/store";
 import * as fromRoot from "../../../store/reducers/index";
 import {
-  CloseExpandCommentsAction,
   LoadArticleCommentsAction,
-  LoadSubCommentsAction
 } from "../../../store/actions/index";
 import {Article} from "../../model/article";
 
@@ -25,10 +23,6 @@ export class ArticleExpandCommentsComponent implements OnInit {
   constructor(
     private store: Store<fromRoot.State>,
   ) { }
-
-  collapseComments() {
-    this.store.dispatch(new CloseExpandCommentsAction(this.id));
-  }
 
   ngOnInit() {
     this.store.select(fromRoot.getCommentsByArticleId, { articleId: this.article.id })

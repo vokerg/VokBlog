@@ -1,6 +1,6 @@
 <div *ngIf="comment.subCommentCount>0">
-  <button *ngIf="!expanded" (click)="expandComments()">{{comment.subCommentCount}} Replies</button>
-  <button *ngIf="expanded" (click)="collapseComments()">Close</button>
+  <button mat-button *ngIf="!expanded" (click)="expandComments()">{{comment.subCommentCount}} Replies</button>
+  <button mat-button *ngIf="expanded" (click)="collapseComments()">Close</button>
   <div class="exp" *ngIf="expanded">
     <app-comments [comments]="subComments" [forArticle]="true"></app-comments>
 </div>

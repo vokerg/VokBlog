@@ -1,6 +1,3 @@
-<div *ngIf="isOpen && article.commentsCount>0">
-  <button (click)="collapseComments()">Close</button>
-  <div class="exp">
+<div *ngIf="isOpen && article.commentsCount>0" class="exp">
     <app-comments [comments]="comments" [forArticle]="true"></app-comments>
-  </div>
 </div>
