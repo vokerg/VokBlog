@@ -1,4 +1,4 @@
-<p>
-  <a [routerLink]="['/authors', article.idAuthor]">{{article.author}}</a>:
+<mat-card>
+  <mat-card-title><a [routerLink]="['/authors', article.idAuthor]">{{article.author}}</a></mat-card-title>
   <app-article-preview [article]="article" [noActions]="noActions"></app-article-preview>
-</p>
+</mat-card>

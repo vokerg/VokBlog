@@ -1,25 +1,27 @@
 <span>
   <span *ngIf="!article.sharedArticle">
-    <a [routerLink]="['/articles', article.id]">{{article.title}}</a>
-    <br>
-    Subject: {{article.subject}}
-    <br>
+    <mat-card-subtitle>{{article.title}}</mat-card-subtitle>
   </span>
   <span *ngIf="article.sharedArticle">
-    shared article
+    <mat-card-subtitle>Shared article</mat-card-subtitle>
     <app-shared-article [idSharedArticle]="article.idSharedArticle" [article]="article.sharedArticle"></app-shared-article>
   </span>
+  <mat-card-content>
+    <a [routerLink]="['/articles', article.id]">...more</a>
+  </mat-card-content>
   <div *ngIf="!noActions">
-    <div>
-      <app-likes-counter [article]="article"></app-likes-counter>
-      <app-share-counter [article]="article"></app-share-counter>
+    <mat-card-content>
+      <app-likes-counter [article]="article"></app-likes-counter> |
+      <app-share-counter [article]="article"></app-share-counter> |
       <app-comments-counter [article]="article" [id]="componentId"></app-comments-counter>
-    </div>
-    <div>
-      <app-like-button [article]="article"></app-like-button>
-      <app-share-button [id]="componentId"></app-share-button>
-      <app-add-comment-button [id]="componentId"></app-add-comment-button>
-    </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <div>
+        <app-like-button [article]="article"></app-like-button>
+        <app-share-button [id]="componentId"></app-share-button>
+        <app-add-comment-button [id]="componentId"></app-add-comment-button>
+      </div>
+    </mat-card-actions>
     <div>
       <app-share [id]="componentId" [articleId]="article.id"></app-share>
       <app-article-expand-comments [article]="article" [id]="componentId"></app-article-expand-comments>

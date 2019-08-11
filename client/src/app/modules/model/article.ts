@@ -10,7 +10,8 @@ export class Article {
   tags: string[];
   likeCount: number;
   commentsCount: number;
-  sharedArticle: Article
+  sharedCount: number;
+  sharedArticle: Article;
   constructor() {
     this.id = null;
     this.title = "";
@@ -20,6 +21,7 @@ export class Article {
     this.liked = false;
     this.tags = [];
     this.likeCount = 0;
+    this.sharedCount = 0;
     this.commentsCount = 0;
   }
 }
