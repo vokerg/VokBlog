@@ -23,13 +23,13 @@ export class LikesCounterComponent implements OnInit {
     const dialogRef = this.dialog.open(LikesListComponent, {
       width: '250px',
       height: '250px',
-      data: {name: this.name, animal: this.animal}
+      data: {idArticle: this.article.id}
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.animal = result;
-    });
+    // dialogRef.afterClosed().subscribe(result => {
+    //   console.log('The dialog was closed');
+    //   this.animal = result;
+    // });
   }
 
   ngOnInit() {

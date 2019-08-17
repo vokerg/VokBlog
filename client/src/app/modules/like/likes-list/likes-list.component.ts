@@ -1,9 +1,10 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {ArticlesService} from "../../../services/articles.service";
+import {Like} from "../../model/like";
 
 export interface DialogData {
-  animal: string;
-  name: string;
+  idArticle: string;
 }
 
 @Component({
@@ -16,14 +17,18 @@ export class LikesListComponent  implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<LikesListComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private articlesService:ArticlesService
+  ) {}
+
+  likes:Like[];
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 
   ngOnInit() {
-    console.log('dialog init');
+    this.articlesService.getArticleLikes("5ce011056511bdb063c545b0").subscribe(likes => this.likes = likes);
   }
 
 }

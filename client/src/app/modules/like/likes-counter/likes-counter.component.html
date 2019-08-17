@@ -1,4 +1,2 @@
-<button mat-raised-button (click)="openDialog()">Pick one</button>
-<!--<button mat-button>{{article.likeCount}} likes</button>-->
-<a href="#">{{article.likeCount}} likes</a>
+<a (click)="openDialog()" [routerLink]="">{{article.likeCount}} likes</a>
 

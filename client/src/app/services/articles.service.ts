@@ -8,6 +8,7 @@ import { Article } from '../modules/model/article';
 import {ApiService} from "./api.service";
 import {Store} from "@ngrx/store";
 import * as fromRoot from "../store/reducers";
+import {Like} from "../modules/model/like";
 
 @Injectable()
 export class ArticlesService extends ApiService{
@@ -69,7 +70,7 @@ export class ArticlesService extends ApiService{
     const {id, ...processedArticle} = article;
     return this.getRequestOptions()
       .pipe(
-        map((requestOptions) => this.http.put<Article>('api/articles', processedArticle, requestOptions)),
+        map(requestOptions => this.http.put<Article>('api/articles', processedArticle, requestOptions)),
         mergeAll()
       )
   }
@@ -85,7 +86,14 @@ export class ArticlesService extends ApiService{
 
   unLikeArticle(articleId): Observable<any> {
     return this.getRequestOptions().pipe(
-      map((requestOptions) => this.http.delete(`api/articles/${articleId}/like`, requestOptions)),
+      map(requestOptions => this.http.delete(`api/articles/${articleId}/like`, requestOptions)),
+      mergeAll()
+    )
+  }
+
+  getArticleLikes(articleId): Observable<Like[]> {
+    return this.getRequestOptions().pipe(
+      map(requestOptions => this.http.get<Like[]>(`api/articles/${articleId}/likes`, requestOptions)),
       mergeAll()
     )
   }
