@@ -1,10 +1,7 @@
 package com.vokerg.blog.VokergBlog.controller;
 
-import com.vokerg.blog.VokergBlog.model.ArticleFull;
-import com.vokerg.blog.VokergBlog.model.Comment;
-import com.vokerg.blog.VokergBlog.model.CommentFull;
+import com.vokerg.blog.VokergBlog.model.*;
 import com.vokerg.blog.VokergBlog.repository.ArticleRepository;
-import com.vokerg.blog.VokergBlog.model.Article;
 import com.vokerg.blog.VokergBlog.repository.CommentRepository;
 import com.vokerg.blog.VokergBlog.service.ArticleService;
 import com.vokerg.blog.VokergBlog.service.CommentService;
@@ -81,6 +78,11 @@ public class ArticleController {
                                                            @RequestBody Comment comment) {
         commentRepository.save(comment);
         return ResponseEntity.ok(commentService.getCommentById(comment.getId()));
+    }
+
+    @GetMapping("/{id}/likes")
+    public ResponseEntity<List<LikeFull>> getArticleLikes(@PathVariable String id) {
+        return ResponseEntity.ok(likeService.getLikesForArticle(id));
     }
 
     @PutMapping("/{id}/like")

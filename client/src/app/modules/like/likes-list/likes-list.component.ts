@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 export interface DialogData {
@@ -12,7 +12,7 @@ export interface DialogData {
   styleUrls: ['./likes-list.component.css']
 })
 
-export class LikesListComponent {
+export class LikesListComponent  implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<LikesListComponent>,
@@ -23,6 +23,7 @@ export class LikesListComponent {
   }
 
   ngOnInit() {
+    console.log('dialog init');
   }
 
 }

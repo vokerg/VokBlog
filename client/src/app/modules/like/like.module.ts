@@ -22,6 +22,9 @@ import { LikesListComponent } from './likes-list/likes-list.component';
     LikeButtonComponent,
     LikesCounterComponent,
     LikesListComponent,
+  ],
+  entryComponents: [
+    LikesListComponent,
   ]
 })
 export class LikeModule { }
