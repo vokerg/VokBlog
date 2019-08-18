@@ -1,14 +1,21 @@
-<div>
-  <span *ngIf="forAuthor==false">
-    <a [routerLink]="['/authors', comment.idAuthor]">{{comment.authorName}}</a>:
-  </span>
-  <span *ngIf="forArticle==false">
-    Article: <a [routerLink]="['/articles', comment.idArticle]">{{articleTitle}}</a>
-  </span>
- {{comment.text}}
-  <app-likes-counter [comment]="comment"></app-likes-counter>
-  <app-like-button [comment]="comment"></app-like-button>
+<mat-card>
+  <mat-card-header>
+    <span *ngIf="forArticle==false">
+      <a [routerLink]="['/articles', comment.idArticle]">{{articleTitle}}</a>
+    </span>
+  </mat-card-header>
+  <mat-card-content>
+    <span *ngIf="forAuthor==false">
+      <a [routerLink]="['/authors', comment.idAuthor]">{{comment.authorName}}</a>:
+    </span>
+    {{comment.text}}
+  </mat-card-content>
+  <mat-card-actions>
+    <app-likes-counter [comment]="comment"></app-likes-counter>
+    <app-like-button [comment]="comment"></app-like-button>
+  </mat-card-actions>
+
   <app-add-comment-button [id]="componentId" [isForArticle]="false"></app-add-comment-button>
   <app-expand-comments [comment]="comment"></app-expand-comments>
   <app-edit-comment [articleId]="articleId" [idParentComment]="comment.id" [id]="componentId"></app-edit-comment>
-</div>
+</mat-card>

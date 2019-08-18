@@ -11,14 +11,14 @@ import {LikeModule} from "../like/like.module";
 import { CommentsCounterComponent } from './comments-counter/comments-counter.component';
 import {
   MatButtonModule,
-  MatCardModule,
-  MatIconModule,
-  MatInputModule,
   MatMenuModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatIconModule,
+  MatCardModule,
+  MatInputModule,
+  MatFormFieldModule,
 } from "@angular/material";
 import { AddCommentButtonComponent } from './add-comment-button/add-comment-button.component';
-import {MatFormFieldModule} from "../../../../node_modules/@angular/material/form-field";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({

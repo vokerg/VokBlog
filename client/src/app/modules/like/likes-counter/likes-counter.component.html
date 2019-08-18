@@ -1,1 +1,6 @@
-<a (click)="openDialog()" [routerLink]="">{{count}} likes</a>
+<a (click)="openDialog()" [routerLink]="">
+  <mat-icon *ngIf="comment" aria-hidden="false" aria-label="Example thumbs up SVG icon">thumb_up</mat-icon>
+  {{count}}
+  <span *ngIf="article">likes</span>
+</a>
+
