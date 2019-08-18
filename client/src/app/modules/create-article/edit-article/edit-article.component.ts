@@ -40,7 +40,6 @@ export class EditArticleComponent implements OnInit {
 
   redirect(id?: string) {
     const redirectId = id || this.id;
-    console.log(redirectId, (redirectId) ? ['/'] : ['/articles/', redirectId]);
       this.router.navigate((redirectId) ? ['/articles/', redirectId] : ['/']);
   }
 

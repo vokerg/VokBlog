@@ -18,8 +18,5 @@ export function reducer(
   }
 }
 
-export const getArticlesByIdAuthor = (state, {idAuthor}) => {
-  console.log(idAuthor, state, state.articlesMap.get(idAuthor) || []);
-  return state.articlesMap.get(idAuthor) || [];
-}
+export const getArticlesByIdAuthor = (state, {idAuthor}) => state.articlesMap.get(idAuthor) || [];
 

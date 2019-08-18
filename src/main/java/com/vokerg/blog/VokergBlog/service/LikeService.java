@@ -59,7 +59,7 @@ public class LikeService {
         likeRepository.deleteAllByIdCommentAndIdAuthor(idComment, idAuthor);
     }
 
-    public List<LikeFull> getLikesForArticle(String idArticle) {
+    public List<LikeFull> getLikesForCriteria(Criteria criteria) {
 
         LookupOperation lookupOperationArticle = LookupOperation.newLookup()
                 .from("articles")
@@ -86,7 +86,7 @@ public class LikeService {
                 .and("author.name").as("authorName");
 
         Aggregation aggregation = Aggregation.newAggregation(
-                match(Criteria.where("idArticle").is(idArticle)),
+                match(criteria),
                 projectArticleIdAndAuthorId,
                 lookupOperationArticle,
                 lookupOperationAuthor,
@@ -97,5 +97,13 @@ public class LikeService {
         AggregationResults<LikeFull> results = mongoTemplate.aggregate(aggregation, "likes", LikeFull.class);
 
         return results.getMappedResults();
+    }
+
+    public List<LikeFull> getLikesForArticle(String idArticle) {
+        return getLikesForCriteria(Criteria.where("idArticle").is(idArticle));
+    }
+
+    public List<LikeFull> getLikesForComment(String idComment) {
+        return getLikesForCriteria(Criteria.where("idComment").is(idComment));
     }
 }

@@ -4,7 +4,7 @@ import {ArticlesService} from "../../../services/articles.service";
 import {Like} from "../../model/like";
 
 export interface DialogData {
-  idArticle: string;
+  likes: Like[];
 }
 
 @Component({
@@ -18,17 +18,9 @@ export class LikesListComponent  implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<LikesListComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private articlesService:ArticlesService
   ) {}
 
-  likes:Like[];
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
   ngOnInit() {
-    this.articlesService.getArticleLikes("5ce011056511bdb063c545b0").subscribe(likes => this.likes = likes);
   }
 
 }

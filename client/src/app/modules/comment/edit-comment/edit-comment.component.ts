@@ -23,7 +23,6 @@ export class EditCommentComponent implements OnInit {
   activeUser$: Observable<fromActiveUser.State>;
 
   onSubmit() {
-    console.log('submit fired');
     this.activeUser$.subscribe(activeUser => {
       if (activeUser) {
         this.comment.idAuthor = activeUser.userId;

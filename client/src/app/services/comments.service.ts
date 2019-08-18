@@ -7,6 +7,7 @@ import {HttpClient} from "@angular/common/http";
 import {Comment} from "../modules/model/comment";
 import {Observable} from "rxjs";
 import {map, mergeAll} from "rxjs/operators";
+import {Like} from "../modules/model/like";
 
 @Injectable({
   providedIn: 'root'
@@ -54,6 +55,13 @@ export class CommentsService extends ApiService {
       map(requestOptions => this.http.get<Comment[]>(`api/authors/${authorId}/comments`, requestOptions)),
       mergeAll()
     );
+  }
+
+  getCommentLikes(commentId): Observable<Like[]> {
+    return this.getRequestOptions().pipe(
+      map(requestOptions => this.http.get<Like[]>(`api/comments/${commentId}/likes`, requestOptions)),
+      mergeAll()
+    )
   }
 
   likeComment(commentId: string): Observable<any> {

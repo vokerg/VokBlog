@@ -6,6 +6,7 @@
     Article: <a [routerLink]="['/articles', comment.idArticle]">{{articleTitle}}</a>
   </span>
  {{comment.text}}
+  <app-likes-counter [comment]="comment"></app-likes-counter>
   <app-like-button [comment]="comment"></app-like-button>
   <app-add-comment-button [id]="componentId" [isForArticle]="false"></app-add-comment-button>
   <app-expand-comments [comment]="comment"></app-expand-comments>

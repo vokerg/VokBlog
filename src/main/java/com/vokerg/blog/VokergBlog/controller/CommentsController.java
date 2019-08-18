@@ -1,6 +1,7 @@
 package com.vokerg.blog.VokergBlog.controller;
 
 import com.vokerg.blog.VokergBlog.model.CommentFull;
+import com.vokerg.blog.VokergBlog.model.LikeFull;
 import com.vokerg.blog.VokergBlog.service.CommentService;
 import com.vokerg.blog.VokergBlog.service.LikeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,11 @@ public class CommentsController {
         return (idParentComment == null)
                 ? ResponseEntity.ok(commentService.getTopFullComments())
                 : ResponseEntity.ok(commentService.getCommentsByParentId(idParentComment));
+    }
+
+    @GetMapping("/{id}/likes")
+    public ResponseEntity<List<LikeFull>> getCommentLikes(@PathVariable String id) {
+        return ResponseEntity.ok(likeService.getLikesForComment(id));
     }
 
     @PutMapping("/{id}/like")

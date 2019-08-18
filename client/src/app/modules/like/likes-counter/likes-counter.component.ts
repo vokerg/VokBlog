@@ -3,6 +3,9 @@ import {Article} from "../../model/article";
 import {Comment} from "../../model/comment";
 import {MatDialog} from "@angular/material";
 import {LikesListComponent} from "../likes-list/likes-list.component";
+import {ArticlesService} from "../../../services/articles.service";
+import {Like} from "../../model/like";
+import {CommentsService} from "../../../services/comments.service";
 
 @Component({
   selector: 'app-likes-counter',
@@ -14,25 +17,33 @@ export class LikesCounterComponent implements OnInit {
   @Input() article:Article;
   @Input() comment:Comment;
 
-  animal: string;
-  name: string;
+  count:number = 0;
+  likes:Like[];
 
-  constructor(public dialog: MatDialog) {}
+  constructor(
+    public dialog: MatDialog,
+    private articlesService:ArticlesService,
+    private commentsService:CommentsService,
+  ) {}
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(LikesListComponent, {
+    this.dialog.open(LikesListComponent, {
       width: '250px',
       height: '250px',
-      data: {idArticle: this.article.id}
+      data: {likes: this.likes}
     });
-
-    // dialogRef.afterClosed().subscribe(result => {
-    //   console.log('The dialog was closed');
-    //   this.animal = result;
-    // });
   }
 
   ngOnInit() {
+    if (this.article) {
+      this.count = this.article.likeCount;
+      this.articlesService.getArticleLikes(this.article.id).subscribe(likes => this.likes = likes);
+    }
+
+    if (this.comment) {
+      this.count = this.comment.likeCount;
+      this.commentsService.getCommentLikes(this.comment.id).subscribe(likes => this.likes = likes);
+    }
   }
 
 }
