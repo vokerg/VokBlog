@@ -1,7 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {LikeButtonComponent} from "./like-button/like-button.component";
-import {MatButtonModule, MatDialogModule, MatFormFieldModule, MatIconModule, MatInputModule} from "@angular/material";
+import {
+  MatBadgeModule,
+  MatButtonModule,
+  MatDialogModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatInputModule
+} from "@angular/material";
 import { LikesCounterComponent } from './likes-counter/likes-counter.component';
 import { LikesListComponent } from './likes-list/likes-list.component';
 import {RouterModule} from "@angular/router";
@@ -19,6 +26,7 @@ import {RouterModule} from "@angular/router";
     MatInputModule,
     MatFormFieldModule,
     MatIconModule,
+    MatBadgeModule,
     RouterModule,
   ],
   exports: [

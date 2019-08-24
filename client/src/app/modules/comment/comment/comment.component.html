@@ -9,13 +9,15 @@
       <a [routerLink]="['/authors', comment.idAuthor]">{{comment.authorName}}</a>:
     </span>
     {{comment.text}}
+    <app-likes-counter [comment]="comment"></app-likes-counter>
+  </mat-card-content>
+  <mat-card-content>
+    <app-like-button [comment]="comment"></app-like-button>
+    <app-add-comment-button [id]="componentId" [isForArticle]="false"></app-add-comment-button>
+    <app-expand-comments [comment]="comment"></app-expand-comments>
+    <app-edit-comment [articleId]="articleId" [idParentComment]="comment.id" [id]="componentId"></app-edit-comment>
   </mat-card-content>
   <mat-card-actions>
-    <app-likes-counter [comment]="comment"></app-likes-counter>
-    <app-like-button [comment]="comment"></app-like-button>
-  </mat-card-actions>
 
-  <app-add-comment-button [id]="componentId" [isForArticle]="false"></app-add-comment-button>
-  <app-expand-comments [comment]="comment"></app-expand-comments>
-  <app-edit-comment [articleId]="articleId" [idParentComment]="comment.id" [id]="componentId"></app-edit-comment>
+  </mat-card-actions>
 </mat-card>
