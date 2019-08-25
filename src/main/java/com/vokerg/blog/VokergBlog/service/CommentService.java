@@ -1,12 +1,15 @@
 package com.vokerg.blog.VokergBlog.service;
 
+import com.vokerg.blog.VokergBlog.model.Comment;
 import com.vokerg.blog.VokergBlog.model.CommentFull;
 import com.vokerg.blog.VokergBlog.repository.AuthorRepository;
+import com.vokerg.blog.VokergBlog.repository.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.*;
 import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -20,11 +23,18 @@ public class CommentService {
 
     public static final String[] COMMENT_FIELDS = {"idAuthor", "authorName", "idArticle", "text", "title", "idParentComment"};
     public static final String[] COMMENT_FIELDS1 = {"idAuthor", "authorName", "idArticle", "text", "title", "idParentComment", "subCommentCount", "article", "likeCount"};
+
     @Autowired
     AuthorRepository authorRepository;
 
     @Autowired
     MongoTemplate mongoTemplate;
+
+    @Autowired
+    CommentRepository commentRepository;
+
+    @Autowired
+    AlertService alertService;
 
     private List<CommentFull> getLatestFullComments(Criteria criteria, Long queryLimit, Long querySkip) {
 
@@ -107,5 +117,12 @@ public class CommentService {
     public List<CommentFull> getCommentsByParentId(String idParentComment) {
         return getLatestFullComments(Criteria.where("_id").ne(null)
                 .and("idParentComment").is(idParentComment), null, null);
+    }
+
+    public CommentFull createComment(Comment comment) {
+        commentRepository.save(comment);
+        CommentFull newComment =  getCommentById(comment.getId());
+        alertService.createNewCommentAlert(newComment);
+        return newComment;
     }
 }

@@ -33,14 +33,14 @@ public class CommentsController {
     }
 
     @PutMapping("/{id}/like")
-    public ResponseEntity likeArticle(@PathVariable String id) {
+    public ResponseEntity likeComment(@PathVariable String id) {
         String userId =  SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
         likeService.setLikeToComment(id, userId);
         return ResponseEntity.ok(null);
     }
 
     @DeleteMapping("/{id}/like")
-    public ResponseEntity unLikeArticle(@PathVariable String id) {
+    public ResponseEntity unLikeComment(@PathVariable String id) {
         String userId =  SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
         likeService.unlikeComment(id, userId);
         return ResponseEntity.ok(null);

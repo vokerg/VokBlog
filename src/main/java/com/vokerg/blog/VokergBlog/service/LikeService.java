@@ -52,6 +52,7 @@ public class LikeService {
                 .idAuthor(idAuthor)
                 .build();
         likeRepository.save(like);
+        alertService.likeComment(idComment, idAuthor);
         return like;
     }
 

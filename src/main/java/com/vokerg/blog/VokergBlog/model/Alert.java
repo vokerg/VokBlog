@@ -14,4 +14,5 @@ public class Alert {
     private String idComment;
     private String idArticle;
     private String text;
+    private boolean seen;
 }

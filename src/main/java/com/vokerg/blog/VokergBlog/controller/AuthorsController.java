@@ -1,13 +1,7 @@
 package com.vokerg.blog.VokergBlog.controller;
 
-import com.vokerg.blog.VokergBlog.model.AggregatedAuthor;
-import com.vokerg.blog.VokergBlog.model.ArticleFull;
-import com.vokerg.blog.VokergBlog.model.CommentFull;
-import com.vokerg.blog.VokergBlog.model.Follow;
-import com.vokerg.blog.VokergBlog.service.AuthorService;
-import com.vokerg.blog.VokergBlog.service.ArticleService;
-import com.vokerg.blog.VokergBlog.service.CommentService;
-import com.vokerg.blog.VokergBlog.service.FollowService;
+import com.vokerg.blog.VokergBlog.model.*;
+import com.vokerg.blog.VokergBlog.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -30,6 +24,9 @@ public class AuthorsController {
 
     @Autowired
     FollowService followService;
+
+    @Autowired
+    AlertService alertService;
 
     @GetMapping("")
     public ResponseEntity<List<AggregatedAuthor>> getTopAuthors() {
@@ -66,6 +63,15 @@ public class AuthorsController {
         if ((userId != null) && userId.equals(idAuthor)) {
             followService.unfollowAuthor(idAuthorFollowed, idAuthor);
             return ResponseEntity.ok(null);
+        }
+        return ResponseEntity.badRequest().body(null);
+    }
+
+    @GetMapping("/{idAuthor}/alerts")
+    public ResponseEntity<List<Alert>> getAlerts(@PathVariable String idAuthor) {
+        String userId =  SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        if ((userId != null) && userId.equals(idAuthor)) {
+            return ResponseEntity.ok(alertService.getAlertsForIdAuthor(idAuthor));
         }
         return ResponseEntity.badRequest().body(null);
     }

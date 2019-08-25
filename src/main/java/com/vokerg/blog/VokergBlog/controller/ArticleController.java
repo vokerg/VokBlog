@@ -73,10 +73,9 @@ public class ArticleController {
     }
 
     @PutMapping("/{id}/comments")
-    public ResponseEntity<CommentFull> createCommentForArticle(@PathVariable String id,
-                                                           @RequestBody Comment comment) {
-        commentRepository.save(comment);
-        return ResponseEntity.ok(commentService.getCommentById(comment.getId()));
+    public ResponseEntity<CommentFull> commentArticle(@PathVariable String id,
+                                                      @RequestBody Comment comment) {
+        return ResponseEntity.ok(commentService.createComment(comment));
     }
 
     @GetMapping("/{id}/likes")
