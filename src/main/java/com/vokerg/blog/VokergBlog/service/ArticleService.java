@@ -1,5 +1,6 @@
 package com.vokerg.blog.VokergBlog.service;
 
+import com.vokerg.blog.VokergBlog.model.AlertType;
 import com.vokerg.blog.VokergBlog.model.Article;
 import com.vokerg.blog.VokergBlog.model.ArticleFull;
 import com.vokerg.blog.VokergBlog.model.Author;
@@ -36,6 +37,9 @@ public class ArticleService {
 
     @Autowired
     AuthorRepository authorRepository;
+
+    @Autowired
+    AlertService alertService;
 
     public ArticleFull getAggregatedArticle(String id) {
         List<ArticleFull> list =  getAggregatedArticles(Criteria.where("_id").is(id));
@@ -126,6 +130,12 @@ public class ArticleService {
                 .idSharedArticle(idArticle)
                 .build()
         );
+        alertService.createSharedArticleAlert(idAuthor, idArticle);
         return getAggregatedArticle(newArticle.getId());
+    }
+
+    public Article createArticle(Article article) {
+        articleRepository.save(article);
+        return article;
     }
 }

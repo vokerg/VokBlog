@@ -49,8 +49,7 @@ public class ArticleController {
 
     @PutMapping("")
     public ResponseEntity<Article> createArticle(@RequestBody Article article) {
-        articleRepository.save(article);
-        return ResponseEntity.ok(article);
+        return ResponseEntity.ok(articleService.createArticle(article));
     }
 
     @GetMapping("/{id}")

@@ -25,6 +25,9 @@ public class LikeService {
     @Autowired
     MongoTemplate mongoTemplate;
 
+    @Autowired
+    AlertService alertService;
+
     public Like setLikeToArticle(String idArticle, String idAuthor) {
         List<Like> likes = likeRepository.getByIdArticleAndIdAuthor(idArticle, idAuthor);
         if (likes.size() > 0) {
@@ -35,6 +38,7 @@ public class LikeService {
                 .idAuthor(idAuthor)
                 .build();
         likeRepository.save(like);
+        alertService.likeArticle(idArticle, idAuthor);
         return like;
     }
 
