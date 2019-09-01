@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Comment } from '../../model/comment';
+import { Comment } from '../../../model/comment';
 import {Observable} from "rxjs";
 import * as fromActiveUser from "../../../store/reducers/activeUser";
 import * as fromReducersRoot from "../../../store/reducers/index";

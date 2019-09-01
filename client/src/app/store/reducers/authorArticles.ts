@@ -1,4 +1,4 @@
-import {Article} from "../../modules/model/article";
+import {Article} from "../../model/article";
 
 export interface State {
   articlesMap: Map<String, Article[]>

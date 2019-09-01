@@ -1,4 +1,4 @@
-import {Article} from "../../modules/model/article";
+import {Article} from "../../model/article";
 import {ActionReducer, combineReducers} from "@ngrx/store";
 
 interface FilteredArticlesState {

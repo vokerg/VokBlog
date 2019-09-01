@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router'
-import { Article } from '../../model/article';
-import { Comment } from '../../model/comment';
+import { Article } from '../../../model/article';
+import { Comment } from '../../../model/comment';
 import {Store} from "@ngrx/store";
 import * as fromRoot from "../../../store/reducers/index";
 import * as fromCurrentArticle from "../../../store/reducers/currentArticle";

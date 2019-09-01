@@ -4,11 +4,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import 'rxjs/Rx';
-import { Article } from '../modules/model/article';
+import { Article } from '../model/article';
 import {ApiService} from "./api.service";
 import {Store} from "@ngrx/store";
 import * as fromRoot from "../store/reducers";
-import {Like} from "../modules/model/like";
+import {Like} from "../model/like";
 
 @Injectable()
 export class ArticlesService extends ApiService{

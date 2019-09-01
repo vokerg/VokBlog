@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Comment} from "../../model/comment";
-import {Article} from "../../model/article";
+import {Comment} from "../../../model/comment";
+import {Article} from "../../../model/article";
 import {LikeArticle, LikeComment, UnLikeArticle, UnLikeComment} from "../../../store/actions/index";
 import {Store} from "@ngrx/store";
 import * as fromReducersRoot from "../../../store/reducers/index";

@@ -1,11 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Comment} from "../../model/comment";
+import {Comment} from "../../../model/comment";
 import {select, Store} from "@ngrx/store";
 import * as fromRoot from "../../../store/reducers/index";
 import {
   LoadArticleCommentsAction,
 } from "../../../store/actions/index";
-import {Article} from "../../model/article";
+import {Article} from "../../../model/article";
 
 @Component({
   selector: 'app-article-expand-comments',

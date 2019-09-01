@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router'
-import { Article } from '../model/article';
+import { Article } from '../../model/article';
 import {Store} from "@ngrx/store";
 import * as fromRoot from "../../store/reducers/index";
 import {LoadArticlesAction} from "../../store/actions/index";

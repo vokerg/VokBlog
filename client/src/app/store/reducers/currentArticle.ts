@@ -1,5 +1,5 @@
-import {Article} from "../../modules/model/article";
-import {Comment} from "../../modules/model/comment";
+import {Article} from "../../model/article";
+import {Comment} from "../../model/comment";
 
 export interface State {
   article: Article;

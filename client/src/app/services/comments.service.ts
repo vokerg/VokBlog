@@ -4,10 +4,10 @@ import * as fromRoot from "../store/reducers";
 
 import {Store} from "@ngrx/store";
 import {HttpClient} from "@angular/common/http";
-import {Comment} from "../modules/model/comment";
+import {Comment} from "../model/comment";
 import {Observable} from "rxjs";
 import {map, mergeAll} from "rxjs/operators";
-import {Like} from "../modules/model/like";
+import {Like} from "../model/like";
 
 @Injectable({
   providedIn: 'root'

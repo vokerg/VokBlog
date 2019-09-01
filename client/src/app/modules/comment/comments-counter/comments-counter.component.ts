@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Article} from "../../model/article";
+import {Article} from "../../../model/article";
 import {Store} from "@ngrx/store";
 import * as fromRoot from "../../../store/reducers";
 import {CloseExpandCommentsAction, PushExpandCommentsAction} from "../../../store/actions";

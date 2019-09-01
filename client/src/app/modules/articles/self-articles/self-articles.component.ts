@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Store} from "@ngrx/store";
 import * as fromRoot from "../../../store/reducers/index";
-import {Article} from "../../model/article";
+import {Article} from "../../../model/article";
 import {LoadArticlesByIdAuthorAction} from "../../../store/actions/index";
 
 @Component({

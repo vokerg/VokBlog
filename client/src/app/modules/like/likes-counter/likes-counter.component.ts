@@ -1,10 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Article} from "../../model/article";
-import {Comment} from "../../model/comment";
+import {Article} from "../../../model/article";
+import {Comment} from "../../../model/comment";
 import {MatDialog} from "@angular/material";
 import {LikesListComponent} from "../likes-list/likes-list.component";
 import {ArticlesService} from "../../../services/articles.service";
-import {Like} from "../../model/like";
+import {Like} from "../../../model/like";
 import {CommentsService} from "../../../services/comments.service";
 
 @Component({

@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Author } from '../modules/model/author';
+import { Author } from '../model/author';
 import {ApiService} from "./api.service";
 import {Store} from "@ngrx/store";
 import * as fromRoot from "../store/reducers";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {map, mergeAll} from "rxjs/operators";
-import {Article} from "../modules/model/article";
+import {Article} from "../model/article";
 
 @Injectable({
   providedIn: 'root'

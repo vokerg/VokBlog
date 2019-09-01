@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Comment} from "../../model/comment";
+import {Comment} from "../../../model/comment";
 import {Store} from "@ngrx/store";
 import * as fromRoot from "../../../store/reducers/index";
 import {LoadLatestCommentsAction} from "../../../store/actions/index";

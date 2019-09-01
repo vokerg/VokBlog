@@ -25,9 +25,6 @@ public class AuthorsController {
     @Autowired
     FollowService followService;
 
-    @Autowired
-    AlertService alertService;
-
     @GetMapping("")
     public ResponseEntity<List<AggregatedAuthor>> getTopAuthors() {
         return ResponseEntity.ok(authorService.getAggregatedAuthors());
@@ -63,15 +60,6 @@ public class AuthorsController {
         if ((userId != null) && userId.equals(idAuthor)) {
             followService.unfollowAuthor(idAuthorFollowed, idAuthor);
             return ResponseEntity.ok(null);
-        }
-        return ResponseEntity.badRequest().body(null);
-    }
-
-    @GetMapping("/{idAuthor}/alerts")
-    public ResponseEntity<List<Alert>> getAlerts(@PathVariable String idAuthor) {
-        String userId =  SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
-        if ((userId != null) && userId.equals(idAuthor)) {
-            return ResponseEntity.ok(alertService.getAlertsForIdAuthor(idAuthor));
         }
         return ResponseEntity.badRequest().body(null);
     }

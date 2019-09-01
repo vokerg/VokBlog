@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ArticlesService } from '../../../services/articles.service';
-import { Article } from '../../model/article';
+import { Article } from '../../../model/article';
 import {Store} from "@ngrx/store";
 import * as fromRoot from "../../../store/reducers/index";
 import {Observable} from "rxjs";

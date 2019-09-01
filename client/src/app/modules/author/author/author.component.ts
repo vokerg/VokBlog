@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthorService } from '../../../services/author.service';
-import { Author } from '../../model/author';
-import { Comment } from '../../model/comment'
-import { Article } from '../../model/article'
+import { Author } from '../../../model/author';
+import { Comment } from '../../../model/comment'
+import { Article } from '../../../model/article'
 import {ActivatedRoute} from "@angular/router";
 import {CommentsService} from "../../../services/comments.service";
 import {ArticlesService} from "../../../services/articles.service";

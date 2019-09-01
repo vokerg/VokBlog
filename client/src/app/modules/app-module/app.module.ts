@@ -28,6 +28,8 @@ import {ArticlesModule} from "../articles/articles.module";
 import {FeedArticlesComponent} from "../articles/feed-articles/feed-articles.component";
 import {MatButtonModule, MatCardModule, MatIconModule, MatMenuModule, MatToolbarModule} from "@angular/material";
 import {CreateArticleModule} from "../create-article/create-article.module";
+import {AlertModule} from "../alert/alert.module";
+import {AlertsPageComponent} from "../alert/alerts-page/alerts-page.component";
 
 @NgModule({
   declarations: [
@@ -43,6 +45,7 @@ import {CreateArticleModule} from "../create-article/create-article.module";
     FormsModule,
     ArticlesModule,
     CreateArticleModule,
+    AlertModule,
     RouterModule.forRoot([
       {path: '', component: MainPageComponent},
       {path: 'articles/new', component: EditArticleComponent},
@@ -53,7 +56,8 @@ import {CreateArticleModule} from "../create-article/create-article.module";
       {path: 'authors/:id', component: AuthorComponent},
       {path: 'tags/:tag', component: TagComponent},
       {path: 'login', component: LoginComponent},
-      {path: 'signup', component: SignupComponent}
+      {path: 'signup', component: SignupComponent},
+      {path: 'alerts', component: AlertsPageComponent}
     ]),
     ArticleModule,
     AuthorModule,

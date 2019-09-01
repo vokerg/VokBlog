@@ -41,7 +41,7 @@ import {catchError, map, mergeMap} from "rxjs/operators";
 import {Action} from "@ngrx/store";
 import {Observable, of} from "rxjs";
 import {LoginService} from "../../services/login.service";
-import {AuthenticatedUser} from "../../modules/model/authenticatedUser";
+import {AuthenticatedUser} from "../../model/authenticatedUser";
 import {CommentsService} from "../../services/comments.service";
 import {AuthorService} from "../../services/author.service";
 
