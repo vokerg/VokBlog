@@ -45,14 +45,14 @@ public class AlertService {
         alertRepository.save(alert);
     }
 
-    private void createCommentAlert(String idAuthor, String idComment, AlertType alertType) {
+    private void createCommentAlert(String idComment, String idAuthor, AlertType alertType) {
         Comment comment = commentRepository.findById(idComment).orElse(null);
         Author author = authorRepository.findById(idAuthor).orElse(null);
 
         String text = "";
         switch(alertType) {
-            case LIKED: text = "User " + author.getName() + " liked your comment " + comment.getText().substring(0, 20); break;
-            case REPLIED: text = "User " + author.getName() + " replied on your comment " + comment.getText().substring(0, 20); break;
+            case LIKED: text = "User " + author.getName() + " liked your comment " + getContentPreview(comment.getText()); break;
+            case REPLIED: text = "User " + author.getName() + " replied on your comment " + getContentPreview(comment.getText()); break;
         }
 
         Alert alert = Alert.builder()
@@ -62,6 +62,10 @@ public class AlertService {
                 .text(text)
                 .build();
         alertRepository.save(alert);
+    }
+
+    private String getContentPreview(String text) {
+        return text.length() > 20 ? text.substring(0, 20) : text;
     }
 
     public void createSharedArticleAlert(String idAuthor, String idArticle) {

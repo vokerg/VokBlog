@@ -22,7 +22,7 @@ export class AlertsService extends ApiService{
   public getUsersAlerts(): Observable<Alert[]> {
     return this.getRequestOptions().pipe(
       map((requestOptions) =>
-        this.http.put<any>(`api/alerts`, {}, requestOptions)
+        this.http.get<any>(`api/alerts`, requestOptions)
       ),
       mergeAll()
     )

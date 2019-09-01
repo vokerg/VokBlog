@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(value="/api/users")
+@RequestMapping(value="/api/alerts")
 public class AlertController {
     @Autowired
     AlertService alertService;
 
-    @GetMapping("/alerts")
+    @GetMapping("")
     public ResponseEntity<List<Alert>> getAlerts() {
         String userId =  SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
         return ResponseEntity.ok(alertService.getAlertsForIdAuthor(userId));

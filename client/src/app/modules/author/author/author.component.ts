@@ -5,12 +5,10 @@ import { Comment } from '../../../model/comment'
 import { Article } from '../../../model/article'
 import {ActivatedRoute} from "@angular/router";
 import {CommentsService} from "../../../services/comments.service";
-import {ArticlesService} from "../../../services/articles.service";
 import {Store} from "@ngrx/store";
 import * as fromRoot from "../../../store/reducers/index";
 import {LoadAuthorArticlesAction} from "../../../store/actions/index";
 import {Observable} from "rxjs";
-import * as fromActiveUser from "../../../store/reducers/activeUser";
 
 @Component({
   selector: 'app-author',
@@ -28,7 +26,6 @@ export class AuthorComponent implements OnInit {
   constructor(
     private authorService: AuthorService,
     private commentService: CommentsService,
-    private articleService: ArticlesService,
     private route: ActivatedRoute,
     private store: Store<fromRoot.State>,
   ) {

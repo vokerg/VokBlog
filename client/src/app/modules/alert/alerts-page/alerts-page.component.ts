@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {AlertsService} from "../../../services/alerts.service";
+import {Alert} from "../../../model/alert";
 
 @Component({
   selector: 'app-alerts-page',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AlertsPageComponent implements OnInit {
 
-  constructor() { }
+  alerts:Alert[];
+  displayedColumns: string[] = ['id'];
+
+  constructor(
+    private alertService: AlertsService
+  ) { }
 
   ngOnInit() {
+    this.alertService.getUsersAlerts().subscribe(alerts => {
+      this.alerts = alerts;
+      console.log('alerts', alerts);
+    })
   }
 
 }
