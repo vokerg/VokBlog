@@ -10,7 +10,11 @@ import {Alert} from "../../../model/alert";
 export class AlertsPageComponent implements OnInit {
 
   alerts:Alert[];
-  displayedColumns: string[] = ['id'];
+  displayedColumns: string[] = ['text'];
+
+  clickAlert(alert:Alert) {
+    console.log('alert clicked', alert);
+  }
 
   constructor(
     private alertService: AlertsService

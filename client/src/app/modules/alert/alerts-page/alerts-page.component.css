@@ -1,0 +1,8 @@
+td{
+  cursor: hand;
+  cursor: pointer;
+  opacity: .9;
+}
+.unseen{
+  background-color: silver;
+}

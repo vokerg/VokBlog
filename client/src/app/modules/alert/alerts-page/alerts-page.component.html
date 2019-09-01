@@ -1,7 +1,11 @@
 <table mat-table [dataSource]="alerts" class="mat-elevation-z8">
-  <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef>ID</th>
-    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  <ng-container matColumnDef="text">
+    <th mat-header-cell *matHeaderCellDef>Alerts</th>
+    <td [ngClass]="(element.seen)?'seen':'unseen'" mat-cell *matCellDef="let element" (click)="clickAlert(element)">
+      <span>
+        {{element.text}}
+      </span>
+    </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
