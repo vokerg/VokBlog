@@ -2,6 +2,7 @@
   <ng-container matColumnDef="text">
     <th mat-header-cell *matHeaderCellDef>Alerts</th>
     <td [ngClass]="(element.seen)?'seen':'unseen'" mat-cell *matCellDef="let element" (click)="clickAlert(element)">
+      <span><b>{{element.authorName}}</b></span>
       <span>
         {{element.text}}
       </span>

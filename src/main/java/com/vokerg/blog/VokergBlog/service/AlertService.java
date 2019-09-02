@@ -31,9 +31,9 @@ public class AlertService {
 
         String text = "";
         switch(alertType) {
-            case LIKED: text = "User " + author.getName() + " liked your article " + article.getTitle(); break;
-            case SHARED: text = "User " + author.getName() + " shared your article " + article.getTitle(); break;
-            case COMMENTED: text = "User " + author.getName() + " commented your article " + article.getTitle(); break;
+            case LIKED: text = "liked your article " + article.getTitle(); break;
+            case SHARED: text = "shared your article " + article.getTitle(); break;
+            case COMMENTED: text = "commented your article " + article.getTitle(); break;
         }
 
         Alert alert = Alert.builder()
@@ -41,6 +41,7 @@ public class AlertService {
                 .idAuthorTarget(article != null ? article.getIdAuthor() : null)
                 .idArticle(idArticle)
                 .text(text)
+                .authorName(author.getName())
                 .build();
         alertRepository.save(alert);
     }
@@ -51,15 +52,17 @@ public class AlertService {
 
         String text = "";
         switch(alertType) {
-            case LIKED: text = "User " + author.getName() + " liked your comment " + getContentPreview(comment.getText()); break;
-            case REPLIED: text = "User " + author.getName() + " replied on your comment " + getContentPreview(comment.getText()); break;
+            case LIKED: text = "liked your comment " + getContentPreview(comment.getText()); break;
+            case REPLIED: text = "replied on your comment " + getContentPreview(comment.getText()); break;
         }
 
         Alert alert = Alert.builder()
                 .idAuthorSource(idAuthor)
+                .idArticle(comment.getIdArticle())
                 .idAuthorTarget(comment != null ? comment.getIdAuthor() : null)
                 .idComment(idComment)
                 .text(text)
+                .authorName(author.getName())
                 .build();
         alertRepository.save(alert);
     }

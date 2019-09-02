@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AlertsService} from "../../../services/alerts.service";
 import {Alert} from "../../../model/alert";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-alerts-page',
@@ -13,18 +14,16 @@ export class AlertsPageComponent implements OnInit {
   displayedColumns: string[] = ['text'];
 
   clickAlert(alert:Alert) {
-    console.log('alert clicked', alert);
+    this.router.navigate([`/articles/${alert.idArticle}`]);
   }
 
   constructor(
+    private router: Router,
     private alertService: AlertsService
   ) { }
 
   ngOnInit() {
-    this.alertService.getUsersAlerts().subscribe(alerts => {
-      this.alerts = alerts;
-      console.log('alerts', alerts);
-    })
+    this.alertService.getUsersAlerts().subscribe(alerts => this.alerts = alerts)
   }
 
 }
