@@ -14,6 +14,7 @@ export class AlertsPageComponent implements OnInit {
   displayedColumns: string[] = ['text'];
 
   clickAlert(alert:Alert) {
+    this.alertService.readAlert(alert);
     this.router.navigate([`/articles/${alert.idArticle}`]);
   }
 
