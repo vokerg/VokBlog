@@ -27,6 +27,15 @@ export class LikesCounterComponent implements OnInit {
   ) {}
 
   openDialog(): void {
+
+    if (this.article) {
+      this.articlesService.getArticleLikes(this.article.id).subscribe(likes => this.likes = likes);
+    }
+
+    if (this.comment) {
+      this.commentsService.getCommentLikes(this.comment.id).subscribe(likes => this.likes = likes);
+    }
+
     this.dialog.open(LikesListComponent, {
       width: '250px',
       height: '250px',
@@ -37,12 +46,10 @@ export class LikesCounterComponent implements OnInit {
   ngOnInit() {
     if (this.article) {
       this.count = this.article.likeCount;
-      this.articlesService.getArticleLikes(this.article.id).subscribe(likes => this.likes = likes);
     }
 
     if (this.comment) {
       this.count = this.comment.likeCount;
-      this.commentsService.getCommentLikes(this.comment.id).subscribe(likes => this.likes = likes);
     }
   }
 

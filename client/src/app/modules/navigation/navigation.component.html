@@ -15,6 +15,9 @@
       <span class="spacer"></span>
       <span>
         <span *ngIf="isAuthenticated$ | async; else loggedOut">
+          <span>
+            <app-alerts-dialog></app-alerts-dialog>
+          </span>
           <span *ngIf="username$ | async; let username">
             login: {{username}}
           </span>

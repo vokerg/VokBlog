@@ -30,9 +30,7 @@ export class AlertsService extends ApiService{
 
   public readAlert(alert:Alert): Observable<any> {
     return this.getRequestOptions().pipe(
-      map(requestOptions =>
-        this.http.post(`api/alerts/${alert.id}/read`, requestOptions)
-      ),
+      map((requestOptions) => this.http.post(`api/alerts/${alert.id}/read`, {}, requestOptions)),
       mergeAll()
     )
   }

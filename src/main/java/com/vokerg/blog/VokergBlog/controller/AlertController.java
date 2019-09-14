@@ -25,7 +25,7 @@ public class AlertController {
         return ResponseEntity.ok(alertService.getAlertsForIdAuthor(userId));
     }
 
-    @PostMapping("/{id}")
+    @PostMapping("/{id}/read")
     public ResponseEntity readAlert(@PathVariable String id) {
         String userId =  SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
         Alert alert = alertRepository.findById(id).orElse(null);

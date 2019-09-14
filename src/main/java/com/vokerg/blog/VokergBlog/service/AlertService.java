@@ -91,7 +91,7 @@ public class AlertService {
     }
 
     public List<Alert> getAlertsForIdAuthor(String idAuthor) {
-        return alertRepository.findByIdAuthorTarget(idAuthor);
+        return alertRepository.findByIdAuthorTargetOrderByIdDesc(idAuthor);
     }
 
     public void readAlert(Alert alert) {
