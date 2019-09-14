@@ -26,16 +26,24 @@ export class LikesCounterComponent implements OnInit {
     private commentsService:CommentsService,
   ) {}
 
-  openDialog(): void {
+  initDialog(): void {
 
     if (this.article) {
-      this.articlesService.getArticleLikes(this.article.id).subscribe(likes => this.likes = likes);
+      this.articlesService.getArticleLikes(this.article.id).subscribe(likes => {
+        this.likes = likes;
+        this.openDialog()
+      });
     }
 
     if (this.comment) {
-      this.commentsService.getCommentLikes(this.comment.id).subscribe(likes => this.likes = likes);
+      this.commentsService.getCommentLikes(this.comment.id).subscribe(likes => {
+        this.likes = likes;
+        this.openDialog()
+      });
     }
+  }
 
+  openDialog(): void {
     this.dialog.open(LikesListComponent, {
       width: '250px',
       height: '250px',

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Optional} from '@angular/core';
 import {AlertsService} from "../../../services/alerts.service";
 import {Alert} from "../../../model/alert";
 import {Router} from "@angular/router";
+import {MatDialogRef} from "@angular/material";
 
 @Component({
   selector: 'app-alerts-page',
@@ -14,13 +15,17 @@ export class AlertsPageComponent implements OnInit {
   displayedColumns: string[] = ['text'];
 
   clickAlert(alert:Alert) {
+    if (this.dialogRef) {
+      this.dialogRef.close();
+    }
     this.alertService.readAlert(alert).subscribe();
     this.router.navigate([`/articles/${alert.idArticle}`]);
   }
 
   constructor(
     private router: Router,
-    private alertService: AlertsService
+    private alertService: AlertsService,
+    @Optional() public dialogRef:MatDialogRef<AlertsPageComponent>
   ) { }
 
   ngOnInit() {

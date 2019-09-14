@@ -1,4 +1,4 @@
-<a *ngIf="count > 0" (click)="openDialog()" [routerLink]="">
+<a *ngIf="count > 0" (click)="initDialog()" [routerLink]="">
   <mat-icon matBadge="{{count}}" matBadgePosition="before" *ngIf="comment" aria-hidden="false" aria-label="Example thumbs up SVG icon">thumb_up</mat-icon>
   <span *ngIf="article">{{count}} likes</span>
 </a>
