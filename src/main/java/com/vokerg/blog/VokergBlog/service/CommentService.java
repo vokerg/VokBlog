@@ -66,7 +66,7 @@ public class CommentService {
                 .and("subComments").size().as("subCommentCount")
                 .and("articles").arrayElementAt(0).as("article")
                 .and("likes")
-                .filter("item", valueOf("item.authorId").equalToValue(currentUserId))
+                .filter("item", valueOf("item.idAuthor").equalToValue(currentUserId))
                 .as("liked")
                 .and("likes").size().as("likeCount");
 
@@ -89,7 +89,7 @@ public class CommentService {
         return results.getMappedResults();
     }
 
-    public List<CommentFull> getFullCommentsForAuthorId(String idAuthor) {
+    public List<CommentFull> getFullCommentsForIdAuthor(String idAuthor) {
         return getLatestFullComments(Criteria.where("idAuthor").is(idAuthor), null, null);
     }
 

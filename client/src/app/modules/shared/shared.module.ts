@@ -9,12 +9,18 @@ import { SharedArticleComponent } from './shared-article/shared-article.componen
 import {CreateArticleModule} from "../create-article/create-article.module";
 import {LikeModule} from "../like/like.module";
 import {CommentModule} from "../comment/comment.module";
+import { ArticleActionsComponent } from './article-actions/article-actions.component';
+import { ArticleCountersComponent } from './article-counters/article-counters.component';
+import { ArticleExpandablePanelsComponent } from './article-expandable-panels/article-expandable-panels.component';
 
 @NgModule({
   declarations: [
     ArticlePreviewComponent,
     ArticleFullPreviewComponent,
     SharedArticleComponent,
+    ArticleActionsComponent,
+    ArticleCountersComponent,
+    ArticleExpandablePanelsComponent,
   ],
   imports: [
     CreateArticleModule,
@@ -33,6 +39,9 @@ import {CommentModule} from "../comment/comment.module";
   exports: [
     ArticlePreviewComponent,
     ArticleFullPreviewComponent,
+    ArticleCountersComponent,
+    ArticleActionsComponent,
+    ArticleExpandablePanelsComponent,
   ]
 })
 export class SharedModule { }

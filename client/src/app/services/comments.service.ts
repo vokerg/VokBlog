@@ -50,9 +50,9 @@ export class CommentsService extends ApiService {
     );
   }
 
-  getCommentsByAuthorId(authorId: string): Observable<Comment[]> {
+  getCommentsByIdAuthor(idAuthor: string): Observable<Comment[]> {
     return this.getRequestOptions().pipe(
-      map(requestOptions => this.http.get<Comment[]>(`api/authors/${authorId}/comments`, requestOptions)),
+      map(requestOptions => this.http.get<Comment[]>(`api/authors/${idAuthor}/comments`, requestOptions)),
       mergeAll()
     );
   }

@@ -4,6 +4,7 @@ import { AlertsPageComponent } from './alerts-page/alerts-page.component';
 import {MatBadgeModule, MatButtonModule, MatIconModule, MatTableModule} from "@angular/material";
 import {BrowserModule} from "@angular/platform-browser";
 import { AlertsDialogComponent } from './alerts-dialog/alerts-dialog.component';
+import {RouterModule} from "@angular/router";
 
 @NgModule({
   declarations: [AlertsPageComponent, AlertsDialogComponent],
@@ -14,6 +15,7 @@ import { AlertsDialogComponent } from './alerts-dialog/alerts-dialog.component';
     MatBadgeModule,
     MatButtonModule,
     MatIconModule,
+    RouterModule,
   ],
   exports: [
     AlertsPageComponent,

@@ -16,12 +16,10 @@
         <p>{{article.content}}</p>
     </mat-card-content>
     <mat-card-actions>
-      <app-like-button [article]="article"></app-like-button>
-      <app-share-button [id]="componentId"></app-share-button>
-      <a [routerLink]="['/articles', id, 'edit']">Edit</a>
-      <app-edit-comment [articleId]="id"></app-edit-comment>
-      <app-share [id]="componentId" [articleId]="article.id"></app-share>
+      <app-article-actions [article]="article" [componentId]="componentId"></app-article-actions>
     </mat-card-actions>
+      <a [routerLink]="['/articles', id, 'edit']">Edit</a>
+      <app-article-expandable-panels [article]="article" [componentId]="componentId"></app-article-expandable-panels>
   </mat-card>
 
   <app-comments [comments]="comments" [forArticle]="true"></app-comments>

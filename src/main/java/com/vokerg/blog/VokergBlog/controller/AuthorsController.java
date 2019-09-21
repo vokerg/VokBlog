@@ -32,12 +32,12 @@ public class AuthorsController {
 
     @GetMapping("/{idAuthor}/articles")
     public ResponseEntity<List<ArticleFull>> getAuthorsArticles(@PathVariable String idAuthor) {
-        return ResponseEntity.ok(articleService.getAggregatedArticlesForAuthorId(idAuthor));
+        return ResponseEntity.ok(articleService.getAggregatedArticlesForIdAuthor(idAuthor));
     }
 
     @GetMapping("/{idAuthor}/comments")
     public ResponseEntity<List<CommentFull>> getAuthorsComments(@PathVariable String idAuthor) {
-        return ResponseEntity.ok(commentService.getFullCommentsForAuthorId(idAuthor));
+        return ResponseEntity.ok(commentService.getFullCommentsForIdAuthor(idAuthor));
     }
 
     @GetMapping("/{idAuthor}/aggregated")

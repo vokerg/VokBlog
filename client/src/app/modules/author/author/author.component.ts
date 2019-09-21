@@ -58,7 +58,7 @@ export class AuthorComponent implements OnInit {
       this.authorService.getAuthor(this.id).subscribe(
         author => this.author = author
       );
-      this.commentService.getCommentsByAuthorId(this.id.toString())
+      this.commentService.getCommentsByIdAuthor(this.id.toString())
         .subscribe((comments) => this.comments = comments);
     })
 

@@ -50,7 +50,7 @@ public class ArticleService {
         return getAggregatedArticles(Criteria.where("tags").in(tag));
     }
 
-    public List<ArticleFull> getAggregatedArticlesForAuthorId(String idAuthor) {
+    public List<ArticleFull> getAggregatedArticlesForIdAuthor(String idAuthor) {
         return getAggregatedArticles(Criteria.where("idAuthor").is(idAuthor));
     }
 
@@ -88,7 +88,7 @@ public class ArticleService {
 
         ProjectionOperation projectLikesAndComments = project(ARTICLE_FIELDS)
                 .and("likes")
-                .filter("item", valueOf("item.authorId").equalToValue(currentUserId))
+                .filter("item", valueOf("item.idAuthor").equalToValue(currentUserId))
                 .as("liked")
                 .and("likes").size().as("likeCount")
                 .and("comments").size().as("commentsCount")

@@ -11,21 +11,13 @@
   </mat-card-content>
   <div *ngIf="!noActions">
     <mat-card-content>
-      <app-likes-counter [article]="article"></app-likes-counter> |
-      <app-share-counter [article]="article"></app-share-counter> |
-      <app-comments-counter [article]="article" [id]="componentId"></app-comments-counter>
+      <app-article-counters [article]="article" [componentId]="componentId"></app-article-counters>
     </mat-card-content>
     <mat-card-actions>
-      <div>
-        <app-like-button [article]="article"></app-like-button>
-        <app-share-button [id]="componentId"></app-share-button>
-        <app-add-comment-button [id]="componentId"></app-add-comment-button>
-      </div>
+      <app-article-actions [article]="article" [componentId]="componentId"></app-article-actions>
     </mat-card-actions>
     <div>
-      <app-share [id]="componentId" [articleId]="article.id"></app-share>
-      <app-article-expand-comments [article]="article" [id]="componentId"></app-article-expand-comments>
-      <app-edit-comment [articleId]="article.id" [id]="componentId"></app-edit-comment>
+      <app-article-expandable-panels [article]="article" [componentId]="componentId"></app-article-expandable-panels>
     </div>
   </div>
 </span>
