@@ -10,10 +10,11 @@ import {
   MatIconModule,
   MatInputModule,
   MatMenuModule,
-  MatToolbarModule
+  MatToolbarModule,
 } from "@angular/material";
 import { ShareCounterComponent } from './share-counter/share-counter.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {RouterModule} from "@angular/router";
 
 
 @NgModule({
@@ -26,7 +27,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
   imports: [
     CommonModule,
     FormsModule,
-
+    RouterModule,
     MatButtonModule,
     MatMenuModule,
     MatToolbarModule,

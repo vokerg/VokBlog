@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Article} from "../../../model/article";
+import {RouterModule} from "@angular/router";
 
 @Component({
   selector: 'app-share-counter',
@@ -9,6 +10,11 @@ import {Article} from "../../../model/article";
 export class ShareCounterComponent implements OnInit {
 
   @Input() article: Article;
+
+  action() {
+    // not implemented
+    console.log('not implemented');
+  }
 
   constructor() { }
 

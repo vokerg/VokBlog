@@ -1,13 +1,17 @@
+import {Alert} from "../../model/alert";
+
 export interface State {
   userId: string;
   username: string;
   token: string;
+  alerts: Alert[];
 }
 
 export function reducer(state:State={
   userId: "",
   username: "",
-  token: ""
+  token: "",
+  alerts: []
 }, action): State {
   switch (action.type) {
     case "LOGIN_SUCCESSFUL": {
@@ -17,7 +21,8 @@ export function reducer(state:State={
       return {
         userId: "",
         username: "",
-        token: ""
+        token: "",
+        alerts: []
       };
     }
     default: {

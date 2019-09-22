@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {Store} from "@ngrx/store";
 import * as fromReducers from "../../store/reducers/index";
 import {LoginAction, LoginUnsuccessful} from "../../store/actions/index";
+import {SchedulerService} from "../../services/scheduler.service";
 
 @Component({
   selector: 'app-login',
@@ -18,14 +19,16 @@ export class LoginComponent implements OnInit {
   constructor(
     private loginService: LoginService,
     private router: Router,
-    private store: Store<fromReducers.State>
+    private store: Store<fromReducers.State>,
+    private schedulerService: SchedulerService,
   ) { }
 
   onLogin() {
     this.store.dispatch(
-      new LoginAction(this.username, this.password, () =>
-        this.router.navigate(['/'])
-      )
+      new LoginAction(this.username, this.password, () => {
+        this.schedulerService.observalbeTimer();
+        this.router.navigate(['/']);
+      })
     );
   }
 

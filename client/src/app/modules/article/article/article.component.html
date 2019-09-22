@@ -13,7 +13,7 @@
       </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-        <p>{{article.content}}</p>
+      <div [innerHTML]="content"></div>
     </mat-card-content>
     <mat-card-actions>
       <app-article-actions [article]="article" [componentId]="componentId"></app-article-actions>

@@ -27,12 +27,16 @@ export class ArticleComponent implements OnInit {
     this.currentArticle$.subscribe(({article, comments}) => {
       this.article = article;
       this.comments = comments;
+      if (this.article) {
+        this.content = this.article.content.replace(new RegExp('\n', 'g'), "<br />")
+      }
     });
   }
 
   id: string;
   article: Article;
   comments: Comment[];
+  content: string;
 
   componentId: string = Math.random().toString(25);
 

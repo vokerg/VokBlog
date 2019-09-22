@@ -1,0 +1,9 @@
+div.column_articles {
+  width: 50%;
+}
+div.column_comments {
+  width: 30%;
+}
+div.column_authors {
+  width: auto;
+}

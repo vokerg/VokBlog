@@ -4,6 +4,7 @@ import {AuthenticationUser} from "../../model/authenticationUser";
 import {Article} from "../../model/article";
 import {Comment} from "../../model/comment";
 import {Author} from "../../model/author";
+import {Alert} from "../../model/alert";
 
 export class LoginAction implements Action {
   type = "LOGIN";
@@ -218,4 +219,14 @@ export class PushAddCommentButtonAction implements Action {
 export class CloseAddCommentAction implements Action {
   type = "CLOSE_ADD_COMMENT";
   constructor(public id: string){}
+}
+
+export class LoadUsersAlerts implements Action {
+  type = "LOAD_ALERTS";
+  constructor(){}
+}
+
+export class LoadUsersAlertsCompleted implements Action {
+  type = "LOAD_ALERTS_COMPLETED";
+  constructor(public alerts: Alert[]){}
 }
