@@ -6,11 +6,15 @@ import {timer} from "rxjs";
 })
 export class SchedulerService {
 
-  observalbeTimer() {
-    const source = timer(1000, 5000);
-    const abc = source.subscribe(val => {
-      console.log("val=", val);
-    })
+  source = null;
+
+  startAlertsTimer() {
+    if (this.source == null) {
+      this.source = timer(1000, 5000);
+      this.source.subscribe(val => {
+        console.log("val=", val);
+      })
+    }
   }
 
   constructor() { }

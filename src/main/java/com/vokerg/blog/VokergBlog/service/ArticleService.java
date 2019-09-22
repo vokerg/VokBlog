@@ -1,6 +1,5 @@
 package com.vokerg.blog.VokergBlog.service;
 
-import com.vokerg.blog.VokergBlog.model.AlertType;
 import com.vokerg.blog.VokergBlog.model.Article;
 import com.vokerg.blog.VokergBlog.model.ArticleFull;
 import com.vokerg.blog.VokergBlog.model.Author;

@@ -34,12 +34,12 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
             token = token.substring(7);
         } else {
             SecurityContextHolder.clearContext();
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            //response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             chain.doFilter(request, response);
             return;
         }
 
-        String iduser = null;
+        String iduser;
         try {
             iduser = jwtUserService.getUserIdFromJsonToken(token);
         } catch (AuthenticationException e) {

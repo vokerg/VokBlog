@@ -66,13 +66,16 @@ AuthenticationManager authenticationManager;
                 .antMatchers("/api/users/login").permitAll()
                 .antMatchers("/api/users/signup").permitAll()
                 .antMatchers("/api/authors/**").permitAll()
-                //.antMatchers("/**").authenticated()
+
+                .antMatchers(HttpMethod.GET,"/swagger-ui.html").permitAll()
+                .antMatchers(HttpMethod.GET,"/webjars/springfox-swagger-ui/**").permitAll()
+
+//                //.antMatchers("/**").authenticated()
                 .antMatchers(HttpMethod.PUT, "/api/articles/**").authenticated()
                 .antMatchers(HttpMethod.DELETE, "/api/articles/**").authenticated()
                 .antMatchers(HttpMethod.PUT, "/api/comments/**").authenticated()
                 .antMatchers(HttpMethod.DELETE, "/api/comments/**").authenticated()
                 .antMatchers(HttpMethod.GET, "/**").permitAll()
-                //.antMatchers("/api/articles").authenticated()
                 .and()
                 .addFilter(new JwtAuthorizationFilter(authenticationManager, new JwtUserService()));
     }

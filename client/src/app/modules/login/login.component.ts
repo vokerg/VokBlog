@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
   onLogin() {
     this.store.dispatch(
       new LoginAction(this.username, this.password, () => {
-        this.schedulerService.observalbeTimer();
+        this.schedulerService.startAlertsTimer();
         this.router.navigate(['/']);
       })
     );
