@@ -13,8 +13,12 @@
   </mat-card-content>
   <mat-card-content>
     <app-like-button [comment]="comment"></app-like-button>
+    -
     <app-add-comment-button [id]="componentId" [isForArticle]="false"></app-add-comment-button>
-    <app-expand-comments [comment]="comment"></app-expand-comments>
+    <span *ngIf="comment.subCommentCount>0">
+      -
+      <app-expand-comments [comment]="comment"></app-expand-comments>
+    </span>
     <app-edit-comment [articleId]="articleId" [idParentComment]="comment.id" [id]="componentId"></app-edit-comment>
   </mat-card-content>
   <mat-card-actions>

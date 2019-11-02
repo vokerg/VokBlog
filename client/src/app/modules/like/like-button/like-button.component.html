@@ -5,8 +5,8 @@
       <button mat-button *ngIf="article.liked" (click)="unLikeArticle()">Unlike</button>
     </span>
     <span *ngIf="activeUser.userId && comment">
-      <button mat-button *ngIf="!comment.liked" (click)="likeComment()">Like</button>
-      <button mat-button *ngIf="comment.liked" (click)="unLikeComment()">Unlike</button>
+      <a [routerLink]="" *ngIf="!comment.liked" (click)="likeComment()">Like</a>
+      <a [routerLink]="" *ngIf="comment.liked" (click)="unLikeComment()">Unlike</a>
     </span>
   </span>
 </span>

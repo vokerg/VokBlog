@@ -13,8 +13,6 @@ export class AddCommentButtonComponent implements OnInit {
   @Input() id: string;
   @Input() isForArticle: boolean=true;
 
-  buttonText:string='Comment';
-
   constructor(
     private store: Store<fromRoot.State>,
   ) { }
@@ -23,10 +21,6 @@ export class AddCommentButtonComponent implements OnInit {
     this.store.dispatch(new PushAddCommentButtonAction(this.id));
   }
 
-  ngOnInit() {
-    if (!this.isForArticle) {
-      this.buttonText = 'Reply';
-    }
-  }
+  ngOnInit() {}
 
 }

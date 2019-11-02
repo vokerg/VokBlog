@@ -1,1 +1,4 @@
-<button mat-button (click)="addCommentClicked()">{{buttonText}}</button>
+<span>
+  <button *ngIf="isForArticle" mat-button (click)="addCommentClicked()">Comment</button>
+  <a *ngIf="!isForArticle" [routerLink]="" (click)="addCommentClicked()">Reply</a>
+</span>

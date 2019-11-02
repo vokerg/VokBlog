@@ -29,7 +29,9 @@ export class ArticleExpandCommentsComponent implements OnInit {
       .subscribe(comments => this.comments = comments);
     this.store.select(fromRoot.isExpandCommentsPushed, {id: this.id})
       .subscribe(isOpen => {
-        this.store.dispatch(new LoadArticleCommentsAction(this.article.id));
+        if (isOpen) {
+          this.store.dispatch(new LoadArticleCommentsAction(this.article.id));
+        }
         this.isOpen = isOpen;
       });
   }

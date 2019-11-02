@@ -1,7 +1,7 @@
-<div *ngIf="comment.subCommentCount>0">
-  <a routerLink="#" *ngIf="!expanded" (click)="expandComments()">{{comment.subCommentCount}} Replies</a>
-  <a routerLink="#" *ngIf="expanded" (click)="collapseComments()">Close</a>
-  <div class="exp" *ngIf="expanded">
-    <app-comments [comments]="subComments" [forArticle]="true"></app-comments>
-</div>
+<span *ngIf="comment.subCommentCount>0">
+  <a [routerLink]="" *ngIf="!expanded" (click)="expandComments()">{{comment.subCommentCount}} Replies</a>
+  <a [routerLink]="" *ngIf="expanded" (click)="collapseComments()">Collapse</a>
+</span>
+<div class="exp" *ngIf="expanded">
+  <app-comments [comments]="subComments" [forArticle]="true"></app-comments>
 </div>

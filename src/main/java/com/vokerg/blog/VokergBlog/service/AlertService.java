@@ -84,9 +84,9 @@ public class AlertService {
     }
 
     public void createNewCommentAlert(Comment newComment) {
-        createArticleAlert(newComment.getIdArticle(), newComment.getIdAuthor(), AlertType.COMMENTED);
+        createArticleAlert(newComment.getIdAuthor(), newComment.getIdArticle(), AlertType.COMMENTED);
         if (newComment.getIdParentComment() != null) {
-            createCommentAlert(newComment.getIdAuthor(), newComment.getIdParentComment(), AlertType.REPLIED);
+            createCommentAlert(newComment.getIdParentComment(), newComment.getIdAuthor(), AlertType.REPLIED);
         }
     }
 
