@@ -1,6 +1,7 @@
 package com.vokerg.blog.VokergBlog.controller;
 
 import com.vokerg.blog.VokergBlog.model.Alert;
+import com.vokerg.blog.VokergBlog.model.AlertEnvelope;
 import com.vokerg.blog.VokergBlog.repository.AlertRepository;
 import com.vokerg.blog.VokergBlog.service.AlertService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +21,9 @@ public class AlertController {
     AlertRepository alertRepository;
 
     @GetMapping("")
-    public ResponseEntity<List<Alert>> getAlerts() {
+    public ResponseEntity<AlertEnvelope> getAlerts(@RequestParam(required = false) boolean forNotification) {
         String userId =  SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
-        return ResponseEntity.ok(alertService.getAlertsForIdAuthor(userId));
+        return ResponseEntity.ok(alertService.getAlertsForIdAuthor(userId, forNotification));
     }
 
     @PostMapping("/{id}/read")

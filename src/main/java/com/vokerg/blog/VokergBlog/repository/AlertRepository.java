@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface AlertRepository extends MongoRepository<Alert, String> {
     List<Alert> findByIdAuthorTargetOrderByIdDesc(String idAuthorTarget);
+    List<Alert> findByIdAuthorTargetAndNotifiedIsFalse(String idAuthorTarget);
+    Integer countByIdAuthorTargetAndSeenIsFalse(String idAuthorTarget);
 }

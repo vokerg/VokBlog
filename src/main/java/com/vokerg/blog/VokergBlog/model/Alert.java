@@ -22,4 +22,5 @@ public class Alert {
     private String authorName;
     private String text;
     private boolean seen;
+    private boolean notified;
 }

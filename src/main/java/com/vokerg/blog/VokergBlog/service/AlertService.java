@@ -90,8 +90,24 @@ public class AlertService {
         }
     }
 
-    public List<Alert> getAlertsForIdAuthor(String idAuthor) {
-        return alertRepository.findByIdAuthorTargetOrderByIdDesc(idAuthor);
+    public AlertEnvelope getAlertsForIdAuthor(String idAuthor, boolean forNotification) {
+        List<Alert> alertList;
+        if (forNotification) {
+            alertList = alertRepository.findByIdAuthorTargetAndNotifiedIsFalse(idAuthor);
+            if (alertList.size() > 0) {
+                alertList.forEach(alert -> {
+                    alert.setNotified(true);
+                    alertRepository.save(alert);
+                });
+            }
+        } else {
+            alertList = alertRepository.findByIdAuthorTargetOrderByIdDesc(idAuthor);
+        }
+
+        return AlertEnvelope.builder()
+                .alertList(alertList)
+                .unseenCount(alertRepository.countByIdAuthorTargetAndSeenIsFalse(idAuthor))
+                .build();
     }
 
     public void readAlert(Alert alert) {
