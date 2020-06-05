@@ -1,5 +1,5 @@
 import {ActionReducer, ActionReducerMap, createFeatureSelector, createSelector} from "@ngrx/store";
-import {storeLogger} from "ngrx-store-logger";
+//import {storeLogger} from "ngrx-store-logger";
 import * as fromActiveUser from "./activeUser";
 import * as fromCurrentArticle from "./currentArticle";
 import * as fromFilteredArticles from "./filteredArticles";
@@ -35,15 +35,17 @@ export const reducers: ActionReducerMap<State> = {
   openPanels: fromOpenPanels.reducer,
 };
 
-export function logger(reducer: ActionReducer<State>): any {
-  return storeLogger()(reducer);
-}
+//export function logger(reducer: ActionReducer<State>): any {
+//  return storeLogger()(reducer);
+//}
 
 export function localStorageSyncReducer(reducer: ActionReducer<State>): ActionReducer<any> {
   return localStorageSync({keys: ['activeUser'], rehydrate:true})(reducer);
 }
 
-export const metaReducers = [localStorageSyncReducer, logger];
+//export const metaReducers = [localStorageSyncReducer, logger];
+//TODO enable logger back
+export const metaReducers = [localStorageSyncReducer];
 
 
 /*selectors*/

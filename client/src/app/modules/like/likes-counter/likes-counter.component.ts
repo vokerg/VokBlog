@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Article} from "../../../model/article";
 import {Comment} from "../../../model/comment";
-import {MatDialog} from "@angular/material";
+import {MatDialog} from "@angular/material/dialog";
 import {LikesListComponent} from "../likes-list/likes-list.component";
 import {ArticlesService} from "../../../services/articles.service";
 import {Like} from "../../../model/like";

@@ -2,7 +2,7 @@ import {Component, OnInit, Optional} from '@angular/core';
 import {AlertsService} from "../../../services/alerts.service";
 import {Alert} from "../../../model/alert";
 import {Router} from "@angular/router";
-import {MatDialogRef} from "@angular/material";
+import {MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-alerts-page',

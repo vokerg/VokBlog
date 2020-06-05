@@ -26,10 +26,14 @@ import {MainPageComponent} from "../main-page/main-page/main-page.component";
 import {SelfArticlesComponent} from "../articles/self-articles/self-articles.component";
 import {ArticlesModule} from "../articles/articles.module";
 import {FeedArticlesComponent} from "../articles/feed-articles/feed-articles.component";
-import {MatButtonModule, MatCardModule, MatIconModule, MatMenuModule, MatToolbarModule} from "@angular/material";
 import {CreateArticleModule} from "../create-article/create-article.module";
 import {AlertModule} from "../alert/alert.module";
 import {AlertsPageComponent} from "../alert/alerts-page/alerts-page.component";
+import {MatButtonModule} from "@angular/material/button";
+import {MatCardModule} from "@angular/material/card";
+import {MatMenuModule} from "@angular/material/menu";
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   declarations: [

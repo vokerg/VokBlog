@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDialog} from "@angular/material";
 import {AlertsPageComponent} from "../alerts-page/alerts-page.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-alerts-dialog',

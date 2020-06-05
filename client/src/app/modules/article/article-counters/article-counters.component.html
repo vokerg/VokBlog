@@ -1,3 +1,10 @@
-<app-likes-counter [article]="article"></app-likes-counter> |
-<app-share-counter [article]="article"></app-share-counter> |
-<app-comments-counter [article]="article" [id]="componentId"></app-comments-counter>
+<span *ngIf="article.likeCount > 0">
+  <app-likes-counter [article]="article"></app-likes-counter>
+</span>
+<span *ngIf="article.sharedCount > 0">
+  <app-share-counter [article]="article"></app-share-counter>
+</span>
+<span *ngIf="article.commentsCount > 0">
+  <app-comments-counter [article]="article" [id]="componentId"></app-comments-counter>
+</span>
+
